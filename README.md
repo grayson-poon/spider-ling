@@ -23,7 +23,7 @@ A production README
 
 Wireframe:
 
-![alt text](https://wireframe.cc/BCgEPG)
+Click [here](https://wireframe.cc/BCgEPG) to view the wireframe.
 
 Technologies, Libraries, and APIs:
 
