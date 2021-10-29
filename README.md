@@ -22,7 +22,7 @@ In addition, this project will include:
 
 ## Wireframe:
 
-Click [here](https://wireframe.cc/BCgEPG) to view the wireframe.
+Click [here](https://wireframe.cc/BCgEPG) to view a general layout of how the game will look on the browser.
 
 ## Technologies, Libraries, and APIs:
 
