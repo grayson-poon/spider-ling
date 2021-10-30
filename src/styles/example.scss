@@ -1,3 +1,23 @@
-#main > h1 {
-  background: black;
+// body > div {
+//   display: flex;
+//   justify-content: center;
+// }
+
+div#nav-links ul li {
+  list-style: none;
 }
+
+
+div#canvas-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+canvas {
+  align-items: center;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+}
+
