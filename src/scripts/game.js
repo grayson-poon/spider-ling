@@ -2,8 +2,8 @@ import GameView from "./game_view";
 
 class Game {
   constructor(ctx) {
-    this.currentPlayer = new Player(0, 0);
-    this.currentLevel = new Level(this.ctx);
+    this.currentLevel = new Level(this.ctx); // (this.ctx, layout, starting pos of player)
+    this.currentPlayer = new Player(0, 0); // (this.currentLevel.startingPos)
   }
 
   animate(ctx) {
