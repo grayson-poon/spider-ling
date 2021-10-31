@@ -1,8 +1,26 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
-div#nav-links ul li {
-  list-style: none;
+div#title {
+  padding-top: 20px;
+  font-size: 50px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+div#title h1 {
+  background-color: red;
+}
+
+div#nav-links ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+div#nav-links ul li:first-child {
+  background-color: cyan;
 }
 
 div#canvas-container {
