@@ -8,6 +8,8 @@ class Level {
   constructor(ctx) {
     this.layout = levelOne;
     this.ctx = ctx;
+
+    // this.startingPos = this.layout.
   }
 
   renderLevel(ctx) {

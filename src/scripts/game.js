@@ -1,3 +1,20 @@
+import GameView from "./game_view";
+
+class Game {
+  constructor(ctx) {
+    this.currentPlayer = new Player(0, 0);
+    this.currentLevel = new Level(this.ctx);
+  }
+
+  animate(ctx) {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.currentLevel.renderLevel(this.ctx);
+    this.currentPlayer.renderPlayer(this.ctx);
+  }
+
+  // try to move player and level stuff to the game class and maybe declare game on startup so 
+  // you can pass in game as an arg into new GameView
+}
 
 
 // import levelOne from "./level_layouts/level_one";

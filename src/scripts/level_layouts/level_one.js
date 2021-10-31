@@ -3,6 +3,7 @@ document.addEventListener("keydown", levelOne);
 export const levelOne = function(ctx) {
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
   // ctx.beginPath();
+  
   let canvas = ctx.canvas;
   // debugger
   

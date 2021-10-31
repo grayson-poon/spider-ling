@@ -8,7 +8,7 @@ class GameView {
     this.ctx = ctx;
     this.canvas = this.ctx.canvas;
 
-    // this.game = new Game(this.canvas, this.ctx);
+    // this.game = new Game(this.ctx);
     this.currentPlayer = new Player(0, 0);
     this.currentLevel = new Level(this.ctx);
 
