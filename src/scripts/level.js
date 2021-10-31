@@ -18,12 +18,3 @@ class Level {
 }
 
 export default Level;
-
-
-// document.addEventListener("keydown", (event) => {
-//   if (event.keyCode === 32) {
-//     generateLayout()
-//   }
-// })
-
-// export default Level;
