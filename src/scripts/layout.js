@@ -1,7 +1,10 @@
 class Layout {
-  constructor(winZone, failZone, ) {
-    this.winZone = ""
-    this.failZone = ""
-
+  constructor(startingPos, structureCb, winZone, failZonesArr) {
+    this.startingPos = startingPos;
+    this.structureCb = structureCb;
+    this.winZone = winZone;
+    this.failZone = failZonesArr;
   }
 }
+
+export default Layout;

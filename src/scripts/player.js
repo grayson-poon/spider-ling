@@ -1,7 +1,7 @@
 class Player {
-  constructor(sX, sY) { // hopefully change to input starting pos
-    this.x = sX;
-    this.y = sY;
+  constructor(posArr) { // hopefully change to input starting pos
+    this.x = posArr[0];
+    this.y = posArr[1];
 
     // defaults
     this.velocity = 5;
@@ -45,7 +45,7 @@ class Player {
   }
 
   inWinZone(layout) { // return a boolean based on input layout
-    
+
   }
 
 }

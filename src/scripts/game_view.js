@@ -31,6 +31,7 @@ class GameView {
     console.log(this.player);
     console.log(this.level);
     document.addEventListener("keydown", this.handleKeydown);
+    document.addEventListener("click", this.handleClick.bind(this));
   }
 
   handleKeydown(event) {
@@ -41,7 +42,12 @@ class GameView {
     } else if (key === 68 && this.player.x < (this.ctx.canvas.width - this.player.width)) {
       this.player.moveRight();
       this.animate();
+      console.log(this.player);
     }
+  }
+
+  handleClick(event) {
+    console.log(event);
   }
 
 }

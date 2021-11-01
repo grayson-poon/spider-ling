@@ -2,18 +2,15 @@
 // import Player from "./player";
 
 // /* IMPORT ALL LAYOUTS INTO THIS FILE */
-import { levelOne } from "./level_layouts/level_one";
+// import { levelOne } from "./level_layouts/level_one";
 
 class Level {
-  constructor(layout_instance) {
+  constructor(layoutInstance) {
     // this.layout = layout_instance
-    this.layout = levelOne;
-    this.allLayouts = [];
-    this.allLayouts.push(levelOne);
-    this.winZone = [];
-    
-
-    // 
+    this.startingPos = layoutInstance.startingPos;
+    this.layout = layoutInstance.structureCb;
+    this.winZone = layoutInstance.winZone;
+    this.failZonesArr = layoutInstance.failZonesArr;
   }
 
   renderLevel(ctx) {

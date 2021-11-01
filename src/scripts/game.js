@@ -2,10 +2,10 @@ import Level from "./level";
 import Player from "./player";
 
 class Game {
-  constructor() {
-    this.currentLevel = new Level(); // (this.ctx, layout, starting pos of player)
+  constructor(arrLevels) {
+    this.currentLevel = arrLevels.shift(); // (this.ctx, layout, starting pos of player)
     this.layout = this.currentLevel.layout;
-    this.currentPlayer = new Player(80, 250); // (this.currentLevel.startingPos)
+    this.currentPlayer = new Player(this.currentLevel.startingPos); // (this.currentLevel.startingPos)
   }
 
   renderFrame(ctx) {
