@@ -19,15 +19,8 @@ class GameView {
   }
 
   animate() {
-    // console.log(e);
-    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    // this.level.renderLevel(this.ctx);
-    // this.player.renderPlayer(this.ctx);
-    // this.game.currentPlayer.move();
-
-    console.log(this.ctx);
     this.game.renderFrame(this.ctx);
-    // requestAnimationFrame(this.animate);
+    requestAnimationFrame(this.animate);
   }
 
   start() {
@@ -42,14 +35,12 @@ class GameView {
 
   handleKeydown(event) {
     let key = event.keyCode;
-    if (key === 65) {
+    if (key === 65 && this.player.x > 0) {
       this.player.moveLeft()
       this.animate();
-      // console.log(this.player);
-    } else if (key === 68) {
+    } else if (key === 68 && this.player.x < (this.ctx.canvas.width - this.player.width)) {
       this.player.moveRight();
       this.animate();
-      // console.log(this.player);
     }
   }
 

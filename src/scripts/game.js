@@ -3,11 +3,9 @@ import Player from "./player";
 
 class Game {
   constructor() {
-    this.currentLevel = new Level(this.ctx); // (this.ctx, layout, starting pos of player)
-    this.currentPlayer = new Player(250, 250); // (this.currentLevel.startingPos)
-
-    // bindings
-    // this.currentLevel = this.currentLevel.bind(this);
+    this.currentLevel = new Level(); // (this.ctx, layout, starting pos of player)
+    this.layout = this.currentLevel.layout;
+    this.currentPlayer = new Player(80, 250); // (this.currentLevel.startingPos)
   }
 
   renderFrame(ctx) {
@@ -16,18 +14,17 @@ class Game {
     this.currentPlayer.renderPlayer(ctx);
   }
 
-  // animate(ctx) {
-  //   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  //   this.currentLevel.renderLevel(this.ctx);
-  //   this.currentPlayer.renderPlayer(this.ctx);
-  // }
+  nextLevel(ctx) {
+    // let currentLayoutIdx = layouts[this.layout];
+    this.layout = layouts[currentLayoutIdx + 1];
+    this.layout.renderLevel(ctx);
+  }
 
-  // try to move player and level stuff to the game class and maybe declare game on startup so 
-  // you can pass in game as an arg into new GameView
-
-  // renderLevel() {
-
-  // }
+  completedLevel(layout) {
+    if (this.currentPlayer.inWinZone(this.layout)) {
+      // render the next level or the congratulations page
+    };
+  }
 }
 
 // /* IMPORT ALL LAYOUTS/LEVELS INTO THIS FILE */

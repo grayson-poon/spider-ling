@@ -1,0 +1,1 @@
+Original sprite images found [here](https://github.com/proteins22/spidermanPhaserGame/blob/master/assets/sprite-spiderman.png), belonging to [Angry Clown Entertainment](https://angryclownent.com/2017/06/30/spiderman-web-slinger-game-made-with-phaser-js/).

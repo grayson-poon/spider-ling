@@ -2,10 +2,8 @@ document.addEventListener("keydown", levelOne);
 
 export const levelOne = function(ctx) {
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // ctx.beginPath();
   
   let canvas = ctx.canvas;
-  // debugger
   
   ctx.fillStyle = 'black';
   ctx.fillRect(0, canvas.height * 0.75, canvas.width * 0.2, canvas.height * 0.25);
@@ -21,6 +19,5 @@ export const levelOne = function(ctx) {
 
   ctx.fillStyle = 'black';
   ctx.fillRect(canvas.width * 0.65, canvas.height * 0.5, canvas.width * 0.15, 10);
-  
 }
 

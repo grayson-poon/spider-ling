@@ -5,15 +5,23 @@
 import { levelOne } from "./level_layouts/level_one";
 
 class Level {
-  constructor(ctx) {
+  constructor(layout_instance) {
+    // this.layout = layout_instance
     this.layout = levelOne;
-    this.ctx = ctx;
+    this.allLayouts = [];
+    this.allLayouts.push(levelOne);
+    this.winZone = [];
+    
 
-    // this.startingPos = this.layout.
+    // 
   }
 
   renderLevel(ctx) {
     this.layout(ctx);
+  }
+
+  winZone() {
+
   }
 }
 

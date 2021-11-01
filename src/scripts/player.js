@@ -8,7 +8,7 @@ class Player {
     let spidey = new Image();
     spidey.src = "../../assets/sprite_spiderman.png";
     this.image = spidey;
-    this.width = 45; // 40 px
+    this.width = 40; // 40 px
     this.height = 80; // 80 px
 
     // setting binds
@@ -21,15 +21,10 @@ class Player {
   renderPlayer(ctx) {
     // only renders image when document loads & will NOT render image any other time
     // you must call ctx.draw image outside the .onload() function
-    
-    this.image.onload = () => {
+    this.image.onload = () => { // images need the .onload() method, native canvas drawings do not
       ctx.drawImage(this.image, 655, 0, 45, 80, this.x, this.y, this.width, this.height);
     }
 
-    console.log(ctx);
-    console.log(this.image);
-    console.log(this.x);
-    console.log(this.y);
     ctx.drawImage(this.image, 655, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
 
@@ -47,6 +42,10 @@ class Player {
 
   impulsePlayer(event) {
 
+  }
+
+  inWinZone(layout) { // return a boolean based on input layout
+    
   }
 
 }

@@ -13,8 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.height = 600; // set to Game.HEIGHT so it's more dynamic
   
   // let player = new Player(); create new player instance when each level is rendered
+  
+  // CREATE AN ARRAY OF LEVEL/LAYOUT INSTANCES HERE OR ANOTHER PAGE TO ACT
+  // AS A SEEDS FILE; PASS IN AS ARG TO new Game(arr_instances)
   let game = new Game();
   let gameView = new GameView(ctx, game);
+
+
+  // add event listener inside this to start the gameview
   gameView.start();
 
 });
