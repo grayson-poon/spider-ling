@@ -16,7 +16,7 @@ class GameView {
     this.handleKeydown = this.handleKeydown.bind(this);
 
     this.listenDown();
-    this.listenUp();
+    this.listenClick();
   }
 
   animate() {
@@ -32,17 +32,21 @@ class GameView {
     document.addEventListener("keydown", this.handleKeydown);
   }
 
-  listenUp() {
-    document.addEventListener("keyup", this.handleKeyup);
+  listenOver() {
+    this.canvas.addEventListener("mouseover", this.handleOver);
   }
 
-  handleKeyup(event) {
+  listenClick() {
+    this.canvas.addEventListener("click", this.handleClick);
+  }
+
+  handleClick(event) {
     console.log(event);
   }
 
   handleKeydown(event) {
+    event.preventDefault();
     let key = event.keyCode;
-    // console.log(event);
     if (key === 65) {
       let closestL = wallUtil.closestWallToTheLeft(this.player, this.level.arrWalls);
       let distanceL = wallUtil.distanceToTheLeft(this.player, closestL);
@@ -76,13 +80,12 @@ class GameView {
       let distanceB = wallUtil.distanceBelow(this.player, closestB);
       
       if (distanceB > 1) {
-        this.player.jumping = false;
+        this.player.jumping = true;
         return
       } else {
         this.player.jumping = true;
         this.player.jump();
         this.animate();
-        // this.player.jumping = false;
       }
     }
   }

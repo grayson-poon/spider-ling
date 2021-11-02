@@ -63,7 +63,7 @@ class Player {
           }
 
           this.y += this.velocity;
-        }, 20)
+        }, 20);
       }
       this.y -= this.velocity;
     }, 20);
