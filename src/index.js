@@ -1,6 +1,6 @@
 import Game from "./scripts/game";
 import GameView from "./scripts/game_view";
-import { arrLevels }  from "./scripts/level_layouts/seeds";
+import { arrLevels }  from "./scripts/wall_layouts/seeds";
 
 document.addEventListener("DOMContentLoaded", () => {
   let main = document.getElementById("canvas-container");
@@ -14,12 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // let player = new Player(); create new player instance when each level is rendered
   
-  // CREATE AN ARRAY OF LEVEL/LAYOUT INSTANCES HERE OR ANOTHER PAGE TO ACT
-  // AS A SEEDS FILE; PASS IN AS ARG TO new Game(arr_instances)
   let game = new Game(arrLevels);
-  debugger
   let gameView = new GameView(ctx, game);
-
 
   // add event listener inside this to start the gameview
   gameView.start();

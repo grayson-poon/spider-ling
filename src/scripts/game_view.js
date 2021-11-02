@@ -1,5 +1,5 @@
-import Player from "./player";
-import Level from "./level";
+import { Util } from "./util";
+
 
 class GameView {
   constructor(ctx, game) {
@@ -15,7 +15,7 @@ class GameView {
     this.animate = this.animate.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
 
-    this.test();
+    this.listen();
   }
 
   animate() {
@@ -27,29 +27,55 @@ class GameView {
     requestAnimationFrame(this.animate);
   }
 
-  test() {
-    console.log(this.player);
-    console.log(this.level);
+  listen() {
     document.addEventListener("keydown", this.handleKeydown);
-    document.addEventListener("click", this.handleClick.bind(this));
   }
+
+  
+  // handleKeydown(event) {
+  //   // debugger
+  //   let key = event.keyCode;
+  //   if (key === 65 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
+  //     this.player.left();
+  //     this.animate();
+  //   } else if (key === 68 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
+  //     this.player.right();
+  //     this.animate();
+  //   } else if (key === 87 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
+  //     this.player.up();
+  //     this.animate();
+  //   } else if (key === 83 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
+  //     this.player.down();
+  //     this.animate();
+  //   }
+  // }
 
   handleKeydown(event) {
+    // debugger
     let key = event.keyCode;
-    if (key === 65 && this.player.x > 0) {
-      this.player.moveLeft()
+    if (key === 65 && this.player.collisionLeft === false) {
+      this.player.collisionRight = false;
+      this.player.left();
       this.animate();
-    } else if (key === 68 && this.player.x < (this.ctx.canvas.width - this.player.width)) {
-      this.player.moveRight();
+      if (Util.collisionDetection(this.player, this.level.arrWalls)) {
+        this.player.collisionLeft = true;
+      }
+    } else if (key === 68 && this.player.collisionRight === false) {
+      this.player.collisionLeft = false;
+      this.player.right();
       this.animate();
-      console.log(this.player);
+      if (Util.collisionDetection(this.player, this.level.arrWalls)) {
+        this.player.collisionRight = true;
+      }
+    } else if (key === 87) {
+      this.player.up();
+      this.animate();
+    } else if (key === 83) {
+      this.player.down();
+      this.animate();
     }
   }
-
-  handleClick(event) {
-    console.log(event);
-  }
-
+  
 }
 
 export default GameView;

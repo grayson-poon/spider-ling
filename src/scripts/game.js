@@ -3,35 +3,33 @@ import Player from "./player";
 
 class Game {
   constructor(arrLevels) {
-    this.currentLevel = arrLevels.shift(); // (this.ctx, layout, starting pos of player)
-    this.layout = this.currentLevel.layout;
-    this.currentPlayer = new Player(this.currentLevel.startingPos); // (this.currentLevel.startingPos)
+    this.allLevels = arrLevels;
+    this.currentLevel = arrLevels.shift();
+    this.currentPlayer = new Player(this.currentLevel.startingPos);
   }
 
   renderFrame(ctx) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    this.currentLevel.layout(ctx);
+    this.currentLevel.renderLevel(ctx);
     this.currentPlayer.renderPlayer(ctx);
   }
 
-  nextLevel(ctx) {
-    // let currentLayoutIdx = layouts[this.layout];
-    this.layout = layouts[currentLayoutIdx + 1];
-    this.layout.renderLevel(ctx);
+  
+  completedLevel() {
+    if (this.currentPlayer.inWinZone(this.currentLevel.layout)) {
+      // render the next level or the congratulations page
+    }
   }
 
-  completedLevel(layout) {
-    if (this.currentPlayer.inWinZone(this.layout)) {
-      // render the next level or the congratulations page
-    };
+  failedLevel() {
+    if (this.currentPlayer.inFailZone(this.currentLevel.layout)) {
+      // render the fail page with buttons to restart or quit
+    }
+  }
+  
+  nextLevel() {
+    this.currentLevel.layout = this.allLevels.shift();
   }
 }
-
-// /* IMPORT ALL LAYOUTS/LEVELS INTO THIS FILE */
-// import Level from "./level";
-
-// // game dimensions for canvas
-// Game.WIDTH = 900;
-// Game.HEIGHT = 600;
 
 export default Game;
