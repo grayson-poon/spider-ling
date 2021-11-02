@@ -6,11 +6,12 @@ class Player {
     // collisions
     this.collisionLeft = false;
     this.collisionRight = false;
-    this.collisionTop = false;
-    this.collisionBottom = false;
+    this.collisionUp = false;
+    this.collisionDown = false;
 
     // defaults
-    this.velocity = 10;
+    this.velocity = 5;
+    this.acceleration = 1;
     let spidey = new Image();
     spidey.src = "../../assets/sprite_spiderman.png";
     this.image = spidey;
@@ -21,6 +22,7 @@ class Player {
     this.renderPlayer = this.renderPlayer.bind(this);
     // this.jumpPlayer = this.jumpPlayer.bind(this);
     // this.impulsePlayer = this.impulsePlayer.bind(this);
+
   }
 
   renderPlayer(ctx) {
@@ -28,10 +30,10 @@ class Player {
     // you must call ctx.draw image outside the .onload() function
     // images need the .onload() method, native canvas drawings do not
     this.image.onload = () => { 
-      ctx.drawImage(this.image, 655, 0, 45, 80, this.x, this.y, this.width, this.height);
+      ctx.drawImage(this.image, 665, 0, 45, 80, this.x, this.y, this.width, this.height);
     } // refactor this later to be variables for standingSpideyX1, standingSpideyY1, etc) break into multi lined arguments
 
-    ctx.drawImage(this.image, 655, 0, 45, 80, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, 665, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
 
   left() {

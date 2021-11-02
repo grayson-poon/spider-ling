@@ -1,4 +1,4 @@
-import { Util } from "./util";
+// import { Util } from "./util";
 
 
 class GameView {
@@ -31,52 +31,43 @@ class GameView {
     document.addEventListener("keydown", this.handleKeydown);
   }
 
-  
-  // handleKeydown(event) {
-  //   // debugger
-  //   let key = event.keyCode;
-  //   if (key === 65 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
-  //     this.player.left();
-  //     this.animate();
-  //   } else if (key === 68 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
-  //     this.player.right();
-  //     this.animate();
-  //   } else if (key === 87 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
-  //     this.player.up();
-  //     this.animate();
-  //   } else if (key === 83 && !Util.collisionDetection(this.player, this.level.arrWalls)) {
-  //     this.player.down();
-  //     this.animate();
-  //   }
-  // }
-
   handleKeydown(event) {
-    // debugger
     let key = event.keyCode;
+    console.log(event);
     if (key === 65 && this.player.collisionLeft === false) {
-      this.player.collisionRight = false;
       this.player.left();
       this.animate();
-      if (Util.collisionDetection(this.player, this.level.arrWalls)) {
-        this.player.collisionLeft = true;
+      if (this.game.collisionDetection()) {
+        this.player.right();
+        this.animate();
       }
     } else if (key === 68 && this.player.collisionRight === false) {
-      this.player.collisionLeft = false;
       this.player.right();
       this.animate();
-      if (Util.collisionDetection(this.player, this.level.arrWalls)) {
-        this.player.collisionRight = true;
+      if (this.game.collisionDetection()) {
+        this.player.left();
+        this.animate();
       }
-    } else if (key === 87) {
-      this.player.up();
-      this.animate();
-    } else if (key === 83) {
-      this.player.down();
-      this.animate();
     }
   }
   
 }
+
+// else if (key === 87 && this.player.collisionUp === false) {
+//       this.player.up();
+//       this.animate();
+//       if (this.game.collisionDetection()) {
+//         this.player.down();
+//         // this.player.down();
+//       }
+//     } else if (key === 83 && this.player.collisionDown === false) {
+//       this.player.down();
+//       this.animate();
+//       if (this.game.collisionDetection()) {
+//         this.player.up();
+//         // this.player.up();
+//       }
+//     }
 
 export default GameView;
 
