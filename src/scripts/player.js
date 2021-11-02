@@ -3,15 +3,14 @@ class Player {
     this.x = initPos[0];
     this.y = initPos[1];
 
-    // collisions
-    this.collisionLeft = false;
-    this.collisionRight = false;
-    this.collisionUp = false;
-    this.collisionDown = false;
-
+    
     // defaults
-    this.velocity = 5;
-    this.acceleration = 1;
+    this.velocity = 10;
+    this.acceleration = 3;
+    this.jumping = false;
+    this.maxJumpHeight = 50;
+
+    // image defaults
     let spidey = new Image();
     spidey.src = "../../assets/sprite_spiderman.png";
     this.image = spidey;
@@ -20,8 +19,6 @@ class Player {
 
     // setting binds
     this.renderPlayer = this.renderPlayer.bind(this);
-    // this.jumpPlayer = this.jumpPlayer.bind(this);
-    // this.impulsePlayer = this.impulsePlayer.bind(this);
 
   }
 
@@ -53,8 +50,23 @@ class Player {
   }
 
   jump() {
-    // this.y -= this.velocity;
-    // this.velocity += 1;
+    let originalYPos = this.y;
+
+    let timerUp = setInterval(() => {
+      if (this.y < originalYPos - this.maxJumpHeight) {
+        clearInterval(timerUp);
+        let timerDown = setInterval(() => {
+          if (this.y >= originalYPos) {
+            clearInterval(timerDown);
+            this.jumping = false;
+            return;
+          }
+
+          this.y += this.velocity;
+        }, 20)
+      }
+      this.y -= this.velocity;
+    }, 20);
   }
 
   impulse(event) {

@@ -1,5 +1,5 @@
 import Player from "./player";
-import { Util } from "./util";
+import { wallUtil } from "./modules/wallUtil";
 
 class Game {
   constructor(arrLevels) {
@@ -9,10 +9,16 @@ class Game {
   }
 
   renderFrame(ctx) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    this.currentPlayer.renderPlayer(ctx)
-    this.currentLevel.renderLevel(ctx);
-    this.gravity();
+    if (this.currentPlayer.jumping) {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      this.currentPlayer.renderPlayer(ctx);
+      this.currentLevel.renderLevel(ctx);
+    } else {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      this.currentPlayer.renderPlayer(ctx);
+      this.currentLevel.renderLevel(ctx);
+      this.gravity();
+    }
   }
 
   
@@ -33,37 +39,16 @@ class Game {
   }
 
   gravity() {
-    let walls = this.currentLevel.arrWalls;
-    let possibleWalls = [];
-
-    walls.forEach((wall) => {
-      if (wall.y > this.currentPlayer.y + this.currentPlayer.height) possibleWalls.push(wall);
-    })
-
-    let closest = Util.closestWall(this.currentPlayer, possibleWalls);
+    let closest = wallUtil.closestWallBelow(this.currentPlayer, this.currentLevel.arrWalls);
+    let distance = wallUtil.distanceBelow(this.currentPlayer, closest);
     
-    if (Util.distanceY(this.currentPlayer, closest) > this.currentPlayer.velocity) {
-      this.currentPlayer.y += this.currentPlayer.velocity;
-      this.currentPlayer.velocity += this.currentPlayer.acceleration;
+    if (distance === 1) {
+      return
+    } else if (distance > this.currentPlayer.velocity) {
+      this.currentPlayer.down();
+    } else {
+      this.currentPlayer.y += (distance - 1);
     }
-  }
-
-  collisionDetection() {
-    let player = this.currentPlayer;
-    let walls = this.currentLevel.arrWalls;
-
-    for (let i = 0; i < walls.length; i++) {
-      let wall = walls[i];
-      
-      if (wall.x < player.x + player.width && // collisionRight
-          wall.x + wall.width > player.x && // collisionLeft
-          wall.y < player.y + player.height && // collisionBottom
-          wall.y + wall.height > player.y) { // collisionTop
-            return true;
-          }
-    }
-
-    return false;
   }
 }
 

@@ -1,4 +1,4 @@
-// import { Util } from "./util";
+import { wallUtil } from "./modules/wallUtil";
 
 
 class GameView {
@@ -15,7 +15,8 @@ class GameView {
     this.animate = this.animate.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
 
-    this.listen();
+    this.listenDown();
+    this.listenUp();
   }
 
   animate() {
@@ -27,50 +28,66 @@ class GameView {
     requestAnimationFrame(this.animate);
   }
 
-  listen() {
+  listenDown() {
     document.addEventListener("keydown", this.handleKeydown);
+  }
+
+  listenUp() {
+    document.addEventListener("keyup", this.handleKeyup);
+  }
+
+  handleKeyup(event) {
+    console.log(event);
   }
 
   handleKeydown(event) {
     let key = event.keyCode;
-    console.log(event);
-    if (key === 65 && this.player.collisionLeft === false) {
-      this.player.left();
-      this.animate();
-      if (this.game.collisionDetection()) {
-        this.player.right();
-        this.animate();
-      }
-    } else if (key === 68 && this.player.collisionRight === false) {
-      this.player.right();
-      this.animate();
-      if (this.game.collisionDetection()) {
+    // console.log(event);
+    if (key === 65) {
+      let closestL = wallUtil.closestWallToTheLeft(this.player, this.level.arrWalls);
+      let distanceL = wallUtil.distanceToTheLeft(this.player, closestL);
+
+      if (distanceL === 1) {
+        return
+      } else if (distanceL > this.player.velocity) {
         this.player.left();
-        this.animate();
+      } else {
+        this.player.x -= (distanceL - 1);
       }
+
+      this.animate();
+
+    } else if (key === 68) {
+      let closestR = wallUtil.closestWallToTheRight(this.player, this.level.arrWalls);
+      let distanceR = wallUtil.distanceToTheRight(this.player, closestR);
+
+      if (distanceR === 1) {
+        return
+      } else if (distanceR > this.player.velocity) {
+        this.player.right();
+      } else {
+        this.player.x += (distanceR - 1);
+      }
+
+      this.animate();
+
     } else if (key === 32) {
-      this.player.jump();
-      this.animate;
+      let closestB = wallUtil.closestWallBelow(this.player, this.level.arrWalls);
+      let distanceB = wallUtil.distanceBelow(this.player, closestB);
+      
+      if (distanceB > 1) {
+        this.player.jumping = false;
+        return
+      } else {
+        this.player.jumping = true;
+        this.player.jump();
+        this.animate();
+        // this.player.jumping = false;
+      }
     }
   }
   
 }
-
-// else if (key === 87 && this.player.collisionUp === false) {
-//       this.player.up();
-//       this.animate();
-//       if (this.game.collisionDetection()) {
-//         this.player.down();
-//         // this.player.down();
-//       }
-//     } else if (key === 83 && this.player.collisionDown === false) {
-//       this.player.down();
-//       this.animate();
-//       if (this.game.collisionDetection()) {
-//         this.player.up();
-//         // this.player.up();
-//       }
-//     }
 
 export default GameView;
 
