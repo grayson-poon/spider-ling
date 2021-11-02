@@ -48,6 +48,9 @@ class GameView {
         this.player.left();
         this.animate();
       }
+    } else if (key === 32) {
+      this.player.jump();
+      this.animate;
     }
   }
   

@@ -9,7 +9,6 @@ export const Util = {
     let closest;
     let found = false;
     let dy = 0;
-    debugger
     while (found === false) {
       possibleWalls.forEach((wall) => {
         if (wall.containsPoint(player.x, player.y + player.height + dy) ||

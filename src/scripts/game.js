@@ -1,4 +1,3 @@
-import Level from "./level";
 import Player from "./player";
 import { Util } from "./util";
 
@@ -10,10 +9,10 @@ class Game {
   }
 
   renderFrame(ctx) {
-    this.gravity();
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    this.currentLevel.renderLevel(ctx);
     this.currentPlayer.renderPlayer(ctx)
+    this.currentLevel.renderLevel(ctx);
+    this.gravity();
   }
 
   
@@ -30,10 +29,10 @@ class Game {
   }
   
   nextLevel() {
-    this.currentLevel.layout = this.allLevels.shift();
+    this.currentLevel = this.allLevels.shift();
   }
 
-  gravity() { // if the distance between player coordinates and wall in the y direction is > this.velocity, turn on gravity
+  gravity() {
     let walls = this.currentLevel.arrWalls;
     let possibleWalls = [];
 
@@ -47,13 +46,6 @@ class Game {
       this.currentPlayer.y += this.currentPlayer.velocity;
       this.currentPlayer.velocity += this.currentPlayer.acceleration;
     }
-
-    // if (!this.collisionDetection() && status) {
-    //   this.currentPlayer.y += this.currentPlayer.velocity;
-    //   this.currentPlayer.velocity += this.currentPlayer.acceleration;
-    // } else {
-    //   status = false;
-    // }
   }
 
   collisionDetection() {
@@ -70,6 +62,7 @@ class Game {
             return true;
           }
     }
+
     return false;
   }
 }

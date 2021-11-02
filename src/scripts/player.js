@@ -15,8 +15,8 @@ class Player {
     let spidey = new Image();
     spidey.src = "../../assets/sprite_spiderman.png";
     this.image = spidey;
-    this.width = 25;
-    this.height = 45;
+    this.width = 35;
+    this.height = 70;
 
     // setting binds
     this.renderPlayer = this.renderPlayer.bind(this);
@@ -30,10 +30,10 @@ class Player {
     // you must call ctx.draw image outside the .onload() function
     // images need the .onload() method, native canvas drawings do not
     this.image.onload = () => { 
-      ctx.drawImage(this.image, 665, 0, 45, 80, this.x, this.y, this.width, this.height);
+      ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
     } // refactor this later to be variables for standingSpideyX1, standingSpideyY1, etc) break into multi lined arguments
 
-    ctx.drawImage(this.image, 665, 0, 45, 80, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
 
   left() {
@@ -53,11 +53,12 @@ class Player {
   }
 
   jump() {
-
+    // this.y -= this.velocity;
+    // this.velocity += 1;
   }
 
   impulse(event) {
-
+    
   }
 
   inWinZone(layout) { // return a boolean based on input layout
