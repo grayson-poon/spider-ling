@@ -42,12 +42,12 @@ class Game {
     let closest = wallUtil.closestWallBelow(this.currentPlayer, this.currentLevel.arrWalls);
     let distance = wallUtil.distanceBelow(this.currentPlayer, closest);
     
-    if (distance === 1) {
+    if (distance === 2) {
       return
     } else if (distance > this.currentPlayer.velocity) {
-      this.currentPlayer.y += this.currentPlayer.velocity
+      this.currentPlayer.y += this.currentPlayer.velocity;
     } else {
-      this.currentPlayer.y += (distance - 1);
+      this.currentPlayer.y += (distance - 2);
     }
   }
 }

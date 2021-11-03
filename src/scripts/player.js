@@ -64,12 +64,8 @@ class Player {
   }
 
   impulse(unitVec) {
-    // this.x += (unitVec[0] * this.maxImpulse);
-    // this.y += (unitVec[1] * this.maxImpulse);
-
-    
-
-
+    this.x += (unitVec[0] * this.maxImpulse);
+    this.y += (unitVec[1] * this.maxImpulse);
   }
 
   inWinZone(layout) { // return a boolean based on input layout

@@ -73,7 +73,7 @@ class GameView {
       let closestB = wallUtil.closestWallBelow(this.player, this.level.arrWalls);
       let distanceB = wallUtil.distanceBelow(this.player, closestB);
       
-      if (distanceB > 1) {
+      if (distanceB > 2) {
         this.player.jumping = true;
         return
       } else {
@@ -96,9 +96,14 @@ class GameView {
     let clickPos = [event.clientX - rect.left, event.clientY - rect.top];
     let unitVec = vecUtil.normalize(playerPos, clickPos);
 
-    // this.player.jumping = true;
+    let closestTest = wallUtil.closestWallToTheLeft(this.player, this.level.arrWalls);
+
+    // this.player.jumping = true; WORKS BUT NEEDS TO BE REFACTORED and made more user friendly
+    // if (closestTest.containsPoint(this.player.x + unitVec[0] * this.player.maxImpulse, this.player.y + unitVec[1] * this.player.maxImpulse)) {
+    //   return;
+    // }
     this.player.impulse(unitVec);
-    // this.player.jumping = false;
+    this.player.jumping = false;
   }
 }
 
