@@ -1,4 +1,5 @@
 import { wallUtil } from "./modules/wallUtil";
+import { vecUtil } from "./modules/vecUtil";
 
 
 class GameView {
@@ -13,7 +14,8 @@ class GameView {
 
     // binds
     this.animate = this.animate.bind(this);
-    this.handleKeydown = this.handleKeydown.bind(this);
+    this.keydownController = this.keydownController.bind(this);
+    this.playerImpulse = this.playerImpulse.bind(this);
 
     this.listenDown();
     this.listenClick();
@@ -21,30 +23,22 @@ class GameView {
 
   animate() {
     this.game.renderFrame(this.ctx);
-    requestAnimationFrame(this.animate);
+    window.requestAnimationFrame(this.animate);
   }
 
   start() {
-    requestAnimationFrame(this.animate);
+    window.requestAnimationFrame(this.animate);
   }
 
   listenDown() {
-    document.addEventListener("keydown", this.handleKeydown);
+    document.addEventListener("keydown", this.keydownController);
   }
 
-  listenOver() {
-    this.canvas.addEventListener("mouseover", this.handleOver);
-  }
+  // listenOver() {
+  //   this.canvas.addEventListener("mouseover", this.handleOver);
+  // }
 
-  listenClick() {
-    this.canvas.addEventListener("click", this.handleClick);
-  }
-
-  handleClick(event) {
-    console.log(event);
-  }
-
-  handleKeydown(event) {
+  keydownController(event) {
     event.preventDefault();
     let key = event.keyCode;
     if (key === 65) {
@@ -59,7 +53,7 @@ class GameView {
         this.player.x -= (distanceL - 1);
       }
 
-      this.animate();
+      // this.animate();
 
     } else if (key === 68) {
       let closestR = wallUtil.closestWallToTheRight(this.player, this.level.arrWalls);
@@ -73,7 +67,7 @@ class GameView {
         this.player.x += (distanceR - 1);
       }
 
-      this.animate();
+      // this.animate();
 
     } else if (key === 32) {
       let closestB = wallUtil.closestWallBelow(this.player, this.level.arrWalls);
@@ -85,11 +79,27 @@ class GameView {
       } else {
         this.player.jumping = true;
         this.player.jump();
-        this.animate();
+        // this.animate();
       }
     }
   }
-  
+
+  listenClick() {
+    this.canvas.addEventListener("click", this.playerImpulse);
+  }
+
+  playerImpulse(event) {
+    event.preventDefault();
+    let rect = this.canvas.getBoundingClientRect();
+
+    let playerPos = [this.player.x, this.player.y];
+    let clickPos = [event.clientX - rect.left, event.clientY - rect.top];
+    let unitVec = vecUtil.normalize(playerPos, clickPos);
+
+    // this.player.jumping = true;
+    this.player.impulse(unitVec);
+    // this.player.jumping = false;
+  }
 }
 
 export default GameView;

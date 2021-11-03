@@ -45,7 +45,7 @@ class Game {
     if (distance === 1) {
       return
     } else if (distance > this.currentPlayer.velocity) {
-      this.currentPlayer.down();
+      this.currentPlayer.y += this.currentPlayer.velocity
     } else {
       this.currentPlayer.y += (distance - 1);
     }

@@ -1,6 +1,6 @@
 export const wallUtil = {
   distanceBelow(player, wall) {
-    return (wall.y - (player.y + player.height)); // 450
+    return (wall.y - (player.y + player.height));
   },
 
   distanceToTheRight(player, wall) {
@@ -13,6 +13,7 @@ export const wallUtil = {
 
   closestWallBelow(player, walls) {
     let possibleWalls = [];
+
     walls.forEach((wall) => {
       if (wall.y > player.y + player.height) {
         possibleWalls.push(wall);
@@ -25,6 +26,7 @@ export const wallUtil = {
 
     while (found === false) {
       possibleWalls.forEach((wall) => {
+        
         if (wall.containsPoint(player.x, player.y + player.height + dy) ||
             wall.containsPoint(player.x + player.width, player.y + player.height + dy)) {
           closest = wall;
