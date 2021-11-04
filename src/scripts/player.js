@@ -76,10 +76,8 @@ class Player {
   inFailZone(failZones) {
     for (let i = 0; i < failZones.length; i++) {
       let zone = failZones[i];
-      
       if (zoneUtil.insideZone(this, zone)) return true;
     }
-    
     return false;
   }
 

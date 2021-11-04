@@ -6,6 +6,7 @@ class Game {
     this.allLevels = arrLevels;
     this.currentLevel = arrLevels.shift();
     this.currentPlayer = new Player(this.currentLevel.startingPos);
+    this.done = false;
   }
 
   renderFrame(ctx) {
@@ -41,9 +42,14 @@ class Game {
   }
   
   nextLevel() {
-    this.currentLevel = this.allLevels.shift();
-    this.currentPlayer.x = this.currentLevel.startingPos[0];
-    this.currentPlayer.y = this.currentLevel.startingPos[1];
+    if (this.allLevels.length >= 1) {
+      this.currentLevel = this.allLevels.shift();
+      this.currentPlayer.x = this.currentLevel.startingPos[0];
+      this.currentPlayer.y = this.currentLevel.startingPos[1];
+    } else {
+      this.done = true;
+      // have something in the animate function? to render a new page
+    }
   }
 
   restartLevel() {

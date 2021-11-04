@@ -95,10 +95,10 @@ export const wallUtil = {
     for (let i = 0; i < walls.length; i++) {
       let wall = walls[i];
       
-      if (wall.x < player.x + player.width && // collisionRight
-          wall.x + wall.width > player.x && // collisionLeft
-          wall.y < player.y + player.height && // collisionBottom
-          wall.y + wall.height > player.y) { // collisionTop
+      if (wall.x < player.x + player.width &&
+          wall.x + wall.width > player.x &&
+          wall.y < player.y + player.height &&
+          wall.y + wall.height > player.y) {
             return true;
           }
     }
