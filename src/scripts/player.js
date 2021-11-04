@@ -1,5 +1,4 @@
 import { zoneUtil } from "./Utils/zoneUtil";
-import { zoneUtil } from "../assets/";
 
 class Player {
   constructor(initPos) {
