@@ -7,6 +7,8 @@ class GameView {
     this.ctx = ctx;
     this.game = game;
 
+    this.gameSession = true;
+
     // relations
     this.canvas = this.ctx.canvas;
     this.player = this.game.currentPlayer;
@@ -22,12 +24,27 @@ class GameView {
   }
 
   animate() {
-    this.game.renderFrame(this.ctx);
-    window.requestAnimationFrame(this.animate);
+    if (this.gameSession) {
+      this.game.renderFrame(this.ctx);
+      window.requestAnimationFrame(this.animate);
+    }
   }
 
   start() {
     window.requestAnimationFrame(this.animate);
+  }
+
+  pause() {
+    this.gameSession = false;
+    document.removeEventListener("keydown", this.keydownController);
+    this.canvas.removeEventListener("click", this.playerImpulse);
+  }
+
+  resume() {
+    this.gameSession = true;
+    this.start();
+    document.addEventListener("keydown", this.keydownController);
+    this.canvas.addEventListener("click", this.playerImpulse);
   }
 
   listenDown() {

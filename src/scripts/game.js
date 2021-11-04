@@ -13,29 +13,42 @@ class Game {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       this.currentPlayer.renderPlayer(ctx);
       this.currentLevel.renderLevel(ctx);
+      this.completedLevel();
+      this.failedLevel();
     } else {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       this.currentPlayer.renderPlayer(ctx);
       this.currentLevel.renderLevel(ctx);
       this.gravity();
+      this.completedLevel();
+      this.failedLevel();
     }
   }
 
   
   completedLevel() {
-    if (this.currentPlayer.inWinZone(this.currentLevel.layout)) {
-      // render the next level or the congratulations page
+    if (this.currentPlayer.inWinZone(this.currentLevel.winZone)) {
+      // change visibility of win page to visible
+      // after 5 seconds with set timeout, change visibility back to hidden
+      this.nextLevel();
     }
   }
 
   failedLevel() {
-    if (this.currentPlayer.inFailZone(this.currentLevel.layout)) {
-      // render the fail page with buttons to restart or quit
+    if (this.currentPlayer.inFailZone(this.currentLevel.failZones)) {
+      this.restartLevel();
     }
   }
   
   nextLevel() {
     this.currentLevel = this.allLevels.shift();
+    this.currentPlayer.x = this.currentLevel.startingPos[0];
+    this.currentPlayer.y = this.currentLevel.startingPos[1];
+  }
+
+  restartLevel() {
+    this.currentPlayer.x = this.currentLevel.startingPos[0];
+    this.currentPlayer.y = this.currentLevel.startingPos[1];
   }
 
   gravity() {

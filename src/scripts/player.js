@@ -1,4 +1,5 @@
 import { vecUtil } from "./modules/vecUtil";
+import { zoneUtil } from "./modules/zoneUtil";
 
 class Player {
   constructor(initPos) {
@@ -11,7 +12,7 @@ class Player {
     this.acceleration = 3;
     this.jumping = false;
     this.maxJumpHeight = 50;
-    this.maxImpulse = 75;
+    this.maxImpulse = 200;
 
     // image defaults
     let spidey = new Image();
@@ -68,8 +69,18 @@ class Player {
     this.y += (unitVec[1] * this.maxImpulse);
   }
 
-  inWinZone(layout) { // return a boolean based on input layout
+  inWinZone(winZone) { // return a boolean based on input layout
+    return zoneUtil.insideZone(this, winZone);
+  }
 
+  inFailZone(failZones) {
+    for (let i = 0; i < failZones.length; i++) {
+      let zone = failZones[i];
+      
+      if (zoneUtil.insideZone(this, zone)) return true;
+    }
+    
+    return false;
   }
 
 }

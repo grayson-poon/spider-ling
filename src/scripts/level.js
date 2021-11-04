@@ -1,10 +1,10 @@
 class Level {
-  constructor(startingPos, layout, winZone, failZonesArr) {
-    this.startingPos = startingPos;
-    this.layout = layout;
-    this.arrWalls = layout.arrWalls;
-    this.winZone = winZone;
-    this.failZonesArr = failZonesArr;
+  constructor(options) {
+    this.startingPos = options.startingPos;
+    this.layout = options.layout;
+    this.arrWalls = this.layout.arrWalls;
+    this.winZone = options.winZone;
+    this.failZones = options.failZones;
   }
 
   renderLevel(ctx) {
