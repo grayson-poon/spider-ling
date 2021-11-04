@@ -17,8 +17,8 @@ function handleStart(gameView, game, ele) {
     if (ele.innerText === "Start") {
       gameView.start();
       ele.innerHTML = "Pause";
-      console.log("success");
       document.getElementById("canvas-container").style.border = "none";
+      document.getElementById("instructions_credits-container").style.visibility = "hidden";
     } else if (ele.innerText === "Pause") {
         game.pause();
         ele.innerHTML = "Resume";

@@ -29,7 +29,7 @@ div#pause-content {
 div#instructions_credits-container {
   width: 900px;
   height: 600px;
-  visibility: hidden;
+  visibility: visible;
   position: absolute;
   display: flex;
   flex-direction: row;

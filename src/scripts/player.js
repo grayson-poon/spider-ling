@@ -6,29 +6,25 @@ class Player {
     this.y = initPos[1];
     this.pos = [this.x, this.y];
     
-    // defaults
     this.velocity = 10;
     this.acceleration = 3;
     this.jumping = false;
     this.maxJumpHeight = 50;
     this.maxImpulse = 200;
 
-    // image defaults
     let spidey = new Image();
     spidey.src = "../../assets/sprite_spiderman.png";
     this.image = spidey;
     this.width = 35;
     this.height = 70;
 
-    // setting binds
     this.renderPlayer = this.renderPlayer.bind(this);
-
   }
 
   renderPlayer(ctx) {
     this.image.onload = () => { 
       ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
-    } // refactor this later to be variables for standingSpideyX1, standingSpideyY1, etc) break into multi lined arguments
+    }
 
     ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
