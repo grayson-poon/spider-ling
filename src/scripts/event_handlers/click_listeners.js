@@ -1,4 +1,4 @@
-import { vecUtil } from "../modules/vecUtil";
+import { vecUtil } from "../Utils/vecUtil";
 
 export default function addClickEventListeners(canvas, player) {
   addClickListener(canvas, player);

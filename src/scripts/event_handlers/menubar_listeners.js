@@ -1,15 +1,15 @@
 export default function addMenubarEventListeners(gameView, game) {
-  addStartListener(gameView);
+  addStartListener(gameView, game);
   addRestartListener(game);
-  addInstructionsListener(gameView);
+  addInstructionsListener(gameView, game);
 }
 
-function addStartListener(gameView) {
+function addStartListener(gameView, game) {
   const ele = document.getElementById("start_pause");
-  ele.addEventListener("click", handleStart(gameView, ele));
+  ele.addEventListener("click", handleStart(gameView, game, ele));
 }
 
-function handleStart(gameView, ele) {
+function handleStart(gameView, game, ele) {
   return function(event) {
     event.stopPropagation();
     event.preventDefault();
@@ -20,14 +20,15 @@ function handleStart(gameView, ele) {
       console.log("success");
       document.getElementById("canvas-container").style.border = "none";
     } else if (ele.innerText === "Pause") {
-        gameView.pause();
+        game.pause();
         ele.innerHTML = "Resume";
         document.getElementById("pause-container").style.visibility = "visible";
-    } else if (ele.innerText === "Resume") {
-      gameView.resume();
-      ele.innerHTML = "Pause";
-      document.getElementById("pause-container").style.visibility = "hidden";
-      document.getElementById("instructions_credits-container").style.visibility = "hidden";
+      } else if (ele.innerText === "Resume") {
+        game.resume(gameView);
+        ele.innerHTML = "Pause";
+        document.getElementById("pause-container").style.visibility = "hidden";
+        document.getElementById("instructions_credits-container").style.visibility = "hidden";
+        document.getElementById("canvas-container").style.border = "none";
     }
   }
 }
@@ -45,9 +46,9 @@ function handleRestart(game) {
   }
 }
 
-function addInstructionsListener(gameView) {
+function addInstructionsListener(gameView, game) {
   const ele = document.getElementById("instructions_credits");
-  ele.addEventListener("click", handleInstructions(gameView));
+  ele.addEventListener("click", handleInstructions(gameView, game));
 }
 
 function handleInstructions(gameView, game) {
@@ -57,13 +58,16 @@ function handleInstructions(gameView, game) {
 
     document.getElementById("start_pause").innerHTML = "Resume";
     const ele = document.getElementById("instructions_credits-container");
+    const startPause = document.getElementById("start_pause");
+
     if (ele.style.visibility === "visible") {
       ele.style.visibility = "hidden";
-      gameView.resume();
+      game.resume(gameView);
       document.getElementById("start_pause").innerHTML = "Pause";
+      document.getElementById("canvas-container").style.border = "none";
     } else {
       ele.style.visibility = "visible";
-      gameView.pause();
+      game.pause();
       document.getElementById("pause-container").style.visibility = "hidden";
     }
   }

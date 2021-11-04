@@ -1,5 +1,6 @@
 import Player from "./player";
-import { wallUtil } from "./modules/wallUtil";
+import { wallUtil } from "./Utils/wallUtil";
+import addKeydownEventListeners from "./event_handlers/keydown_listeners";
 
 class Game {
   constructor(arrLevels) {
@@ -7,6 +8,7 @@ class Game {
     this.currentLevel = arrLevels.shift();
     this.currentPlayer = new Player(this.currentLevel.startingPos);
     this.done = false;
+    this.pauseStatus = false;
   }
 
   renderFrame(ctx) {
@@ -20,17 +22,32 @@ class Game {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       this.currentPlayer.renderPlayer(ctx);
       this.currentLevel.renderLevel(ctx);
-      this.gravity();
       this.completedLevel();
       this.failedLevel();
+      this.gravity();
     }
   }
 
+  pause() {
+    this.pauseStatus = true;
+    addKeydownEventListeners(this.player, this.level, this.pauseStatus);
+  }
+
+  resume(gameView) {
+    this.pauseStatus = false;
+    addKeydownEventListeners(this.player, this.level, this.pauseStatus);
+    gameView.start();
+  }
+
+  winGame() {
+    if (this.done) {
+      document.getElementById("win-container").style.visibility = "visible";
+      this.pause();
+    }
+  }
   
   completedLevel() {
     if (this.currentPlayer.inWinZone(this.currentLevel.winZone)) {
-      // change visibility of win page to visible
-      // after 5 seconds with set timeout, change visibility back to hidden
       this.nextLevel();
     }
   }
@@ -48,7 +65,7 @@ class Game {
       this.currentPlayer.y = this.currentLevel.startingPos[1];
     } else {
       this.done = true;
-      // have something in the animate function? to render a new page
+      this.winGame();
     }
   }
 

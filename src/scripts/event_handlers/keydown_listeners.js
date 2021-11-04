@@ -1,4 +1,4 @@
-import { wallUtil } from "../modules/wallUtil";
+import { wallUtil } from "../Utils/wallUtil";
 
 export default function addKeydownEventListeners(player, level, pauseStatus) {
   addKeydownListener(player, level, pauseStatus);
@@ -14,7 +14,6 @@ function addKeydownListener(player, level, pauseStatus) {
 
 function handleKeydown(player, level) {
   return function(event) {
-    console.log(event);
     event.stopPropagation();
     event.preventDefault();
 

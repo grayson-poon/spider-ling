@@ -1,7 +1,7 @@
 import Level from "../level";
 import Layout from "../layout";
 
-// import wall_layouts HERE
+// wall_layouts
 import { levelOne } from "./level_one";
 import { levelTwo } from "./level_two";
 

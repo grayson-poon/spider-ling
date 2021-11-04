@@ -1,5 +1,4 @@
-import { vecUtil } from "./modules/vecUtil";
-import { zoneUtil } from "./modules/zoneUtil";
+import { zoneUtil } from "./Utils/zoneUtil";
 
 class Player {
   constructor(initPos) {
@@ -27,12 +26,9 @@ class Player {
   }
 
   renderPlayer(ctx) {
-    // only renders image when document loads & will NOT render image any other time
-    // you must call ctx.draw image outside the .onload() function
-    // images need the .onload() method, native canvas drawings do not
-    // this.image.onload = () => { 
-    //   ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
-    // } // refactor this later to be variables for standingSpideyX1, standingSpideyY1, etc) break into multi lined arguments
+    this.image.onload = () => { 
+      ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
+    } // refactor this later to be variables for standingSpideyX1, standingSpideyY1, etc) break into multi lined arguments
 
     ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
@@ -69,7 +65,7 @@ class Player {
     this.y += (unitVec[1] * this.maxImpulse);
   }
 
-  inWinZone(winZone) { // return a boolean based on input layout
+  inWinZone(winZone) {
     return zoneUtil.insideZone(this, winZone);
   }
 
