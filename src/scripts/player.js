@@ -13,7 +13,7 @@ class Player {
     this.maxImpulse = 200;
 
     let spidey = new Image();
-    spidey.src = "assets/sprite_spiderman.png";
+    spidey.src = "./assets/sprite_spiderman.png";
     this.image = spidey;
     this.width = 35;
     this.height = 70;
