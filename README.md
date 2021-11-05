@@ -4,16 +4,16 @@
 
 Spider-ling is an implementation of a level-based game, in which a user-controlled character must move from a starting position to an ending position to complete/pass the level. The user then advances to a subsequent level of harder difficulty to pass. There are various moves the character can employ in order to avoid the obstacles, such as move around, jump and shoot webs to change its current trajectory.
 
-As of now, this game will not include the use of any external libraries or engine to model the game physics properties, as these will be implemented as properties of the various objects in the game. Due to this, different game physics properties can be added to objects in the game in future updates, which will add a sense of robustness to the game itself. Spider-ling will be hosted on Heroku.
+As of now, this game will not include the use of any external libraries or engine to model the game physics properties, as these will be implemented as properties of the various objects in the game. Due to this, different game physics properties can be added to objects in the game in future updates, which will add a sense of robustness and customizability to the game itself. Spider-ling is hosted on [GitHub pages](https://grayson-poon.github.io/spider-ling/).
 
 ## Functionality and MVPs:
 
 In Spider-ling, users will be able to:
 
-* Start, pause, and quit the current game
+* Start, pause, and restart the game
 * Move around the game view by pressing certain keyboard characters
 * Choose where they want to place/shoot webs with the mouse
-* Jump and swing from one location to another
+* Jump and launch from one location to another
 
 In addition, this project will include:
 
@@ -30,7 +30,7 @@ This project will be implemented with the following technologies:
 
 * Canvas API to render the game view
 * Webpack to transpile the source JavaScript code
-* Heroku as the web platform to host the application
+* GitHub Pages as the web platform to host the application
 * npm to manage project dependencies
 
 ## Implementation Timeline:
@@ -43,7 +43,7 @@ This project will be implemented with the following technologies:
 
 * Wednesday: Focus on overall styling of the game and player instance. Work on implementing other levels that consist of new border properties if the first level is completed and fully ready.
 
-* Thursday Morning: Deploy to Heroku and rewrite this proposal in the README according to the actual implementation.
+* Thursday Morning: Fix any remaining bugs and finish styling. Deploy to GitHub Pages.
 
 ## Bonus Features:
 
