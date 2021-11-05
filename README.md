@@ -22,7 +22,7 @@ In addition, this project will include:
 
 ## Wireframe:
 
-![alt text][https://github.com/grayson-poon/spider-ling/blob/main/assets/webframe.jpg]
+![alt text](https://github.com/grayson-poon/spider-ling/blob/main/assets/webframe.jpg)
 
 ## Technologies, Libraries, and APIs:
 
