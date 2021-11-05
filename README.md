@@ -35,15 +35,15 @@ This project will be implemented with the following technologies:
 
 ## Implementation Timeline:
 
-* Friday Afternoon and Weekend: Setup project, by getting Webpack and Canvas running. Familiarize myself with the Canvas API. Create a Player class and get the canvas rendered with a generic playing environment and borders. Get an HTML element on the canvas to move with user input on the keyboard. Start playing around with basic physics logic such as collisions if possible.
+* 10/29/2021 - 10/31/2021: Setup project, by getting Webpack and Canvas running. Familiarize myself with the Canvas API. Create a Player class and get the canvas rendered with a generic playing environment and borders. Get an HTML element on the canvas to move with user input on the keyboard. Start playing around with basic physics logic such as collisions if possible.
 
-* Monday: Begin implementing physics game logic, such as gravity in 1D, collisions, and impulses via click events from the mouse and spacebar. Further tune the movement, collision and border properties of the object and the canvas.
+* 11/01/2021: Begin implementing physics game logic, such as gravity in 1D, collisions, and impulses via click events from the mouse and spacebar. Further tune the movement, collision and border properties of the object and the canvas.
 
-* Tuesday: Work on the animation of shooting webs in the direction of the mouse click event. Further tune the physics properties of the game.
+* 11/02/2021: Work on the animation of shooting webs in the direction of the mouse click event. Further tune the physics properties of the game.
 
-* Wednesday: Focus on overall styling of the game and player instance. Work on implementing other levels that consist of new border properties if the first level is completed and fully ready.
+* 11/03/2021: Focus on overall styling of the game and player instance. Work on implementing other levels that consist of new border properties if the first level is completed and fully ready.
 
-* Thursday Morning: Fix any remaining bugs and finish styling. Deploy to GitHub Pages.
+* 11/04/2021: Fix any remaining bugs and finish styling. Deploy to GitHub Pages.
 
 ## Bonus Features:
 
