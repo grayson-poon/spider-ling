@@ -20,7 +20,7 @@ In addition, this project will include:
 * Instructions/controls for how to play the game
 * A production README
 
-## Wireframe:
+## Webframe:
 
 ![alt text](https://github.com/grayson-poon/spider-ling/blob/main/assets/webframe.jpg)
 
