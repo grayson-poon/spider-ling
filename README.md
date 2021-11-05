@@ -4,7 +4,7 @@
 
 Spider-ling is an implementation of a level-based game, in which a user-controlled character must move from a starting position to an ending position to complete/pass the level. The user then advances to a subsequent level of harder difficulty to pass. There are various moves the character can employ in order to avoid the obstacles, such as move around, jump and shoot webs to change its current trajectory.
 
-As of now, this game will not include the use of any external libraries or engine to model the game physics properties, as these will be implemented as properties of the various objects in the game. Due to this, different game physics properties can be added to objects in the game in future updates, which will add a sense of robustness and customizability to the game itself. Spider-ling is hosted on [GitHub pages](https://grayson-poon.github.io/spider-ling/).
+As of now, this game will not include the use of any external libraries or engine to model the game physics properties, as these will be implemented as properties of the various objects in the game. Due to this, different game physics properties can be added to objects in the game in future updates, which will add a sense of robustness and customizability to the game itself. Spider-ling is hosted on [GitHub Pages](https://grayson-poon.github.io/spider-ling/).
 
 ## Functionality and MVPs:
 
