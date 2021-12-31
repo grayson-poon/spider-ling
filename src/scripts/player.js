@@ -6,6 +6,9 @@ class Player {
     this.y = initPos[1];
     this.pos = [this.x, this.y];
     
+    // this.velocityX = 0;
+    // this.velocityY = 0;
+
     this.velocity = 10;
     this.acceleration = 3;
     this.jumping = false;
