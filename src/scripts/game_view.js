@@ -1,6 +1,7 @@
 import addMenubarEventListeners from "./event_handlers/menubar_listeners";
 import addKeydownEventListeners from "./event_handlers/keydown_listeners";
 import addClickEventListeners from "./event_handlers/click_listeners";
+import { handleInstructions, handleRestart, handleStart } from "./event_handlers/new_menubar_listeners";
 
 class GameView {
   constructor(ctx, game) {
@@ -13,7 +14,11 @@ class GameView {
 
     this.animate = this.animate.bind(this);
 
-    addMenubarEventListeners(this, this.game);
+    handleStart(this, this.game);
+    handleRestart(this.game);
+    handleInstructions(this, this.game);
+
+    // addMenubarEventListeners(this, this.game);
     addKeydownEventListeners(this.player, this.level, this.game.pauseStatus);
     addClickEventListeners(this.ctx.canvas, this.player);
   }
