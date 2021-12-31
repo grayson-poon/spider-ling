@@ -19,6 +19,3 @@ class Wall {
 }
 
 export default Wall;
-
-// run the object collision functions inside the game, if player's coords overlap with wall instance coords, stop movement
-// refactor level/layout/game/gameview classes to account for array of wall objects
