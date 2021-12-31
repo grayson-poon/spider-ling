@@ -81,7 +81,8 @@ class Game {
     if (distance === 2) {
       return
     } else if (distance > this.currentPlayer.velocity) {
-      this.currentPlayer.y += this.currentPlayer.velocity;
+      // this.currentPlayer.y += this.currentPlayer.velocity;
+      this.currentPlayer.gravityStep();
     } else {
       this.currentPlayer.y += (distance - 2);
     }

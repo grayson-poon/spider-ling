@@ -1,4 +1,5 @@
 import { zoneUtil } from "./Utils/zoneUtil";
+import { wallUtil } from "./Utils/wallUtil";
 
 class Player {
   constructor(initPos) {
@@ -6,7 +7,9 @@ class Player {
     this.y = initPos[1];
     this.pos = [this.x, this.y];
     
-    this.velocity = 10;
+    this.velocity = 0;
+    this.velocityY = 0;
+    this.velocityX = 0;
     this.acceleration = 3;
     this.jumping = false;
     this.maxJumpHeight = 50;
@@ -26,6 +29,11 @@ class Player {
       ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
     }
 
+    // this.gravity();
+
+
+
+    console.log(this.velocityY);
     ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
 
@@ -73,6 +81,16 @@ class Player {
     return false;
   }
 
+  gravityStep() {
+    this.velocityY += 1;
+    this.y += this.velocityY;
+    this.velocityY *= 0.9;
+
+    if (this.y > 400) {
+      this.y = 400;
+      this.velocityY = 0;
+    }
+  }
 }
 
 export default Player;
