@@ -18,7 +18,6 @@ class GameView {
     handleRestart(this.game);
     handleInstructions(this, this.game);
 
-    // addMenubarEventListeners(this, this.game);
     addKeydownEventListeners(this.player, this.level, this.game.pauseStatus);
     addClickEventListeners(this.ctx.canvas, this.player);
   }
