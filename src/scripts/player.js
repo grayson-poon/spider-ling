@@ -22,16 +22,41 @@ class Player {
     this.height = 70;
 
     this.renderPlayer = this.renderPlayer.bind(this);
+
+    document.addEventListener("keydown", () => this.controller(event));
+  }
+
+  controller(event) {
+    let left = false;
+    let right = false;
+    let jump = false;
+    // debugger
+    let key_state = event.type === "keydown" ? true : false;
+
+    switch(event.keyCode) {
+      case 65:
+        return left = key_state;
+      case 68:
+        return right = key_state;
+      case 32:
+        return jump = key_state;
+      default:
+        break;
+    }
+
+    if (left) this.velocityX -= 0.5;
+    if (right) this.velocityX += 0.5;
+    if (jump && this.jumping === false) {
+      this.jumping = true;
+      this.velocityY -= 5;
+    }
+    // debugger
   }
 
   renderPlayer(ctx) {
     this.image.onload = () => { 
       ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
     }
-
-    // this.gravity();
-
-
 
     console.log(this.velocityY);
     ctx.drawImage(this.image, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
