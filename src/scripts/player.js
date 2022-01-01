@@ -1,6 +1,7 @@
 import { handleClick } from "./event_handlers/click_listeners";
 import { adjustPlayerGoingLeft } from "./Utils/playerUtil";
 import { vecUtil } from "./Utils/vecUtil";
+import { wallUtil } from "./Utils/wallUtil";
 
 
 class Player {
@@ -17,8 +18,8 @@ class Player {
     this.maxImpulse = 30;
     this.impulsing = false;
 
-    this.standing = new Image();
-    this.standing.src = "./assets/sprite_spiderman.png";
+    this.spidermanSprite = new Image();
+    this.spidermanSprite.src = "./assets/sprite_spiderman.png";
     this.width = 35;
     this.height = 70;
 
@@ -33,33 +34,56 @@ class Player {
   }
 
   draw(ctx) {
-    if (this.keydownState.left) this.velocityX -= 0.5;
-    if (this.keydownState.right) this.velocityX += 0.5;
-    if (this.keydownState.jumping && this.jumping === false) {
+    let arrWalls = this.currentLevel.arrWalls;
+    let { left, right, jumping, impulsing } = this.keydownState;
+
+    if (left) this.velocityX -= 0.5;
+    if (right) this.velocityX += 0.5;
+
+    if (jumping && this.jumping === false) {
       this.velocityY -= 20;
       this.jumping = true;
     }
-    if (this.keydownState.impulsing) {
-      this.velocityX += (this.unitVec[0] * this.maxImpulse);
-      this.velocityY += (this.unitVec[1] * this.maxImpulse);
-      this.keydownState.impulsing = false;
-      this.unitVec = [0, 0];
+
+    // let tempVec;
+    if (impulsing) {
+      this.velocityX += this.unitVec[0] * this.maxImpulse;
+      this.velocityY += this.unitVec[1] * this.maxImpulse;
+      // console.log(this.unitVec[0]);
+      // impulsing = false;
+      // tempVec = Object.assign([], this.unitVec);
+      // this.unitVec = [0, 0];
     }
 
-    this.velocityY += 1;
-    this.x += this.velocityX;
-    this.y += this.velocityY;
+    this.velocityY += 1; // gravity
+    // this.x += this.velocityX; // change in positionX over time (incremental move)
+    this.y += this.velocityY; // change in positionY over time (incremental move)
     this.velocityX *= 0.9;
     this.velocityY *= 0.9;
+    adjustPlayerGoingLeft(this, arrWalls, right, impulsing);
+    this.keydownState.impulsing = false;
+    this.unitVec = [0, 0];
+
+    // console.log(this.velocityX);
 
     if (this.y > 600 - this.height) {
       this.velocityY = 0;
       this.jumping = false;
-      this.impulsing = false;
+      this.keydownState.impulsing = false
       this.y = 600 - this.height;
     }
 
-    ctx.drawImage(this.standing, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
+    ctx.drawImage(
+      this.spidermanSprite,
+      660,
+      0,
+      45,
+      80,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
   }
 
   keydownController(event) {
