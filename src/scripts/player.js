@@ -1,4 +1,6 @@
+import { handleClick } from "./event_handlers/click_listeners";
 import { adjustPlayerGoingLeft } from "./Utils/playerUtil";
+import { vecUtil } from "./Utils/vecUtil";
 
 
 class Player {
@@ -9,8 +11,10 @@ class Player {
     
     this.velocityX = 0;
     this.velocityY = 0;
-    this.maxImpulse = 50;
     this.jumping = false;
+
+    this.unitVec = [0, 0];
+    this.maxImpulse = 30;
     this.impulsing = false;
 
     this.standing = new Image();
@@ -24,7 +28,7 @@ class Player {
       jumping: false,
       impulsing: false,
       keydownController: this.keydownController.bind(this),
-      clickListener: this.clickListener.bind(this),
+      clickController: this.clickController.bind(this),
     }
   }
 
@@ -35,9 +39,11 @@ class Player {
       this.velocityY -= 20;
       this.jumping = true;
     }
-    if (this.keydownState.impulsing && this.impulsing === false) {
-
-      this.impulsing = true;
+    if (this.keydownState.impulsing) {
+      this.velocityX += (this.unitVec[0] * this.maxImpulse);
+      this.velocityY += (this.unitVec[1] * this.maxImpulse);
+      this.keydownState.impulsing = false;
+      this.unitVec = [0, 0];
     }
 
     this.velocityY += 1;
@@ -49,14 +55,16 @@ class Player {
     if (this.y > 600 - this.height) {
       this.velocityY = 0;
       this.jumping = false;
+      this.impulsing = false;
       this.y = 600 - this.height;
     }
 
-    console.log(this.velocityY);
     ctx.drawImage(this.standing, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
 
   keydownController(event) {
+    event.stopPropagation();
+    event.preventDefault();
     let keyState = event.type === "keydown" ? true : false;
 
     switch(event.keyCode) {
@@ -74,8 +82,13 @@ class Player {
     }
   }
 
-  clickListener(event) {
-    
+  clickController(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.keydownState.impulsing = true;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const clickPos = [event.clientX - rect.left, event.clientY - rect.top];
+    this.unitVec = vecUtil.normalize([this.x, this. y], clickPos);
   }
 }
 

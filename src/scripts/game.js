@@ -38,7 +38,7 @@ class Game {
     document.addEventListener("keyup", this.player.keydownState.keydownController);
     document
       .getElementById("canvas")
-      .addEventListener("click", this.player.keydownState.clickListener);
+      .addEventListener("click", this.player.keydownState.clickController);
   }
 
   removeKeydownListeners() {
@@ -46,7 +46,7 @@ class Game {
     document.removeEventListener("keyup", this.player.keydownState.keydownController);
     document
       .getElementById("canvas")
-      .removeEventListener("click", this.player.keydownState.clickListener);
+      .removeEventListener("click", this.player.keydownState.clickController);
   }
 }
 
