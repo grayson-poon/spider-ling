@@ -12,17 +12,10 @@ class GameView {
   }
 
   loop() {
-    let player = this.game.player;
-    let controller = this.game.player.controller;
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
-    if (controller.left) player.velocityX -= 0.5;
-    if (controller.right) player.velocityX += 0.5;
-    if (controller.jumping && player.jumping === false) {
-      player.velocityY -= 20;
-      player.jumping = true;
-    }
-
-    // adjustBoundsOfPlayer(player);
+    this.game.player.draw(this.ctx);
+    // this.game.currentLevel.draw(this.ctx);
 
     window.requestAnimationFrame(this.loop.bind(this));
   }

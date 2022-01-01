@@ -7,10 +7,12 @@ class Player {
     
     this.velocityX = 0;
     this.velocityY = 0;
-    // this.jumping = false;
+    this.jumping = false;
 
     this.standing = new Image();
     this.standing.src = "./assets/sprite_spiderman.png";
+    this.width = 35;
+    this.height = 70;
 
     this.controller = {
       left: false,
@@ -24,6 +26,27 @@ class Player {
   }
 
   draw(ctx) {
+    if (this.controller.left) this.velocityX -= 0.5;
+    if (this.controller.right) this.velocityX += 0.5;
+    if (this.controller.jumping && this.jumping === false) {
+      this.velocityY -= 20;
+      this.jumping = true;
+    }
+
+    this.velocityY += 1;
+    console.log(this.velocityX);
+    this.x += this.velocityX;
+    this.y += this.velocityY;
+    this.velocityX *= 0.85;
+    this.velocityY *= 0.85;
+
+    if (this.y > 600 - this.height) {
+      this.velocityY = 0;
+      this.jumping = false;
+      this.y = 600 - this.height;
+    }
+
+    console.log(this.y, this.velocityY);
     ctx.drawImage(this.standing, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
 

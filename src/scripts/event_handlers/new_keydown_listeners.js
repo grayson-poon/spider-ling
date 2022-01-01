@@ -18,11 +18,7 @@ export const handleKeydown = (player, level, pauseStatus) => {
           player.velocityY -= 20;
         }
 
-        player.velocityY += 1.5;
-        player.x += player.velocityX;
-        player.y += player.velocityY;
-        player.velocityX *= 0.9;
-        player.velocityY *= 0.9;
+        
       default:
         return;
     }
