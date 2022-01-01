@@ -75,6 +75,7 @@ class Player {
       adjustPositiveX(this, arrWalls, left, impulsing);
     }
 
+    // console.log(this.velocityX);
     this.x += this.velocityX;
     // if (right || (impulsing && this.unitVec[0] > 0)) {
     //   adjustPlayerGoingRight(this, arrWalls, left, impulsing);
