@@ -1,14 +1,12 @@
-export const handleStart = (gameView, game) => {
+const handleStart = (gameView, game) => {
   const ele = document.getElementById("start_pause");
 
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
 
-    // debugger;
-
     if (ele.innerText === "Start") {
-      gameView.start();
+      game.start(gameView);
       ele.innerHTML = "Pause";
       document.getElementById("canvas-container").style.border = "none";
       document.getElementById(
@@ -30,7 +28,7 @@ export const handleStart = (gameView, game) => {
   });
 };
 
-export const handleRestart = (game) => {
+const handleRestart = (game) => {
   const ele = document.getElementById("restart");
 
   ele.addEventListener("click", (event) => {
@@ -40,7 +38,7 @@ export const handleRestart = (game) => {
   });
 };
 
-export const handleInstructions = (gameView, game) => {
+const handleInstructions = (gameView, game) => {
   const ele = document.getElementById("instructions_credits");
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -59,4 +57,10 @@ export const handleInstructions = (gameView, game) => {
       document.getElementById("pause-container").style.visibility = "hidden";
     }
   });
+};
+
+export const addMenubarListeners = (gameView, game) => {
+  handleStart(gameView, game);
+  handleRestart(game);
+  handleInstructions(gameView, game);
 };
