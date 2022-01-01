@@ -34,13 +34,19 @@ class Game {
   }
 
   addKeydownListeners() {
-    document.addEventListener("keydown", this.player.controller.keyListener);
-    document.addEventListener("keyup", this.player.controller.keyListener);
+    document.addEventListener("keydown", this.player.keydownState.keydownController);
+    document.addEventListener("keyup", this.player.keydownState.keydownController);
+    document
+      .getElementById("canvas")
+      .addEventListener("click", this.player.keydownState.clickListener);
   }
 
   removeKeydownListeners() {
-    document.removeEventListener("keydown", this.player.controller.keyListener);
-    document.removeEventListener("keyup", this.player.controller.keyListener);
+    document.removeEventListener("keydown", this.player.keydownState.keydownController);
+    document.removeEventListener("keyup", this.player.keydownState.keydownController);
+    document
+      .getElementById("canvas")
+      .removeEventListener("click", this.player.keydownState.clickListener);
   }
 }
 
