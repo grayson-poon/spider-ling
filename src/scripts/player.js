@@ -1,5 +1,5 @@
 import { handleClick } from "./event_handlers/click_listeners";
-import { adjustLeftVelocity, adjustPlayerGoingLeft, adjustPlayerGoingRight } from "./Utils/playerUtil";
+import { adjustNegativeX, adjustPlayerGoingLeft, adjustPlayerGoingRight, adjustPositiveX, adjustVelocity } from "./Utils/playerUtil";
 import { vecUtil } from "./Utils/vecUtil";
 import { wallUtil } from "./Utils/wallUtil";
 import { arrLevels } from "./wall_layouts/seeds";
@@ -62,12 +62,25 @@ class Player {
     // if (left || (impulsing && this.unitVec[0] < 0)) {
     //   adjustPlayerGoingLeft(this, arrWalls, right, impulsing);
     // }
+
+    // adjustVelocity(
+    //   this, arrWalls, [this.velocityX, this.velocityY], right, left, impulsing
+    // );
     
-    adjustLeftVelocity(this, arrWalls, right, impulsing);
+    if (this.velocityX < 0) {
+      adjustNegativeX(this, arrWalls, right, impulsing);
+    }
+
+    if (this.velocityX > 0) {
+      adjustPositiveX(this, arrWalls, left, impulsing);
+    }
+
     this.x += this.velocityX;
     // if (right || (impulsing && this.unitVec[0] > 0)) {
     //   adjustPlayerGoingRight(this, arrWalls, left, impulsing);
     // }
+
+    // console.log(this.velocityX);
 
     this.keydownState.impulsing = false;
     this.unitVec = [0, 0];

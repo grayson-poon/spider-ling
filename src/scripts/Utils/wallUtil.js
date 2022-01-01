@@ -15,7 +15,7 @@ export const wallUtil = {
     let possibleWalls = [];
 
     walls.forEach((wall) => {
-      if (wall.y > player.y + player.height) {
+      if (wall.y >= player.y + player.height) {
         possibleWalls.push(wall);
       }
     });
@@ -42,7 +42,7 @@ export const wallUtil = {
   closestWallToTheRight(player, walls) {
     let possibleWalls = [];
     walls.forEach((wall) => {
-      if (wall.x > player.x + player.width) {
+      if (wall.x >= player.x + player.width) {
         possibleWalls.push(wall);
       }
     });
@@ -68,7 +68,7 @@ export const wallUtil = {
   closestWallToTheLeft(player, walls) {
     let possibleWalls = [];
     walls.forEach((wall) => {
-      if (wall.x + wall.width < player.x) {
+      if (wall.x + wall.width <= player.x) {
         possibleWalls.push(wall);
       }
     });
