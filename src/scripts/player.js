@@ -1,7 +1,8 @@
 import { handleClick } from "./event_handlers/click_listeners";
-import { adjustPlayerGoingLeft } from "./Utils/playerUtil";
+import { adjustLeftVelocity, adjustPlayerGoingLeft, adjustPlayerGoingRight } from "./Utils/playerUtil";
 import { vecUtil } from "./Utils/vecUtil";
 import { wallUtil } from "./Utils/wallUtil";
+import { arrLevels } from "./wall_layouts/seeds";
 
 
 class Player {
@@ -39,37 +40,42 @@ class Player {
 
     if (left) this.velocityX -= 0.5;
     if (right) this.velocityX += 0.5;
-
     if (jumping && this.jumping === false) {
       this.velocityY -= 20;
       this.jumping = true;
     }
 
-    // let tempVec;
     if (impulsing) {
       this.velocityX += this.unitVec[0] * this.maxImpulse;
       this.velocityY += this.unitVec[1] * this.maxImpulse;
-      // console.log(this.unitVec[0]);
+      this.jumping = true;
       // impulsing = false;
-      // tempVec = Object.assign([], this.unitVec);
       // this.unitVec = [0, 0];
     }
 
     this.velocityY += 1; // gravity
-    // this.x += this.velocityX; // change in positionX over time (incremental move)
     this.y += this.velocityY; // change in positionY over time (incremental move)
     this.velocityX *= 0.9;
     this.velocityY *= 0.9;
-    adjustPlayerGoingLeft(this, arrWalls, right, impulsing);
+
+    // adjust x position based on wall/game logic
+    // if (left || (impulsing && this.unitVec[0] < 0)) {
+    //   adjustPlayerGoingLeft(this, arrWalls, right, impulsing);
+    // }
+    
+    adjustLeftVelocity(this, arrWalls, right, impulsing);
+    this.x += this.velocityX;
+    // if (right || (impulsing && this.unitVec[0] > 0)) {
+    //   adjustPlayerGoingRight(this, arrWalls, left, impulsing);
+    // }
+
     this.keydownState.impulsing = false;
     this.unitVec = [0, 0];
-
-    // console.log(this.velocityX);
 
     if (this.y > 600 - this.height) {
       this.velocityY = 0;
       this.jumping = false;
-      this.keydownState.impulsing = false
+      this.keydownState.impulsing = false;
       this.y = 600 - this.height;
     }
 
