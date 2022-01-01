@@ -12,11 +12,11 @@ class GameView {
   }
 
   loop() {
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-
-    this.game.player.draw(this.ctx);
-    // this.game.currentLevel.draw(this.ctx);
-
+    if (!this.game.pauseStatus) {
+      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      this.game.player.draw(this.ctx);
+      this.game.currentLevel.draw(this.ctx);
+    }
     window.requestAnimationFrame(this.loop.bind(this));
   }
 }

@@ -1,9 +1,11 @@
+import { adjustPlayerGoingLeft } from "./Utils/playerUtil";
 
 
 class Player {
-  constructor(initPos) {
+  constructor(initPos, currentLevel) {
     this.x = initPos[0];
     this.y = initPos[1];
+    this.currentLevel = currentLevel;
     
     this.velocityX = 0;
     this.velocityY = 0;
@@ -21,12 +23,15 @@ class Player {
       keyListener: this.keyListener.bind(this),
     }
 
-    document.addEventListener("keydown", this.controller.keyListener);
-    document.addEventListener("keyup", this.controller.keyListener);
+    // document.addEventListener("keydown", this.controller.keyListener);
+    // document.addEventListener("keyup", this.controller.keyListener);
   }
 
   draw(ctx) {
-    if (this.controller.left) this.velocityX -= 0.5;
+    if (this.controller.left) {
+      this.velocityX -= 0.5;
+    };
+
     if (this.controller.right) this.velocityX += 0.5;
     if (this.controller.jumping && this.jumping === false) {
       this.velocityY -= 20;
@@ -34,11 +39,10 @@ class Player {
     }
 
     this.velocityY += 1;
-    console.log(this.velocityX);
     this.x += this.velocityX;
     this.y += this.velocityY;
-    this.velocityX *= 0.85;
-    this.velocityY *= 0.85;
+    this.velocityX *= 0.9;
+    this.velocityY *= 0.9;
 
     if (this.y > 600 - this.height) {
       this.velocityY = 0;
@@ -46,7 +50,7 @@ class Player {
       this.y = 600 - this.height;
     }
 
-    console.log(this.y, this.velocityY);
+    console.log(this.velocityY);
     ctx.drawImage(this.standing, 660, 0, 45, 80, this.x, this.y, this.width, this.height);
   }
 
