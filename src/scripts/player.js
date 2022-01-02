@@ -18,6 +18,8 @@ class Player {
 
     this.spidermanSprite = new Image();
     this.spidermanSprite.src = "./assets/sprite_spiderman.png";
+    this.spidermanSpriteReversed = new Image();
+    this.spidermanSpriteReversed.src = "./assets/sprite_spiderman_reversed.png";
     this.width = 45;
     this.height = 70;
     this.count = 0;
@@ -70,6 +72,7 @@ class Player {
     drawPlayer(
       ctx,
       this.spidermanSprite,
+      this.spidermanSpriteReversed,
       this.x,
       this.y,
       this.velocityX,

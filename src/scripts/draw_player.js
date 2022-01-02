@@ -1,5 +1,5 @@
 export const drawPlayer = (
-  ctx, image, x, y, velocityX, velocityY, left, right, jumping, impulsing, count
+  ctx, image, reverseImage, x, y, velocityX, velocityY, left, right, jumping, impulsing, count
 ) => {
 
   switch (true) {
@@ -16,15 +16,25 @@ export const drawPlayer = (
         ctx.drawImage(image, 360, 0, 70, 80, x, y, 45, 70);
       }
       break;
+    case velocityX <= -1.0 || left:
+      if (count <= 5) {
+        ctx.drawImage(reverseImage, 1375, 0, 65, 80, x, y, 45, 70);
+      } else if (count <= 10) {
+        ctx.drawImage(reverseImage, 1300, 0, 65, 80, x, y, 45, 70);
+      } else if (count <= 15) {
+        ctx.drawImage(reverseImage, 1225, 0, 65, 80, x, y, 45, 70);
+      } else if (count <= 20) {
+        ctx.drawImage(reverseImage, 1160, 0, 55, 80, x, y, 45, 70);
+      } else {
+        ctx.drawImage(reverseImage, 1010, 0, 70, 80, x, y, 45, 70);
+      }
+      break;
     case Math.abs(velocityX) < 1.0:
       ctx.drawImage(image, 660, 0, 55, 80, x, y, 45, 70); // standing
       break;
 
   }
 
-  if (velocityX > 0.5) {
-    
-  }
 
   
 
