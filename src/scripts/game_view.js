@@ -1,5 +1,5 @@
 import Game from "./game";
-import { arrLevels } from "./wall_layouts/seeds";
+import { arrLevels } from "./levels/seeds";
 import { addMenubarListeners } from "./event_handlers/menubar_listeners";
 
 class GameView {
