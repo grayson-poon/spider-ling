@@ -8,7 +8,7 @@ const handleClick = (canvas, player) => {
     let clickPos = [event.clientX - rect.left, event.clientY - rect.top];
     let unitVec = vecUtil.normalize(playerPos, clickPos);
 
-    debugger
+    // debugger
     return unitVec;
   });
 };

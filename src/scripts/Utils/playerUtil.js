@@ -39,3 +39,42 @@ export const adjustPositiveX = (
     }
   }
 }
+
+export const adjustPositiveY = (
+  player, arrWalls, jumping, impulsing
+) => {
+  let closestB = wallUtil.closestWallBelow(player, arrWalls);
+  let distanceB = wallUtil.distanceBelow(player, closestB);
+
+  if (distanceB === 0) {
+    player.jumping = false;
+    player.velocityY = 0;
+  } else {
+    if (
+      Math.abs(distanceB) < Math.abs(player.velocityY) ||
+      Math.abs(distanceB) < 0.9 &&
+      (!impulsing || !jumping)
+    ) {
+      player.y += distanceB;
+      player.velocityY = 0;
+    }
+  }
+}
+
+export const adjustNegativeY = (
+  player, arrWalls, jumping, impulsing
+) => {
+  let closestA = wallUtil.closestWallAbove(player, arrWalls);
+  let distanceA = wallUtil.distanceAbove(player, closestA);
+
+  if (distanceA === 0) {
+    player.velocityY = 0;
+  } else {
+    if (Math.abs(distanceA) < Math.abs(player.velocityY) ||
+      Math.abs(distanceA) < 0.9
+    ) {
+      player.y -= distanceA;
+      player.velocityY = 0;
+    }
+  }
+}

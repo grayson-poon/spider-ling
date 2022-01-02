@@ -1,5 +1,5 @@
 import { handleClick } from "./event_handlers/click_listeners";
-import { adjustNegativeX, adjustPlayerGoingLeft, adjustPlayerGoingRight, adjustPositiveX, adjustVelocity } from "./Utils/playerUtil";
+import { adjustNegativeX, adjustPositiveY, adjustPositiveX, adjustNegativeY } from "./Utils/playerUtil";
 import { vecUtil } from "./Utils/vecUtil";
 import { wallUtil } from "./Utils/wallUtil";
 import { arrLevels } from "./wall_layouts/seeds";
@@ -41,6 +41,7 @@ class Player {
     if (left) this.velocityX -= 0.5;
     if (right) this.velocityX += 0.5;
     if (jumping && this.jumping === false) {
+      // debugger
       this.velocityY -= 20;
       this.jumping = true;
     }
@@ -54,7 +55,7 @@ class Player {
     }
 
     this.velocityY += 1; // gravity
-    this.y += this.velocityY; // change in positionY over time (incremental move)
+    // this.y += this.velocityY; // change in positionY over time (incremental move)
     this.velocityX *= 0.9;
     this.velocityY *= 0.9;
 
@@ -67,21 +68,21 @@ class Player {
     //   this, arrWalls, [this.velocityX, this.velocityY], right, left, impulsing
     // );
     
-    if (this.velocityX < 0) {
-      adjustNegativeX(this, arrWalls, right, impulsing);
-    }
+    if (this.velocityX < 0) adjustNegativeX(this, arrWalls, right, impulsing);
 
-    if (this.velocityX > 0) {
-      adjustPositiveX(this, arrWalls, left, impulsing);
-    }
+    if (this.velocityX > 0) adjustPositiveX(this, arrWalls, left, impulsing);
 
-    // console.log(this.velocityX);
+    if (this.velocityY > 0) adjustPositiveY(this, arrWalls, jumping, impulsing);
+
+    if (this.velocityY < 0) adjustNegativeY(this, arrWalls, jumping, impulsing);
+
     this.x += this.velocityX;
+    this.y += this.velocityY;
+
     // if (right || (impulsing && this.unitVec[0] > 0)) {
     //   adjustPlayerGoingRight(this, arrWalls, left, impulsing);
     // }
 
-    // console.log(this.velocityX);
 
     this.keydownState.impulsing = false;
     this.unitVec = [0, 0];
