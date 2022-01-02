@@ -37,14 +37,14 @@ const handleRestart = (gameView, game) => {
     event.preventDefault();
     document.getElementById("start_pause").innerText = "Pause";
     document.getElementById("pause-container").style.visibility = "hidden";
-    document.getElementById("instructions_credits-container").style.visibility =
-      "hidden";
+    document.getElementById("instructions_credits-container").style.visibility = "hidden";
     game.restartLevel(gameView);
   });
 };
 
 const handleInstructions = (game) => {
   const ele = document.getElementById("instructions_credits");
+  
   ele.addEventListener("click", (event) => {
     if (!game.gameStarted) return;
     event.stopPropagation();

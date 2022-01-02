@@ -16,7 +16,6 @@ class Player {
     this.unitVec = [0, 0];
     this.maxImpulse = 35;
     this.impulsing = false;
-    this.impulsingCount = 0;
 
     this.spidermanSprite = new Image();
     this.spidermanSprite.src = "./assets/sprite_spiderman.png";
@@ -42,6 +41,7 @@ class Player {
 
     if (left) this.velocityX -= 0.5;
     if (right) this.velocityX += 0.5;
+    
     if (jumping && this.jumping === false) {
       this.velocityY -= 20;
       this.jumping = true;
@@ -53,14 +53,18 @@ class Player {
       this.jumping = true;
     }
 
-    this.velocityY += 1; // gravity
-    this.velocityX *= 0.88; // friction
-    this.velocityY *= 0.9; // friction
+    // gravity and friction
+    this.velocityY += 1;
+    this.velocityX *= 0.9;
+    this.velocityY *= 0.9;
     
+    // adjust velocityX and Y before applying it to positionX and Y
     if (this.velocityX < 0) playerUtil.adjustNegativeX(this, arrWalls, right, impulsing, jumping);
     if (this.velocityX > 0) playerUtil.adjustPositiveX(this, arrWalls, left, impulsing, jumping);
     if (this.velocityY > 0) playerUtil.adjustPositiveY(this, arrWalls, jumping, impulsing);
     if (this.velocityY < 0) playerUtil.adjustNegativeY(this, arrWalls, jumping, impulsing);
+    
+    // adjust velocity for landing on corners
     if (this.velocityX !== 0 && this.velocityY !== 0) playerUtil.adjustDiagonally(this, arrWalls);
 
     this.x += this.velocityX;
@@ -68,6 +72,7 @@ class Player {
     this.keydownState.impulsing = false;
     this.unitVec = [0, 0];
 
+    // render sprite section based on count of draw loop
     this.count >= 25 ? this.count = 0 : this.count += 1;
     drawPlayer(
       ctx,
@@ -120,10 +125,23 @@ class Player {
   clickController(event) {
     event.stopPropagation();
     event.preventDefault();
-    this.keydownState.impulsing = true;
+
     const rect = event.currentTarget.getBoundingClientRect();
     const clickPos = [event.clientX - rect.left, event.clientY - rect.top];
+    
     this.unitVec = vecUtil.normalize([this.x, this. y], clickPos);
+    this.keydownState.impulsing = true;
+  }
+
+  inWinZone(zone) {
+    return zoneUtil.insideZone(this, zone);
+  }
+
+  inFailZones(zones) {
+    for (let i = 0; i < zones.length; i++) {
+      if (zoneUtil.insideZone(this, zones[i])) return true;
+    }
+    return false;
   }
 }
 
