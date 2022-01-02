@@ -43,6 +43,7 @@ class Player {
     if (jumping && this.jumping === false) {
       this.velocityY -= 20;
       this.jumping = true;
+      debugger
     }
 
     if (impulsing) {
@@ -79,20 +80,20 @@ class Player {
       this.velocityY,
       left,
       right,
-      jumping,
+      this.jumping,
       impulsing,
       this.count
     );
 
     // ctx.drawImage(
     //   this.spidermanSprite,
-    //   360,
+    //   865,
     //   0,
-    //   70,
-    //   80,
+    //   75,
+    //   68,
     //   this.x,
     //   this.y,
-    //   45,
+    //   55,
     //   70
     // );
   }
