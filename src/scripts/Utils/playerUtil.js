@@ -28,7 +28,7 @@ export const adjustPositiveX = (
   let closestR = wallUtil.closestWallToTheRight(player, arrWalls);
   let distanceR = wallUtil.distanceToTheRight(player, closestR);
 
-  if (distanceR === 1) {
+  if (distanceR === 0) {
     if (!wallUtil.leftEdgeHangingOff(player, arrWalls)) {
       player.velocityX = 0;
     }
@@ -38,7 +38,7 @@ export const adjustPositiveX = (
       Math.abs(distanceR) < 0.45 &&
       !impulsing
     ) {
-      player.x += distanceR - 1;
+      player.x += distanceR;
       player.velocityX = 0;
     }
   }

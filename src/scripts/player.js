@@ -1,3 +1,4 @@
+import { drawPlayer } from "./draw_player";
 import { adjustNegativeX, adjustPositiveY, adjustPositiveX, adjustNegativeY } from "./Utils/playerUtil";
 import { vecUtil } from "./Utils/vecUtil";
 
@@ -17,8 +18,9 @@ class Player {
 
     this.spidermanSprite = new Image();
     this.spidermanSprite.src = "./assets/sprite_spiderman.png";
-    this.width = 35;
+    this.width = 45;
     this.height = 70;
+    this.count = 0;
 
     this.keydownState = {
       left: false,
@@ -64,17 +66,32 @@ class Player {
     this.keydownState.impulsing = false;
     this.unitVec = [0, 0];
 
-    ctx.drawImage(
+    this.count >= 25 ? this.count = 0 : this.count += 1;
+    drawPlayer(
+      ctx,
       this.spidermanSprite,
-      660,
-      0,
-      45,
-      80,
       this.x,
       this.y,
-      this.width,
-      this.height
+      this.velocityX,
+      this.velocityY,
+      left,
+      right,
+      jumping,
+      impulsing,
+      this.count
     );
+
+    // ctx.drawImage(
+    //   this.spidermanSprite,
+    //   360,
+    //   0,
+    //   70,
+    //   80,
+    //   this.x,
+    //   this.y,
+    //   45,
+    //   70
+    // );
   }
 
   keydownController(event) {
