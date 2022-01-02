@@ -58,7 +58,7 @@ class Player {
     this.velocityX *= 0.9;
     this.velocityY *= 0.9;
     
-    // adjust velocityX and Y before applying it to positionX and Y
+    // adjust velocityX and Y
     if (this.velocityX < 0) playerUtil.adjustNegativeX(this, arrWalls, right, impulsing, jumping);
     if (this.velocityX > 0) playerUtil.adjustPositiveX(this, arrWalls, left, impulsing, jumping);
     if (this.velocityY > 0) playerUtil.adjustPositiveY(this, arrWalls, jumping, impulsing);

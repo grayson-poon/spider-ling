@@ -174,7 +174,7 @@ export const wallUtil = {
     return closest;
   },
 
-  collisionDetected(player, walls) {
+  currentCollisionDetected(player, walls) {
     for (let i = 0; i < walls.length; i++) {
       let wall = walls[i];
 
@@ -183,6 +183,23 @@ export const wallUtil = {
         wall.x + wall.width >= player.x &&
         wall.y <= player.y + player.height &&
         wall.y + wall.height >= player.y
+      ) {
+        return true;
+      }
+    }
+
+    return false;
+  },
+
+  futureCollisionDetected(player, walls) {
+    for (let i = 0; i < walls.length; i++) {
+      let wall = walls[i];
+
+      if (
+        wall.x <= player.x + player.width + player.velocityX &&
+        wall.x + wall.width >= player.x + player.velocityX &&
+        wall.y <= player.y + player.height + player.velocityY &&
+        wall.y + wall.height >= player.y + player.velocityY
       ) {
         return true;
       }
