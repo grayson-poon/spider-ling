@@ -48,9 +48,6 @@ class Player {
     }
 
     if (impulsing) {
-      // this.velocityX = 0;
-      // this.velocityY = 0;
-
       this.velocityX = this.unitVec[0] * this.maxImpulse;
       this.velocityY = this.unitVec[1] * this.maxImpulse;
       this.jumping = true;
@@ -68,6 +65,8 @@ class Player {
 
     this.x += this.velocityX;
     this.y += this.velocityY;
+    this.keydownState.impulsing = false;
+    this.unitVec = [0, 0];
 
     this.count >= 25 ? this.count = 0 : this.count += 1;
     drawPlayer(
@@ -84,9 +83,6 @@ class Player {
       impulsing,
       this.count
     );
-    
-    this.keydownState.impulsing = false;
-    this.unitVec = [0, 0];
 
     // ctx.drawImage(
     //   this.spidermanSprite,
