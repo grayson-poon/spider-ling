@@ -39,7 +39,7 @@ const handleRestart = (gameView, game) => {
     document.getElementById("pause-container").style.visibility = "hidden";
     document.getElementById("instructions_credits-container").style.visibility =
       "hidden";
-    game.restartLevel();
+    game.restartLevel(gameView);
   });
 };
 

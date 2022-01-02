@@ -31,6 +31,8 @@ class Game {
     this.addKeydownListeners();
     this.player.x = this.currentLevel.startingPos[0];
     this.player.y = this.currentLevel.startingPos[1];
+    this.player.velocityX = 0;
+    this.player.velocityY = 0;
   }
 
   addKeydownListeners() {

@@ -35,12 +35,15 @@ export const drawPlayer = (
     case velocityX > -1.0 && velocityX < 0 && !jumping:
       ctx.drawImage(reverseImage, 725, 0, 55, 80, x, y, 45, 70); // standing facing left
       break;
+    case impulsing:
+      ctx.drawImage(image, 805, 0, 50, 80, x, y, 45, 70);
     case jumping && velocityX >= 0:
       ctx.drawImage(image, 865, 0, 75, 68, x, y, 55, 70); // jumping facing right
       break;
     case jumping && velocityX < 0:
       ctx.drawImage(reverseImage, 500, 0, 75, 68, x, y, 55, 70); // jumping facing left
       break;
+    
   }
 
 
