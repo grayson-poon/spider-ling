@@ -1,5 +1,5 @@
 import { drawPlayer } from "./draw_player";
-import { adjustNegativeX, adjustPositiveY, adjustPositiveX, adjustNegativeY, adjustDiagonally } from "./Utils/playerUtil";
+import { playerUtil } from "./Utils/playerUtil";
 import { vecUtil } from "./Utils/vecUtil";
 import { wallUtil } from "./Utils/wallUtil";
 
@@ -60,11 +60,11 @@ class Player {
     this.velocityX *= 0.88; // friction
     this.velocityY *= 0.9; // friction
     
-    if (this.velocityX < 0) adjustNegativeX(this, arrWalls, right, impulsing, jumping);
-    if (this.velocityX > 0) adjustPositiveX(this, arrWalls, left, impulsing, jumping);
-    if (this.velocityY > 0) adjustPositiveY(this, arrWalls, jumping, impulsing);
-    if (this.velocityY < 0) adjustNegativeY(this, arrWalls, jumping, impulsing);
-    if (this.velocityX !== 0 && this.velocityY !== 0) adjustDiagonally(this, arrWalls);
+    if (this.velocityX < 0) playerUtil.adjustNegativeX(this, arrWalls, right, impulsing, jumping);
+    if (this.velocityX > 0) playerUtil.adjustPositiveX(this, arrWalls, left, impulsing, jumping);
+    if (this.velocityY > 0) playerUtil.adjustPositiveY(this, arrWalls, jumping, impulsing);
+    if (this.velocityY < 0) playerUtil.adjustNegativeY(this, arrWalls, jumping, impulsing);
+    if (this.velocityX !== 0 && this.velocityY !== 0) playerUtil.adjustDiagonally(this, arrWalls);
 
     this.x += this.velocityX;
     this.y += this.velocityY;
