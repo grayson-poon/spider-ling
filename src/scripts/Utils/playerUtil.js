@@ -28,7 +28,7 @@ export const adjustPositiveX = (
   let closestR = wallUtil.closestWallToTheRight(player, arrWalls);
   let distanceR = wallUtil.distanceToTheRight(player, closestR);
 
-  if (distanceR === 0) {
+  if (distanceR === 1) {
     if (!wallUtil.leftEdgeHangingOff(player, arrWalls)) {
       player.velocityX = 0;
     }
@@ -38,10 +38,12 @@ export const adjustPositiveX = (
       Math.abs(distanceR) < 0.45 &&
       !impulsing
     ) {
-      player.x += distanceR;
+      player.x += distanceR - 1;
       player.velocityX = 0;
     }
   }
+
+  // console.log(closestR, [player.velocityX, player.velocityY], distanceR);
 }
 
 export const adjustPositiveY = (
@@ -60,9 +62,12 @@ export const adjustPositiveY = (
       (!impulsing || !jumping)
     ) {
       player.y += distanceB;
+      player.jumping = false;
       player.velocityY = 0;
     }
   }
+
+  // console.log(closestB, [player.velocityX, player.velocityY], distanceB);
 }
 
 export const adjustNegativeY = (

@@ -41,58 +41,32 @@ class Player {
     if (left) this.velocityX -= 0.5;
     if (right) this.velocityX += 0.5;
     if (jumping && this.jumping === false) {
-      // debugger
       this.velocityY -= 20;
       this.jumping = true;
     }
 
     if (impulsing) {
+      this.velocityX = 0;
+      this.velocityY = 0;
+
       this.velocityX += this.unitVec[0] * this.maxImpulse;
       this.velocityY += this.unitVec[1] * this.maxImpulse;
       this.jumping = true;
-      // impulsing = false;
-      // this.unitVec = [0, 0];
     }
 
     this.velocityY += 1; // gravity
-    // this.y += this.velocityY; // change in positionY over time (incremental move)
-    this.velocityX *= 0.9;
-    this.velocityY *= 0.9;
-
-    // adjust x position based on wall/game logic
-    // if (left || (impulsing && this.unitVec[0] < 0)) {
-    //   adjustPlayerGoingLeft(this, arrWalls, right, impulsing);
-    // }
-
-    // adjustVelocity(
-    //   this, arrWalls, [this.velocityX, this.velocityY], right, left, impulsing
-    // );
+    this.velocityX *= 0.88; // friction
+    this.velocityY *= 0.9; // friction
     
     if (this.velocityX < 0) adjustNegativeX(this, arrWalls, right, impulsing);
-
     if (this.velocityX > 0) adjustPositiveX(this, arrWalls, left, impulsing);
-
     if (this.velocityY > 0) adjustPositiveY(this, arrWalls, jumping, impulsing);
-
     if (this.velocityY < 0) adjustNegativeY(this, arrWalls, jumping, impulsing);
 
     this.x += this.velocityX;
     this.y += this.velocityY;
-
-    // if (right || (impulsing && this.unitVec[0] > 0)) {
-    //   adjustPlayerGoingRight(this, arrWalls, left, impulsing);
-    // }
-
-
     this.keydownState.impulsing = false;
     this.unitVec = [0, 0];
-
-    if (this.y > 600 - this.height) {
-      this.velocityY = 0;
-      this.jumping = false;
-      this.keydownState.impulsing = false;
-      this.y = 600 - this.height;
-    }
 
     ctx.drawImage(
       this.spidermanSprite,

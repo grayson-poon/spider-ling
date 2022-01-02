@@ -7,14 +7,16 @@ class Wall {
   }
 
   containsPoint(testX, testY) {
-    if (this.x <= testX &&
-        testX <= this.x + this.width &&
-        this.y <= testY &&
-        testY <= this.y + this.height) {
-          return true;
-        } else {
-          return false;
-        }
+    if (
+      this.x <= testX &&
+      testX <= this.x + this.width &&
+      this.y <= testY &&
+      testY <= this.y + this.height
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
