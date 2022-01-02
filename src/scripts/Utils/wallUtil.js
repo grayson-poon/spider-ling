@@ -136,5 +136,55 @@ export const wallUtil = {
     }
 
     return false;
+  },
+
+  leftEdgeHangingOff(player, walls) {
+    let rightEdge = this.closestWallBelow(player, walls);
+    let leftEdge;
+    let possibleWalls = [];
+
+    walls.forEach((wall) => {
+      if (wall.y >= player.y + player.height) possibleWalls.push(wall);
+    });
+
+    let found = false;
+    let dy = 0;
+
+    while (found === false) {
+      possibleWalls.forEach((wall) => {
+        if (wall.containsPoint(player.x, player.y + player.height + dy)) {
+          leftEdge = wall;
+          found = true;
+        }
+      });
+      dy += 1;
+    }
+
+    return rightEdge !== leftEdge;
+  },
+
+  rightEdgeHangingOff(player, walls) {
+    let leftEdge = this.closestWallBelow(player, walls);
+    let rightEdge;
+    let possibleWalls = [];
+
+    walls.forEach((wall) => {
+      if (wall.y >= player.y + player.height) possibleWalls.push(wall);
+    });
+
+    let found = false;
+    let dy = 0;
+
+    while (found === false) {
+      possibleWalls.forEach((wall) => {
+        if (wall.containsPoint(player.x + player.width, player.y + player.height + dy)) {
+          rightEdge = wall;
+          found = true;
+        }
+      });
+      dy += 1;
+    }
+
+    return leftEdge !== rightEdge;
   }
 }

@@ -7,7 +7,9 @@ export const adjustNegativeX = (
   let distanceL = wallUtil.distanceToTheLeft(player, closestL);
 
   if (distanceL === 0) {
-    player.velocityX = 0;
+    if (!wallUtil.rightEdgeHangingOff(player, arrWalls)) {
+      player.velocityX = 0;
+    }
   } else {
     if (
       Math.abs(distanceL) < Math.abs(player.velocityX) ||
@@ -27,7 +29,9 @@ export const adjustPositiveX = (
   let distanceR = wallUtil.distanceToTheRight(player, closestR);
 
   if (distanceR === 0) {
-    player.velocityX = 0;
+    if (!wallUtil.leftEdgeHangingOff(player, arrWalls)) {
+      player.velocityX = 0;
+    }
   } else {
     if (
       Math.abs(distanceR) < Math.abs(player.velocityX) ||
