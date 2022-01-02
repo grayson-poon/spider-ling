@@ -49,12 +49,12 @@ const handleRestart = (gameView, game) => {
 
 const handleInstructionsCredits = (game) => {
   const ele = document.getElementById("instructions-credits");
+  const content = document.getElementById("instructions-credits-container");
   
   ele.addEventListener("click", (event) => {
-    if (!game.gameStarted) return;
     event.stopPropagation();
     event.preventDefault();
-    const content = document.getElementById("instructions-credits-container");
+    if (!game.gameStarted) return;
 
     if (content.style.visibility === "visible") {
       content.style.visibility = "hidden";
