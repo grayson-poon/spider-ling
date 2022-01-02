@@ -1,7 +1,7 @@
 import { drawPlayer } from "./draw_player";
-import { playerUtil } from "./Utils/playerUtil";
-import { vecUtil } from "./Utils/vecUtil";
-import { wallUtil } from "./Utils/wallUtil";
+import { playerUtil } from "./util/playerUtil";
+import { vecUtil } from "./util/vecUtil";
+import { wallUtil } from "./util/wallUtil";
 
 class Player {
   constructor(initPos, currentLevel) {
