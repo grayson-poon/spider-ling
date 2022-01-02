@@ -1,8 +1,6 @@
 import Game from "./game";
 import { arrLevels } from "./wall_layouts/seeds";
-import { addMenubarListeners } from "./event_handlers/new_menubar_listeners";
-import { addClickListener } from "./event_handlers/click_listeners";
-
+import { addMenubarListeners } from "./event_handlers/menubar_listeners";
 
 class GameView {
   constructor(ctx) {

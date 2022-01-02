@@ -1,9 +1,5 @@
-import { handleClick } from "./event_handlers/click_listeners";
 import { adjustNegativeX, adjustPositiveY, adjustPositiveX, adjustNegativeY } from "./Utils/playerUtil";
 import { vecUtil } from "./Utils/vecUtil";
-import { wallUtil } from "./Utils/wallUtil";
-import { arrLevels } from "./wall_layouts/seeds";
-
 
 class Player {
   constructor(initPos, currentLevel) {
