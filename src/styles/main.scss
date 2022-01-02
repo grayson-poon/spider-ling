@@ -23,7 +23,7 @@ div#pause-content {
   color: white;
 }
 
-div#instructions_credits-container {
+div#instructions-credits-container {
   width: 900px;
   height: 600px;
   visibility: visible;
@@ -36,7 +36,7 @@ div#instructions_credits-container {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-div#instructions_credits-content {
+div#instructions-credits-content {
   width: 900px;
   height: 400px;
   position: absolute;
@@ -48,12 +48,12 @@ div#instructions_credits-content {
   color: white;
 }
 
-div#instructions_credits-content li {
+div#instructions-credits-content li {
   list-style: none;
   font-size: 20px;
 }
 
-div#instructions_credits-content li a {
+div#instructions-credits-content li a {
   color: white;
   text-decoration: underline;
 }
