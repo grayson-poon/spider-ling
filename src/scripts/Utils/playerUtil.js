@@ -19,10 +19,8 @@ export const adjustNegativeX = (
     ) {
       player.x -= distanceL;
       player.velocityX = 0;
-      // console.log(distanceL, "DISTANCE inside X statement");
     }
   }
-  // console.log(distanceL, "DISTANCE outside X statement");
 }
 
 export const adjustPositiveX = (
@@ -45,8 +43,6 @@ export const adjustPositiveX = (
       player.velocityX = 0;
     }
   }
-
-  // console.log(closestR, [player.velocityX, player.velocityY], distanceR);
 }
 
 export const adjustPositiveY = (
@@ -67,11 +63,8 @@ export const adjustPositiveY = (
       player.y += distanceB;
       player.jumping = false;
       player.velocityY = 0;
-      // console.log(distanceB, "DISTANCE inside Y statement");
     }
   }
-  // console.log(distanceB, "DISTANCE outside Y statement");
-  // console.log(closestB, [player.velocityX, player.velocityY], distanceB);
 }
 
 export const adjustNegativeY = (
@@ -97,32 +90,17 @@ export const adjustDiagonally = (
 ) => {
   let payload = wallUtil.velocityVectorPathController(player, arrWalls);
   if (!payload) return;
-  let { closestV, distanceV, dx, dy } = payload;
+  let { dx, dy } = payload;
   
-  if (distanceV === 0) {
-    debugger
-    player.velocityX = 0;
-    player.velocityY = 0;
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    player.y += dy;
+
+    if (dx > 0) adjustPositiveX(player, arrWalls);
+    if (dx < 0) adjustNegativeX(player, arrWalls);
   } else {
-    if (Math.abs(distanceV) <= Math.abs(vecUtil.vecMagnitude([0, 0], [player.velocityX, player.velocityY]))) {
-      console.log("hit this part and hopefully its fixed");
-      if (Math.abs(dx) >= Math.abs(dy)) {
-        player.y += dy;
+    player.x += dx;
 
-        if (dx > 0) adjustPositiveX(player, arrWalls);
-        if (dx < 0) adjustNegativeX(player, arrWalls);
-      } else if (Math.abs(dx) < Math.abs(dy)) {
-        player.x += dx;
-
-        if (dy > 0) adjustPositiveY(player, arrWalls);
-        if (dy < 0) adjustNegativeY(player, arrWalls);
-      }
-    }
+    if (dy > 0) adjustPositiveY(player, arrWalls);
+    if (dy < 0) adjustNegativeY(player, arrWalls);
   }
 }
-
-// export const bottomRightCorner = (
-//   player, arrWalls, jumping
-// ) => {
-//   if 
-// }

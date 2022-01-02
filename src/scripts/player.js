@@ -65,29 +65,25 @@ class Player {
     if (this.velocityY > 0) adjustPositiveY(this, arrWalls, jumping, impulsing);
     if (this.velocityY < 0) adjustNegativeY(this, arrWalls, jumping, impulsing);
     if (this.velocityX !== 0 && this.velocityY !== 0) adjustDiagonally(this, arrWalls);
-    
-
-    // console.log(adjustDiagonally(this, arrWalls), "ADJ DIAG");
-    // console.log(this.velocityX, this.velocityY, "VELS");
 
     this.x += this.velocityX;
     this.y += this.velocityY;
 
     this.count >= 25 ? this.count = 0 : this.count += 1;
-    // drawPlayer(
-    //   ctx,
-    //   this.spidermanSprite,
-    //   this.spidermanSpriteReversed,
-    //   this.x,
-    //   this.y,
-    //   this.velocityX,
-    //   this.velocityY,
-    //   left,
-    //   right,
-    //   this.jumping,
-    //   impulsing,
-    //   this.count
-    // );
+    drawPlayer(
+      ctx,
+      this.spidermanSprite,
+      this.spidermanSpriteReversed,
+      this.x,
+      this.y,
+      this.velocityX,
+      this.velocityY,
+      left,
+      right,
+      this.jumping,
+      impulsing,
+      this.count
+    );
     
     this.keydownState.impulsing = false;
     this.unitVec = [0, 0];
@@ -103,13 +99,6 @@ class Player {
     //   45,
     //   70
     // );
-    ctx.beginPath();
-    ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = "black";
-    ctx.stroke();
-
-    // console.log(wallUtil.collisionDetected(this, arrWalls), "COLLISION STATUS");
   }
 
   keydownController(event) {

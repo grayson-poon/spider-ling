@@ -27,7 +27,6 @@ export const wallUtil = {
     } else if (player.velocityX < 0 && player.velocityY < 0) {
       return this.secondQuadrantInfo(player, walls);
     } else if (player.velocityX < 0 && player.velocityY > 0) {
-      // console.log(this.thirdQuadrantInfo(player, walls), "THIRD QUAD");
       return this.thirdQuadrantInfo(player, walls);
     } else if (player.velocityX > 0 && player.velocityY > 0) {
       return this.fourthQuadrantInfo(player, walls);
@@ -37,99 +36,59 @@ export const wallUtil = {
   },
 
   firstQuadrantInfo(player, walls) {
-    let closest;
     let found = false;
     let [dx, dy] = [player.velocityX, player.velocityY];
 
     walls.forEach((wall) => {
       if (wall.containsPoint(player.x + player.width + dx, player.y + dy)) {
-        closest = wall;
         found = true;
       }
     });
-    if (!found) return null;
 
-    return {
-      closestV: closest,
-      distanceV: vecUtil.vecMagnitude(
-        [0, 0],
-        [player.velocityX, player.velocityY]
-      ),
-      dx,
-      dy,
-    };
+    if (!found) return null;
+    return { dx, dy };
   },
 
   secondQuadrantInfo(player, walls) {
-    let closest;
     let found = false;
     let [dx, dy] = [player.velocityX, player.velocityY];
 
     walls.forEach((wall) => {
       if (wall.containsPoint(player.x + dx, player.y + dy)) {
-        closest = wall;
         found = true;
       }
     });
-    if (!found) return null;
 
-    return {
-      closestV: closest,
-      distanceV: vecUtil.vecMagnitude(
-        [0, 0],
-        [player.velocityX, player.velocityY]
-      ),
-      dx,
-      dy,
-    };
+    if (!found) return null;
+    return { dx, dy };
   },
 
   thirdQuadrantInfo(player, walls) {
-    let closest;
     let found = false;
     let [dx, dy] = [player.velocityX, player.velocityY];
 
     walls.forEach((wall) => {
       if (wall.containsPoint(player.x + dx, player.y + player.height + dy)) {
-        closest = wall;
         found = true;
       }
-      // console.log(dx, "dx", dy, "dy");
     });
+
     if (!found) return null;
-
-    // console.log(closest, "CLOSEST");
-
-    return {
-      closestV: closest,
-      distanceV: vecUtil.vecMagnitude([0,0], [player.velocityX, player.velocityY]),
-      dx,
-      dy,
-    };
+    return { dx, dy };
   },
 
   fourthQuadrantInfo(player, walls) {
-    let closest;
     let found = false;
     let [dx, dy] = [player.velocityX, player.velocityY];
 
     walls.forEach((wall) => {
       if (wall.containsPoint(player.x + player.width + dx, player.y + player.height + dy)) {
-        closest = wall;
         found = true;
       }
     });
-    if (!found) return null;
 
-    return {
-      closestV: closest,
-      distanceV: vecUtil.vecMagnitude(
-        [0, 0],
-        [player.velocityX, player.velocityY]
-      ),
-      dx,
-      dy,
-    };
+    if (!found) return null;
+    return { dx, dy };
   },
 
   closestWallBelow(player, walls) {
