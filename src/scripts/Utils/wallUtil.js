@@ -1,5 +1,3 @@
-import { vecUtil } from "./vecUtil";
-
 export const wallUtil = {
   distanceBelow(player, wall) {
     return wall.y - (player.y + player.height);
@@ -17,73 +15,46 @@ export const wallUtil = {
     return player.x - (wall.x + wall.width);
   },
 
-  distanceInVelocityDirection(player, wall) {
-    return 
-  },
-
   velocityVectorPathController(player, walls) {
     if (player.velocityX > 0 && player.velocityY < 0) {
-      return this.firstQuadrantInfo(player, walls);
+      return this.getQuadrantInfo(player, walls, 1);
     } else if (player.velocityX < 0 && player.velocityY < 0) {
-      return this.secondQuadrantInfo(player, walls);
+      return this.getQuadrantInfo(player, walls, 2);
     } else if (player.velocityX < 0 && player.velocityY > 0) {
-      return this.thirdQuadrantInfo(player, walls);
+      return this.getQuadrantInfo(player, walls, 3);
     } else if (player.velocityX > 0 && player.velocityY > 0) {
-      return this.fourthQuadrantInfo(player, walls);
+      return this.getQuadrantInfo(player, walls, 4);
     } else {
       return null;
     }
   },
 
-  firstQuadrantInfo(player, walls) {
+  getQuadrantInfo(player, walls, quadrant) {
     let found = false;
     let [dx, dy] = [player.velocityX, player.velocityY];
 
     walls.forEach((wall) => {
-      if (wall.containsPoint(player.x + player.width + dx, player.y + dy)) {
-        found = true;
-      }
-    });
-
-    if (!found) return null;
-    return { dx, dy };
-  },
-
-  secondQuadrantInfo(player, walls) {
-    let found = false;
-    let [dx, dy] = [player.velocityX, player.velocityY];
-
-    walls.forEach((wall) => {
-      if (wall.containsPoint(player.x + dx, player.y + dy)) {
-        found = true;
-      }
-    });
-
-    if (!found) return null;
-    return { dx, dy };
-  },
-
-  thirdQuadrantInfo(player, walls) {
-    let found = false;
-    let [dx, dy] = [player.velocityX, player.velocityY];
-
-    walls.forEach((wall) => {
-      if (wall.containsPoint(player.x + dx, player.y + player.height + dy)) {
-        found = true;
-      }
-    });
-
-    if (!found) return null;
-    return { dx, dy };
-  },
-
-  fourthQuadrantInfo(player, walls) {
-    let found = false;
-    let [dx, dy] = [player.velocityX, player.velocityY];
-
-    walls.forEach((wall) => {
-      if (wall.containsPoint(player.x + player.width + dx, player.y + player.height + dy)) {
-        found = true;
+      switch(quadrant) {
+        case 1:
+          if (wall.containsPoint(player.x + player.width + dx, player.y + dy)) {
+            found = true;
+          }
+          break;
+        case 2:
+          if (wall.containsPoint(player.x + dx, player.y + dy)) {
+            found = true;
+          }
+          break;
+        case 3:
+          if (wall.containsPoint(player.x + dx, player.y + player.height + dy)) {
+            found = true;
+          }
+          break;
+        case 4:
+          if (wall.containsPoint(player.x + player.width + dx, player.y + player.height + dy)) {
+            found = true;
+          }
+          break;
       }
     });
 
@@ -220,38 +191,14 @@ export const wallUtil = {
     return false;
   },
 
-  leftEdgeHangingOff(player, walls) {
-    let rightEdge = this.closestWallBelow(player, walls);
+  edgeHangingOff(player, walls, edge) {
     let leftEdge;
-    let possibleWalls = [];
-
-    walls.forEach((wall) => {
-      if (wall.y >= player.y + player.height) possibleWalls.push(wall);
-    });
-
-    let found = false;
-    let dy = 0;
-
-    while (found === false) {
-      possibleWalls.forEach((wall) => {
-        if (wall.containsPoint(player.x, player.y + player.height + dy)) {
-          leftEdge = wall;
-          found = true;
-        }
-      });
-      dy += 1;
-    }
-
-    return (
-      rightEdge !== leftEdge && this.distanceBelow(player, rightEdge) === 0
-    );
-  },
-
-  rightEdgeHangingOff(player, walls) {
-    let leftEdge = this.closestWallBelow(player, walls);
     let rightEdge;
     let possibleWalls = [];
 
+    if (edge === "left") rightEdge = this.closestWallBelow(player, walls);
+    if (edge === "right") leftEdge = this.closestWallBelow(player, walls);
+
     walls.forEach((wall) => {
       if (wall.y >= player.y + player.height) possibleWalls.push(wall);
     });
@@ -261,19 +208,26 @@ export const wallUtil = {
 
     while (found === false) {
       possibleWalls.forEach((wall) => {
-        if (
-          wall.containsPoint(
-            player.x + player.width,
-            player.y + player.height + dy
-          )
-        ) {
-          rightEdge = wall;
-          found = true;
+        if (edge === "left") {
+          if (wall.containsPoint(player.x, player.y + player.height + dy)) {
+            leftEdge = wall;
+            found = true;
+          }
+        } else if (edge === "right") {
+          if (wall.containsPoint(player.x + player.width, player.y + player.height + dy)) {
+            rightEdge = wall;
+            found = true;
+          }
         }
       });
       dy += 1;
     }
 
-    return leftEdge !== rightEdge && this.distanceBelow(player, leftEdge) === 0;
+    switch(edge) {
+      case "left":
+        return rightEdge !== leftEdge && this.distanceBelow(player, rightEdge) === 0;
+      case "right":
+        return leftEdge !== rightEdge && this.distanceBelow(player, leftEdge) === 0;
+    }
   },
 };

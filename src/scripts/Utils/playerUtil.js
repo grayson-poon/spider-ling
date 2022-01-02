@@ -1,4 +1,3 @@
-import { vecUtil } from "./vecUtil";
 import { wallUtil } from "./wallUtil"
 
 export const playerUtil = {
@@ -7,7 +6,7 @@ export const playerUtil = {
     let distanceL = wallUtil.distanceToTheLeft(player, closestL);
 
     if (distanceL === 0) {
-      if (!wallUtil.rightEdgeHangingOff(player, arrWalls)) {
+      if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
         player.velocityX = 0;
       }
     } else {
@@ -27,7 +26,7 @@ export const playerUtil = {
     let distanceR = wallUtil.distanceToTheRight(player, closestR);
 
     if (distanceR === 0) {
-      if (!wallUtil.leftEdgeHangingOff(player, arrWalls)) {
+      if (!wallUtil.edgeHangingOff(player, arrWalls, "left")) {
         player.velocityX = 0;
       }
     } else {
@@ -97,12 +96,3 @@ export const playerUtil = {
     }
   },
 };
-
-
-
-
-
-
-
-
-
