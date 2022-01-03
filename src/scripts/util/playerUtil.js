@@ -1,3 +1,4 @@
+import { vecUtil } from "./vecUtil";
 import { wallUtil } from "./wallUtil"
 
 export const playerUtil = {
@@ -47,6 +48,9 @@ export const playerUtil = {
 
     if (distanceB === 0) {
       player.jumping = false;
+      player.ableToImpulse = true;
+      player.impulsingCount = 0;
+
       player.velocityY = 0;
     } else {
       if (
@@ -54,8 +58,11 @@ export const playerUtil = {
         // Math.abs(distanceB) < 0.9 &&
         // (!impulsing || !jumping)
       ) {
-        player.y += distanceB;
         player.jumping = false;
+        player.ableToImpulse = true;
+        player.impulsingCount = 0;
+
+        player.y += distanceB;
         player.velocityY = 0;
       }
     }
@@ -93,6 +100,28 @@ export const playerUtil = {
 
       if (dy > 0) this.adjustPositiveY(player, arrWalls);
       if (dy < 0) this.adjustNegativeY(player, arrWalls);
+    }
+  },
+
+  adjustStep(player, arrWalls) {
+    if (
+      wallUtil.futureCollisionDetected(player, arrWalls, player.velocityX, player.velocityY) &&
+      !wallUtil.currentCollisionDetected(player, arrWalls)
+    ) {
+      let { dx, dy } = wallUtil.oneStepTooFar(player, arrWalls);
+      console.log({dx, dy}, "one step too far");
+
+      player.x += dx;
+      player.y += dy;
+
+      // if (player.velocityX >= 0) player.velocityX = -0.5;
+      // if (player.velocityX < 0) player.velocityX = 0.5;
+
+      // if (player.velocityY >= 0) player.velocityY = -0.5;
+      // if (player.velocityY < 0) player.velocityY = 0.5;
+      
+      player.velocityX = 0;
+      player.velocityY = 0;
     }
   },
 };

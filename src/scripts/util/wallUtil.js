@@ -1,3 +1,5 @@
+import { vecUtil } from "./vecUtil";
+
 export const wallUtil = {
   distanceBelow(player, wall) {
     return wall.y - (player.y + player.height);
@@ -63,18 +65,19 @@ export const wallUtil = {
   },
 
   closestWallBelow(player, walls) {
+    let closest;
     let possibleWalls = [];
 
     walls.forEach((wall) => {
       if (wall.y >= player.y + player.height) possibleWalls.push(wall);
     });
 
-    let closest;
-    let found = false;
+    if (possibleWalls.length === 1) closest = possibleWalls[0];
     let dy = 0;
 
-    while (found === false) {
-      possibleWalls.forEach((wall) => {
+    while (closest === undefined) {
+      for (let i = 0; i < possibleWalls.length; i++) {
+        let wall = possibleWalls[i];
         if (
           wall.containsPoint(player.x, player.y + player.height + dy) ||
           wall.containsPoint(
@@ -83,9 +86,9 @@ export const wallUtil = {
           )
         ) {
           closest = wall;
-          found = true;
         }
-      });
+        if (closest) break;
+      };
       dy += 1;
     }
 
@@ -93,26 +96,27 @@ export const wallUtil = {
   },
 
   closestWallAbove(player, walls) {
+    let closest;
     let possibleWalls = [];
 
     walls.forEach((wall) => {
       if (wall.y + wall.height <= player.y) possibleWalls.push(wall);
     });
 
-    let closest;
-    let found = false;
+    if (possibleWalls.length === 1) closest = possibleWalls[0];
     let dy = 0;
 
-    while (found === false) {
-      possibleWalls.forEach((wall) => {
+    while (closest === undefined) {
+      for (let i = 0; i < possibleWalls.length; i++) {
+        let wall = possibleWalls[i];
         if (
           wall.containsPoint(player.x, player.y + dy) ||
           wall.containsPoint(player.x + player.width, player.y + dy)
         ) {
           closest = wall;
-          found = true;
         }
-      });
+        if (closest) break;
+      };
       dy -= 1;
     }
 
@@ -120,17 +124,19 @@ export const wallUtil = {
   },
 
   closestWallToTheRight(player, walls) {
+    let closest;
     let possibleWalls = [];
+
     walls.forEach((wall) => {
       if (wall.x >= player.x + player.width) possibleWalls.push(wall);
     });
-
-    let closest;
-    let found = false;
+    
+    if (possibleWalls.length === 1) closest = possibleWalls[0];
     let dx = 0;
 
-    while (found === false) {
-      possibleWalls.forEach((wall) => {
+    while (closest === undefined) {
+      for (let i = 0; i < possibleWalls.length; i++) {
+        let wall = possibleWalls[i];
         if (
           wall.containsPoint(player.x + player.width + dx, player.y) ||
           wall.containsPoint(
@@ -139,9 +145,9 @@ export const wallUtil = {
           )
         ) {
           closest = wall;
-          found = true;
         }
-      });
+        if (closest) break;
+      };
       dx += 1;
     }
 
@@ -149,25 +155,27 @@ export const wallUtil = {
   },
 
   closestWallToTheLeft(player, walls) {
+    let closest;
     let possibleWalls = [];
+
     walls.forEach((wall) => {
       if (wall.x + wall.width <= player.x) possibleWalls.push(wall);
     });
 
-    let closest;
-    let found = false;
+    if (possibleWalls.length === 1) closest = possibleWalls[0];
     let dx = 0;
-
-    while (found === false) {
-      possibleWalls.forEach((wall) => {
+    
+    while (closest === undefined) {
+      for (let i = 0; i < possibleWalls.length; i++) {
+        let wall = possibleWalls[i];
         if (
           wall.containsPoint(player.x + dx, player.y) ||
           wall.containsPoint(player.x + dx, player.y + player.height)
         ) {
           closest = wall;
-          found = true;
         }
-      });
+        if (closest) break;
+      };
       dx -= 1;
     }
 
@@ -191,21 +199,23 @@ export const wallUtil = {
     return false;
   },
 
-  futureCollisionDetected(player, walls) {
+  futureCollisionDetected(player, walls, dx, dy) {
+    let status = false;
+
     for (let i = 0; i < walls.length; i++) {
       let wall = walls[i];
 
       if (
-        wall.x <= player.x + player.width + player.velocityX &&
-        wall.x + wall.width >= player.x + player.velocityX &&
-        wall.y <= player.y + player.height + player.velocityY &&
-        wall.y + wall.height >= player.y + player.velocityY
+        wall.x <= player.x + player.width + dx &&
+        wall.x + wall.width >= player.x + dx &&
+        wall.y <= player.y + player.height + dy &&
+        wall.y + wall.height >= player.y + dy
       ) {
-        return true;
+        status = true;
       }
     }
 
-    return false;
+    return status;
   },
 
   edgeHangingOff(player, walls, edge) {
@@ -220,23 +230,26 @@ export const wallUtil = {
       if (wall.y >= player.y + player.height) possibleWalls.push(wall);
     });
 
-    let found = false;
+    if (possibleWalls.length === 1) {
+      if (edge === "left") leftEdge = possibleWalls[0];
+      if (edge === "right") rightEdge = possibleWalls[0];
+    }
     let dy = 0;
 
-    while (found === false) {
-      possibleWalls.forEach((wall) => {
+    while (!leftEdge || !rightEdge) {
+      for (let i = 0; i < possibleWalls.length; i++) {
+        let wall = possibleWalls[i];
         if (edge === "left") {
           if (wall.containsPoint(player.x, player.y + player.height + dy)) {
             leftEdge = wall;
-            found = true;
           }
         } else if (edge === "right") {
           if (wall.containsPoint(player.x + player.width, player.y + player.height + dy)) {
             rightEdge = wall;
-            found = true;
           }
         }
-      });
+        if (leftEdge && leftEdge) break;
+      };
       dy += 1;
     }
 
@@ -247,4 +260,44 @@ export const wallUtil = {
         return leftEdge !== rightEdge && this.distanceBelow(player, leftEdge) === 0;
     }
   },
+
+  newController(player, walls) {
+    switch (wallUtil.futureCollisionDetected(
+      player, walls, player.velocityX, player.velocityY
+    )) {
+      case player.velocityX > 0 && player.velocityY < 0:
+        
+      case player.velocityX < 0 && player.velocityY < 0:
+
+      case player.velocityX < 0 && player.velocityY > 0:
+
+      case player.velocityX > 0 && player.velocityY > 0:
+
+      case player.velocityX > 0 && player.velocityY === 0:
+
+      case player.velocityX < 0 && player.velocityY === 0:
+
+      case player.velocityX === 0 && player.velocityY > 0:
+
+      case player.velocityX === 0 && player.velocityY < 0:
+    }
+  },
+
+  oneStepTooFar(player, walls) {
+    let unitVec  = vecUtil.normalize([0, 0], [player.velocityX, player.velocityY]);
+    let [dx, dy] = unitVec;
+    let collision = false;
+
+    while (collision === false) {
+      if (this.futureCollisionDetected(player, walls, dx, dy)) {
+        collision = true;
+      };
+
+      dx += unitVec[0];
+      dy += unitVec[1];
+    }
+
+    // console.log({ dx: dx - unitVec[0], dy: dy - unitVec[1] }, "onestep too far");
+    return { dx: dx - unitVec[0], dy: dy - unitVec[1] };
+  }
 };

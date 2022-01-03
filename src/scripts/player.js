@@ -14,8 +14,10 @@ class Player {
     this.jumping = false;
 
     this.unitVec = [0, 0];
+    this.numImpulses = 2;
     this.maxImpulse = 35;
-    this.impulsing = false;
+    this.ableToImpulse = true;
+    this.impulsingCount = 0;
 
     this.spidermanSprite = new Image();
     this.spidermanSprite.src = "./assets/sprite_spiderman.png";
@@ -47,9 +49,11 @@ class Player {
       this.jumping = true;
     }
 
-    if (impulsing) {
+    if (impulsing && this.ableToImpulse) {
       this.velocityX = this.unitVec[0] * this.maxImpulse;
       this.velocityY = this.unitVec[1] * this.maxImpulse;
+
+      this.impulsingCount += 1;
       this.jumping = true;
     }
 
@@ -61,16 +65,19 @@ class Player {
     // adjust velocityX and Y
     if (this.velocityX < 0) playerUtil.adjustNegativeX(this, arrWalls, right, impulsing, jumping);
     if (this.velocityX > 0) playerUtil.adjustPositiveX(this, arrWalls, left, impulsing, jumping);
-    if (this.velocityY > 0) playerUtil.adjustPositiveY(this, arrWalls, jumping, impulsing);
     if (this.velocityY < 0) playerUtil.adjustNegativeY(this, arrWalls, jumping, impulsing);
-    
+    if (this.velocityY > 0) playerUtil.adjustPositiveY(this, arrWalls, jumping, impulsing);
+
     // adjust velocity for landing on corners
     if (this.velocityX !== 0 && this.velocityY !== 0) playerUtil.adjustDiagonally(this, arrWalls);
-
+    
+    // adjust step
+    playerUtil.adjustStep(this, arrWalls);
+    
     this.x += this.velocityX;
     this.y += this.velocityY;
     this.keydownState.impulsing = false;
-    this.unitVec = [0, 0];
+    if (this.impulsingCount >= this.numImpulses) this.ableToImpulse = false;
 
     // render sprite section based on count of draw loop
     this.count >= 25 ? this.count = 0 : this.count += 1;
