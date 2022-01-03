@@ -23,7 +23,7 @@ class Player {
     this.spidermanSprite.src = "./assets/sprite_spiderman.png";
     this.spidermanSpriteReversed = new Image();
     this.spidermanSpriteReversed.src = "./assets/sprite_spiderman_reversed.png";
-    this.width = 45;
+    this.width = 30;
     this.height = 70;
     this.count = 0;
 
@@ -62,7 +62,7 @@ class Player {
     this.velocityX *= 0.9;
     this.velocityY *= 0.9;
   
-    console.log(this.x, "X", this.velocityX, "velX");
+    // console.log(this.x, "X", this.velocityX, "velX");
     // adjust velocityX and Y
     if (this.velocityX < 0) playerUtil.adjustNegativeX(this, arrWalls, right, impulsing, jumping);
     if (this.velocityX > 0) playerUtil.adjustPositiveX(this, arrWalls, left, impulsing, jumping);
@@ -74,6 +74,8 @@ class Player {
     
     // adjust step
     playerUtil.adjustStep(this, arrWalls);
+
+    // console.log(10 ** (-25), "exp", this.velocityX, "VEL x");
     
     this.x += this.velocityX;
     this.y += this.velocityY;

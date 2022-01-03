@@ -6,9 +6,12 @@ export const playerUtil = {
     let closestL = wallUtil.closestWallToTheLeft(player, arrWalls);
     let distanceL = wallUtil.distanceToTheLeft(player, closestL);
 
-    if (distanceL === 0) {
+    console.log(distanceL, "DISTANCE")
+
+
+    if (distanceL <= (10 ** -100)) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
-        player.velocityX = 0;
+        player.velocityX = -(10 ** -100);
       }
     } else {
       if (
@@ -17,7 +20,7 @@ export const playerUtil = {
         // !impulsing
       ) {
         player.x -= distanceL;
-        player.velocityX = 0;
+        player.velocityX = -(10 ** -100);
       }
     }
   },
@@ -26,9 +29,11 @@ export const playerUtil = {
     let closestR = wallUtil.closestWallToTheRight(player, arrWalls);
     let distanceR = wallUtil.distanceToTheRight(player, closestR);
 
-    if (distanceR === 0) {
+    console.log(distanceR, "DISTANCE");
+
+    if (distanceR <= (10 ** -100)) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "left")) {
-        player.velocityX = 0;
+        player.velocityX = 10 ** -100;
       }
     } else {
       if (
@@ -37,7 +42,7 @@ export const playerUtil = {
         // !impulsing
       ) {
         player.x += distanceR;
-        player.velocityX = 0;
+        player.velocityX = 10 ** -100;
       }
     }
   },
@@ -120,7 +125,7 @@ export const playerUtil = {
       // if (player.velocityY >= 0) player.velocityY = -0.5;
       // if (player.velocityY < 0) player.velocityY = 0.5;
       
-      player.velocityX = 0;
+      player.velocityX = 10 ** -25;
       player.velocityY = 0;
     }
   },
