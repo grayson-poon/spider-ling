@@ -61,7 +61,8 @@ class Player {
     this.velocityY += 1;
     this.velocityX *= 0.9;
     this.velocityY *= 0.9;
-    
+  
+    console.log(this.x, "X", this.velocityX, "velX");
     // adjust velocityX and Y
     if (this.velocityX < 0) playerUtil.adjustNegativeX(this, arrWalls, right, impulsing, jumping);
     if (this.velocityX > 0) playerUtil.adjustPositiveX(this, arrWalls, left, impulsing, jumping);
@@ -82,6 +83,7 @@ class Player {
     // render sprite section based on count of draw loop
     this.count >= 25 ? this.count = 0 : this.count += 1;
     drawPlayer(
+      this,
       ctx,
       this.spidermanSprite,
       this.spidermanSpriteReversed,

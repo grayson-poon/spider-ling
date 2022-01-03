@@ -1,9 +1,9 @@
 export const drawPlayer = (
-  ctx, image, reverseImage, x, y, velocityX, velocityY, left, right, jumping, impulsing, count
+  player, ctx, image, reverseImage, x, y, velocityX, velocityY, left, right, jumping, impulsing, count
 ) => {
 
   switch (true) {
-    case (velocityX >= 1.0 && !jumping) || (right && !jumping):
+    case (velocityX >= 1.0 && !jumping) || (right && !jumping): // running right
       if (count <= 5) {
         ctx.drawImage(image, 0, 0, 65, 80, x, y, 45, 70);
       } else if (count <= 10) {
@@ -16,7 +16,7 @@ export const drawPlayer = (
         ctx.drawImage(image, 360, 0, 70, 80, x, y, 45, 70);
       }
       break;
-    case (velocityX <= -1.0 && !jumping) || (left && !jumping):
+    case (velocityX <= -1.0 && !jumping) || (left && !jumping): // running left
       if (count <= 5) {
         ctx.drawImage(reverseImage, 1375, 0, 65, 80, x, y, 45, 70);
       } else if (count <= 10) {
@@ -29,16 +29,16 @@ export const drawPlayer = (
         ctx.drawImage(reverseImage, 1010, 0, 70, 80, x, y, 45, 70);
       }
       break;
-    case velocityX < 1.0 && velocityX >= 0 && !jumping:
-      ctx.drawImage(image, 660, 0, 55, 80, x, y, 45, 70); // standing facing right
+    case velocityX < 1.0 && velocityX >= 0 && !jumping && Math.abs(velocityY) === 0:
+      ctx.drawImage(image, 660, 0, 40, 80, x, y, 35, 70); // standing facing right
       break;
-    case velocityX > -1.0 && velocityX < 0 && !jumping:
+    case velocityX > -1.0 && velocityX < 0 && !jumping && Math.abs(velocityY) === 0:
       ctx.drawImage(reverseImage, 725, 0, 55, 80, x, y, 45, 70); // standing facing left
       break;
-    case jumping && velocityX >= 0:
+    case (jumping && velocityX >= 0) || (!jumping && velocityY > 0 && velocityX >= 0):
       ctx.drawImage(image, 865, 0, 75, 68, x, y, 55, 70); // jumping facing right
       break;
-    case jumping && velocityX < 0:
+    case Math.abs(velocityY) > 0 && velocityX < 0:
       ctx.drawImage(reverseImage, 500, 0, 75, 68, x, y, 55, 70); // jumping facing left
       break;
     

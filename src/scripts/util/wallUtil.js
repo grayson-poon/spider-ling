@@ -234,30 +234,42 @@ export const wallUtil = {
       if (edge === "left") leftEdge = possibleWalls[0];
       if (edge === "right") rightEdge = possibleWalls[0];
     }
-    let dy = 0;
 
-    while (!leftEdge || !rightEdge) {
+    let dy = 0;
+    while (!leftEdge || !rightEdge || dy <= 600) {
+      // possibleWalls.forEach((wall) => {
       for (let i = 0; i < possibleWalls.length; i++) {
         let wall = possibleWalls[i];
+
         if (edge === "left") {
           if (wall.containsPoint(player.x, player.y + player.height + dy)) {
             leftEdge = wall;
           }
         } else if (edge === "right") {
-          if (wall.containsPoint(player.x + player.width, player.y + player.height + dy)) {
+          if (
+            wall.containsPoint(
+              player.x + player.width,
+              player.y + player.height + dy
+            )
+          ) {
             rightEdge = wall;
           }
         }
-        if (leftEdge && leftEdge) break;
+
+        if (leftEdge && rightEdge) return;
       };
       dy += 1;
     }
 
-    switch(edge) {
+    switch (edge) {
       case "left":
-        return rightEdge !== leftEdge && this.distanceBelow(player, rightEdge) === 0;
+        return (
+          rightEdge !== leftEdge && this.distanceBelow(player, rightEdge) === 0
+        );
       case "right":
-        return leftEdge !== rightEdge && this.distanceBelow(player, leftEdge) === 0;
+        return (
+          leftEdge !== rightEdge && this.distanceBelow(player, leftEdge) === 0
+        );
     }
   },
 
