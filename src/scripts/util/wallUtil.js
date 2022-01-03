@@ -230,20 +230,17 @@ export const wallUtil = {
       if (wall.y >= player.y + player.height) possibleWalls.push(wall);
     });
 
-    if (possibleWalls.length === 1) {
-      if (edge === "left") leftEdge = possibleWalls[0];
-      if (edge === "right") rightEdge = possibleWalls[0];
-    }
-
+    let found = false;
     let dy = 0;
-    while (!leftEdge || !rightEdge || dy <= 600) {
-      // possibleWalls.forEach((wall) => {
+
+    while (!rightEdge || !leftEdge || dy > 600) {
       for (let i = 0; i < possibleWalls.length; i++) {
         let wall = possibleWalls[i];
 
         if (edge === "left") {
           if (wall.containsPoint(player.x, player.y + player.height + dy)) {
             leftEdge = wall;
+            found = true;
           }
         } else if (edge === "right") {
           if (
@@ -253,10 +250,11 @@ export const wallUtil = {
             )
           ) {
             rightEdge = wall;
+            found = true;
           }
         }
 
-        if (leftEdge && rightEdge) return;
+        if (rightEdge && leftEdge) break;
       };
       dy += 1;
     }

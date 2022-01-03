@@ -7,7 +7,7 @@ export const playerUtil = {
     let distanceL = wallUtil.distanceToTheLeft(player, closestL);
 
     if (distanceL === 0) {
-      if (!wallUtil.edgeHangingOff(player, arrWalls, "left")) {
+      if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
         player.velocityX = 0;
       }
     } else {
@@ -27,7 +27,7 @@ export const playerUtil = {
     let distanceR = wallUtil.distanceToTheRight(player, closestR);
 
     if (distanceR === 0) {
-      if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
+      if (!wallUtil.edgeHangingOff(player, arrWalls, "left")) {
         player.velocityX = 0;
       }
     } else {
