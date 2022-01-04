@@ -17,7 +17,7 @@ export const wallUtil = {
     return player.x - (wall.x + wall.width);
   },
 
-  velocityVectorPathController(player, walls) {
+  quadrantInfoController(player, walls) {
     if (player.velocityX > 0 && player.velocityY < 0) {
       return this.getQuadrantInfo(player, walls, 1);
     } else if (player.velocityX < 0 && player.velocityY < 0) {

@@ -75,7 +75,7 @@ export const playerUtil = {
   },
 
   adjustDiagonally(player, arrWalls) {
-    let payload = wallUtil.velocityVectorPathController(player, arrWalls);
+    let payload = wallUtil.quadrantInfoController(player, arrWalls);
     if (!payload) return;
     let { dx, dy } = payload;
 
