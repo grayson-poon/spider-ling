@@ -15,7 +15,7 @@ div#game-menu {
   border-bottom-right-radius: 10px 10px;
   border-top-right-radius: 10px 10px;
   font-size: 14px;
-  max-width: 150px;
+  max-width: 130px;
 }
 
 div#game-menu > div:first-child {
@@ -43,6 +43,10 @@ div#game-menu ul li:hover {
   background-color: red;
   margin: 10px;
   cursor: pointer;
+}
+
+div#game-menu ul li:last-child {
+  font-size: 14px;
 }
 
 div#nav-links {
