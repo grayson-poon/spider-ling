@@ -4,7 +4,6 @@ import Wall from "../wall";
 const cW = 900;
 const cH = 600;
 
-// try to get canvas and/or ctx defined in here so it can be used to lay out walls
 export const levelTwo = [
   new Wall(0, 0, cW, 2), // Ceiling wall
   new Wall(0, 0, 2, cH), // Left wall

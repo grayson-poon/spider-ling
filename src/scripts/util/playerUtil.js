@@ -74,8 +74,6 @@ export const playerUtil = {
     if (!payload) return;
     let { dx, dy } = payload;
 
-    console.log("hitting here");
-
     if (Math.abs(dx) >= Math.abs(dy)) {
       player.y += dy;
 

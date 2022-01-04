@@ -39,7 +39,6 @@ class Player {
 
   draw(ctx) {
     let arrWalls = this.game.currentLevel.arrWalls;
-    console.log(this.game, this.game.currentLevel);
     let { left, right, jumping, impulsing } = this.keydownState;
 
     if (left) this.velocityX -= 0.5;
@@ -114,7 +113,6 @@ class Player {
   }
 
   keydownController(event) {
-    debugger
     event.stopPropagation();
     event.preventDefault();
     let keyState = event.type === "keydown" ? true : false;

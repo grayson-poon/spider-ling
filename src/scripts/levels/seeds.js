@@ -4,10 +4,7 @@ import Layout from "../layout";
 // wall_layouts
 import { levelOne } from "./level_one";
 import { levelTwo } from "./level_two";
-
-// canvas width and height
-const canvasWidth = 900;
-const canvasHeight = 600;
+import { levelThree } from "./level_three";
 
 // Level 1
 let level1 = new Level({
@@ -31,9 +28,10 @@ let level2 = new Level({
   ]
 });
 
+// Level 3
 let level3 = new Level({
   startingPos: [15, 200],
-  layout: new Layout(),
+  layout: new Layout(levelThree),
   winZone: { x: 800, y: 350, width: 100, height: 100 },
   failZones: [
     { x: 160, y: 520, width: 150, height: 80 },
@@ -44,5 +42,6 @@ let level3 = new Level({
 // Export all levels //////////////////////////////////////////////////////
 export const arrLevels = [
   level1,
-  level2
+  level2,
+  level3,
 ];

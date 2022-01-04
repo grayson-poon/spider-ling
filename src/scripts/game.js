@@ -49,7 +49,6 @@ class Game {
       this.player.velocityX = (10 ** -100);
       this.player.velocityY = 0;
     } else {
-      debugger
       this.won = true;
     }
   }

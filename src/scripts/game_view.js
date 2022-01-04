@@ -16,7 +16,8 @@ class GameView {
       this.game.player.draw(this.ctx);
       this.game.currentLevel.draw(this.ctx);
     } else if (this.game.won) {
-      return;
+      console.log("won");
+      // return;
     }
     window.requestAnimationFrame(this.loop.bind(this));
   }
