@@ -37,6 +37,7 @@ div#instructions-credits-container {
 }
 
 div#instructions-credits-content {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
   width: 900px;
   height: 400px;
   position: absolute;
@@ -48,14 +49,12 @@ div#instructions-credits-content {
   color: white;
 }
 
-div#instructions-credits-content li {
-  list-style: none;
-  font-size: 20px;
+div#context {
+  visibility: visible;
 }
 
-div#instructions-credits-content li a {
-  color: white;
-  text-decoration: underline;
+div#controls {
+  visibility: hidden;
 }
 
 div#win-container {
