@@ -1,5 +1,3 @@
-import { vecUtil } from "./vecUtil";
-
 export const wallUtil = {
   distanceBelow(player, wall) {
     return wall.y - (player.y + player.height);

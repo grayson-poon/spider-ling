@@ -1,0 +1,83 @@
+div#pause-container {
+  width: 900px;
+  height: 600px;
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+div#pause-content {
+  width: 900px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 25px;
+  color: white;
+}
+
+div#instructions-credits-container {
+  width: 900px;
+  height: 600px;
+  visibility: visible;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+div#instructions-credits-content {
+  width: 900px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 25px;
+  color: white;
+}
+
+div#instructions-credits-content li {
+  list-style: none;
+  font-size: 20px;
+}
+
+div#instructions-credits-content li a {
+  color: white;
+  text-decoration: underline;
+}
+
+div#win-container {
+  width: 900px;
+  height: 600px;
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+div#win {
+  text-align: center;
+  font-size: 25px;
+  color: white;
+}
+
+div#win h2 {
+  padding-bottom: 15px;
+}
