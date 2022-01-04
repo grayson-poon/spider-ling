@@ -47,12 +47,11 @@ export const playerUtil = {
         ) {
           shortestDistance = testDistance;
         }
+        if (shortestDistance === 0) break;
       }
     }
 
-
     if (shortestDistance <= 10 ** -100) {
-      console.log(shortestDistance, "inside")
       if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
         player.velocityX = -(10 ** -100);
       }
