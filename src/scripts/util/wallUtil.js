@@ -293,7 +293,7 @@ export const wallUtil = {
     }
   },
 
-  oneStepTooFar(player, walls) {
+  maximumStep(player, walls) {
     let unitVec  = vecUtil.normalize([0, 0], [player.velocityX, player.velocityY]);
     let [dx, dy] = unitVec;
     let collision = false;

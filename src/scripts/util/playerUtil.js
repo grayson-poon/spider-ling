@@ -6,9 +6,6 @@ export const playerUtil = {
     let closestL = wallUtil.closestWallToTheLeft(player, arrWalls);
     let distanceL = wallUtil.distanceToTheLeft(player, closestL);
 
-    console.log(distanceL, "DISTANCE")
-
-
     if (distanceL <= (10 ** -100)) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
         player.velocityX = -(10 ** -100);
@@ -19,7 +16,7 @@ export const playerUtil = {
         // Math.abs(distanceL) < 0.45 &&
         // !impulsing
       ) {
-        player.x -= distanceL;
+        player.x -= distanceL + (10 ** -100);
         player.velocityX = -(10 ** -100);
       }
     }
@@ -28,8 +25,6 @@ export const playerUtil = {
   adjustPositiveX(player, arrWalls, movingLeft, impulsing) {
     let closestR = wallUtil.closestWallToTheRight(player, arrWalls);
     let distanceR = wallUtil.distanceToTheRight(player, closestR);
-
-    console.log(distanceR, "DISTANCE");
 
     if (distanceR <= (10 ** -100)) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "left")) {
@@ -41,7 +36,7 @@ export const playerUtil = {
         // Math.abs(distanceR) < 0.45 &&
         // !impulsing
       ) {
-        player.x += distanceR;
+        player.x += distanceR - (10 ** -100);
         player.velocityX = 10 ** -100;
       }
     }
@@ -55,6 +50,7 @@ export const playerUtil = {
       player.jumping = false;
       player.ableToImpulse = true;
       player.impulsingCount = 0;
+      player.unitVec = [0, 0];
 
       player.velocityY = 0;
     } else {
@@ -66,6 +62,7 @@ export const playerUtil = {
         player.jumping = false;
         player.ableToImpulse = true;
         player.impulsingCount = 0;
+        player.unitVec = [0, 0];
 
         player.y += distanceB;
         player.velocityY = 0;
@@ -113,20 +110,21 @@ export const playerUtil = {
       wallUtil.futureCollisionDetected(player, arrWalls, player.velocityX, player.velocityY) &&
       !wallUtil.currentCollisionDetected(player, arrWalls)
     ) {
-      let { dx, dy } = wallUtil.oneStepTooFar(player, arrWalls);
+      let { dx, dy } = wallUtil.maximumStep(player, arrWalls);
       console.log({dx, dy}, "one step too far");
 
       player.x += dx;
       player.y += dy;
+
+      if (dx > 0) player.velocityX = 10 ** -100;
+      if (dx < 0) player.velocityX = -(10 ** -100);
+      player.velocityY = 0;
 
       // if (player.velocityX >= 0) player.velocityX = -0.5;
       // if (player.velocityX < 0) player.velocityX = 0.5;
 
       // if (player.velocityY >= 0) player.velocityY = -0.5;
       // if (player.velocityY < 0) player.velocityY = 0.5;
-      
-      player.velocityX = 10 ** -25;
-      player.velocityY = 0;
     }
   },
 };

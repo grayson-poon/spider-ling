@@ -1,9 +1,11 @@
-export const drawPlayer = (
-  player, ctx, image, reverseImage, x, y, velocityX, velocityY, left, right, jumping, impulsing, count
-) => {
+import { vecUtil } from "./util/vecUtil";
 
+export const drawPlayer = (
+  player, ctx, image, reverseImage, x, y, velocityX, velocityY, unitVec, left, right, jumping, impulsing, count
+) => {
   switch (true) {
-    case (velocityX >= 1.0 && !jumping) || (right && !jumping): // running right
+    // running right
+    case (velocityX >= 0.5 && !jumping && velocityY === 0) || (right && !jumping && velocityY === 0):
       if (count <= 5) {
         ctx.drawImage(image, 0, 0, 65, 80, x - 15, y, 45, 70);
       } else if (count <= 10) {
@@ -16,7 +18,8 @@ export const drawPlayer = (
         ctx.drawImage(image, 360, 0, 70, 80, x - 15, y, 45, 70);
       }
       break;
-    case (velocityX <= -1.0 && !jumping) || (left && !jumping): // running left
+    // running left
+    case (velocityX <= -0.5 && !jumping && velocityY === 0) || (left && !jumping && velocityY === 0): 
       if (count <= 5) {
         ctx.drawImage(reverseImage, 1375, 0, 65, 80, x, y, 45, 70);
       } else if (count <= 10) {
@@ -29,23 +32,29 @@ export const drawPlayer = (
         ctx.drawImage(reverseImage, 1010, 0, 70, 80, x, y, 45, 70);
       }
       break;
-    case velocityX < 1.0 && velocityX >= 0 && !jumping && Math.abs(velocityY) === 0:
-      ctx.drawImage(image, 667, 0, 35, 80, x, y, 30, 70); // standing facing right
+    // standing facing right
+    case velocityX < 0.5 && velocityX > 0 && !jumping && Math.abs(velocityY) === 0: 
+      ctx.drawImage(image, 667, 0, 35, 76, x, y, 30, 70); 
       break;
-    case velocityX > -1.0 && velocityX < 0 && !jumping && Math.abs(velocityY) === 0:
-      ctx.drawImage(reverseImage, 740, 0, 35, 80, x, y, 30, 70); // standing facing left
+     // standing facing left
+    case velocityX > -0.5 && velocityX < 0 && !jumping && Math.abs(velocityY) === 0:
+      ctx.drawImage(reverseImage, 740, 0, 35, 76, x, y, 30, 70); 
       break;
-    case (jumping && velocityX >= 0) || (!jumping && velocityY > 0 && velocityX >= 0):
-      ctx.drawImage(image, 865, 0, 63, 68, x - 23, y, 55, 70); // jumping facing right
+    // shooting web up and right
+    case (jumping && velocityY < 0 && velocityX > 0 && vecUtil.angleOfVelocity(unitVec) <= 90 && vecUtil.angleOfVelocity(unitVec) >= 60):
+      ctx.drawImage(image, 810, 0, 50, 80, x, y, 45, 70);
       break;
-    case Math.abs(velocityY) > 0 && velocityX < 0:
-      ctx.drawImage(reverseImage, 500, 0, 75, 68, x, y, 55, 70); // jumping facing left
+    // shooting web up and left
+    case (jumping && velocityY < 0 && velocityX < 0 && vecUtil.angleOfVelocity(unitVec) >= 90 && vecUtil.angleOfVelocity(unitVec) <= 120):
+      ctx.drawImage(reverseImage, 580, 0, 50, 80, x - 15, y, 45, 70);
       break;
-    
+    // jumping facing right
+    case (jumping && velocityX > 0) || (!jumping && velocityY > 0 && velocityX > 0): 
+      ctx.drawImage(image, 865, 0, 63, 68, x - 15, y, 45, 70); 
+      break;
+    // jumping facing left
+    case (jumping && velocityX < 0) || (!jumping && velocityY > 0 && velocityX < 0): 
+      ctx.drawImage(reverseImage, 512, 0, 63, 68, x, y, 45, 70); 
+      break;
   }
-
-
-  
-
-  
 }

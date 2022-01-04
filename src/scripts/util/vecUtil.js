@@ -11,5 +11,28 @@ export const vecUtil = {
     let unitY = (1 / magnitude) * vector[1];
 
     return [unitX, unitY];
-  }
+  },
+
+  radiansToDegrees(radians) {
+    return radians * (180 / Math.PI);
+  },
+
+  angleOfVelocity(unitVec) {
+    let [velocityX, velocityY] = unitVec;
+    if (velocityY === 0) return;
+    
+    let angleInRad = Math.atan2(Math.abs(velocityY), Math.abs(velocityX));
+    let angleInDeg = this.radiansToDegrees(angleInRad);
+
+    switch(true) {
+      case velocityX > 0 && velocityY < 0:
+        return angleInDeg;
+      case velocityX < 0 && velocityY < 0:
+        return 180 - angleInDeg;
+      case velocityX < 0 && velocityY > 0:
+        return 180 + angleInDeg;
+      case velocityX > 0 && velocityY > 0:
+        return 360 - angleInDeg;
+    }
+  },
 }

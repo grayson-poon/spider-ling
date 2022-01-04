@@ -9,7 +9,7 @@ class Player {
     this.y = initPos[1];
     this.currentLevel = currentLevel;
     
-    this.velocityX = 0;
+    this.velocityX = 10 ** -100;;
     this.velocityY = 0;
     this.jumping = false;
 
@@ -59,7 +59,7 @@ class Player {
 
     // gravity and friction
     this.velocityY += 1;
-    this.velocityX *= 0.9;
+    this.velocityX *= 0.87;
     this.velocityY *= 0.9;
   
     // console.log(this.x, "X", this.velocityX, "velX");
@@ -82,6 +82,7 @@ class Player {
     this.keydownState.impulsing = false;
     if (this.impulsingCount >= this.numImpulses) this.ableToImpulse = false;
 
+    console.log(this.unitVec, "UNIT");
     // render sprite section based on count of draw loop
     this.count >= 25 ? this.count = 0 : this.count += 1;
     drawPlayer(
@@ -93,6 +94,7 @@ class Player {
       this.y,
       this.velocityX,
       this.velocityY,
+      this.unitVec,
       left,
       right,
       this.jumping,
@@ -102,7 +104,7 @@ class Player {
 
     // ctx.drawImage(
     //   this.spidermanSprite,
-    //   805,
+    //   810,
     //   0,
     //   50,
     //   80,
@@ -111,6 +113,7 @@ class Player {
     //   45,
     //   70
     // );
+    // console.log(vecUtil.angleOfVelocity(this.unitVec), "ANGLE")
   }
 
   keydownController(event) {
@@ -140,7 +143,7 @@ class Player {
     const rect = event.currentTarget.getBoundingClientRect();
     const clickPos = [event.clientX - rect.left, event.clientY - rect.top];
     
-    this.unitVec = vecUtil.normalize([this.x, this. y], clickPos);
+    this.unitVec = vecUtil.normalize([this.x, this.y], clickPos);
     this.keydownState.impulsing = true;
   }
 
