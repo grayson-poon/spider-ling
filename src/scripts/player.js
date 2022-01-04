@@ -71,7 +71,7 @@ class Player {
     if (this.velocityX !== 0 && this.velocityY !== 0) playerUtil.adjustDiagonally(this, arrWalls);
     
     // adjust step for walls thinner than length/width of player object
-    playerUtil.adjustStep(this, arrWalls);
+    // playerUtil.adjustStep(this, arrWalls);
     
     this.x += this.velocityX;
     this.y += this.velocityY;

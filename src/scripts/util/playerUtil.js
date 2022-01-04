@@ -21,41 +21,44 @@ export const playerUtil = {
     //   }
     // }
 
-    let newDistance = 900;
-    let newWall;
+    // debugger
+
+    let testDistance;
+    let shortestDistance;
 
     for (let i = 0; i < arrWalls.length; i++) {
       let wall = arrWalls[i];
 
-      if (
-        (wall.y + wall.height > player.y && wall.y < player.y + player.height ||
-        wall.y > player.y && wall.y < player.y + player.height) &&
-        wall.x + wall.width <= player.x
-      ) {
-        
-        let test = wallUtil.distanceToTheLeft(player, wall);
-        if (test < newDistance) {
-          newDistance = test;
-          newWall = wall;
-        };
+      if (wall.x + wall.width <= player.x) {
+        testDistance = wallUtil.distanceToTheLeft(player, wall);
+        if (!shortestDistance && shortestDistance !== 0) {
+          shortestDistance = wallUtil.distanceToTheLeft(player, wall);
+        }
+
+        if (
+          ((wall.y + wall.height > player.y &&
+            wall.y < player.y + player.height) ||
+            (wall.y > player.y && 
+            wall.y < player.y + player.height) ||
+            (wall.y < player.y && 
+            wall.y + wall.height > player.y + player.height)) &&
+          testDistance < shortestDistance &&
+          testDistance >= 0
+        ) {
+          shortestDistance = testDistance;
+        }
       }
     }
 
-    console.log(newDistance, "NEWD", newWall, "new wall")
 
-    // debugger
-
-    if (newDistance <= 10 ** -100) {
+    if (shortestDistance <= 10 ** -100) {
+      console.log(shortestDistance, "inside")
       if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
         player.velocityX = -(10 ** -100);
       }
     } else {
-      if (
-        Math.abs(newDistance) < Math.abs(player.velocityX)
-        // Math.abs(newDistance) < 0.45 &&
-        // !impulsing
-      ) {
-        player.x -= newDistance + 10 ** -100;
+      if (Math.abs(shortestDistance) < Math.abs(player.velocityX)) {
+        player.x -= shortestDistance + (10 ** -100);
         player.velocityX = -(10 ** -100);
       }
     }
