@@ -295,7 +295,7 @@ export const wallUtil = {
 
   maximumStep(player, walls) {
     let unitVec  = vecUtil.normalize([0, 0], [player.velocityX, player.velocityY]);
-    let [dx, dy] = unitVec;
+    let [dx, dy] = [0, 0];
     let collision = false;
 
     while (collision === false) {
@@ -307,7 +307,6 @@ export const wallUtil = {
       dy += unitVec[1];
     }
 
-    // console.log({ dx: dx - unitVec[0], dy: dy - unitVec[1] }, "onestep too far");
     return { dx: dx - unitVec[0], dy: dy - unitVec[1] };
   }
 };

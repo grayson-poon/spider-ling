@@ -1,7 +1,6 @@
 import { drawPlayer } from "./draw_player";
 import { playerUtil } from "./util/playerUtil";
 import { vecUtil } from "./util/vecUtil";
-import { wallUtil } from "./util/wallUtil";
 
 class Player {
   constructor(initPos, currentLevel) {
@@ -62,7 +61,6 @@ class Player {
     this.velocityX *= 0.87;
     this.velocityY *= 0.9;
   
-    // console.log(this.x, "X", this.velocityX, "velX");
     // adjust velocityX and Y
     if (this.velocityX < 0) playerUtil.adjustNegativeX(this, arrWalls, right, impulsing, jumping);
     if (this.velocityX > 0) playerUtil.adjustPositiveX(this, arrWalls, left, impulsing, jumping);
@@ -72,17 +70,14 @@ class Player {
     // adjust velocity for landing on corners
     if (this.velocityX !== 0 && this.velocityY !== 0) playerUtil.adjustDiagonally(this, arrWalls);
     
-    // adjust step
+    // adjust step for walls thinner than length/width of player object
     playerUtil.adjustStep(this, arrWalls);
-
-    // console.log(10 ** (-25), "exp", this.velocityX, "VEL x");
     
     this.x += this.velocityX;
     this.y += this.velocityY;
     this.keydownState.impulsing = false;
     if (this.impulsingCount >= this.numImpulses) this.ableToImpulse = false;
 
-    console.log(this.unitVec, "UNIT");
     // render sprite section based on count of draw loop
     this.count >= 25 ? this.count = 0 : this.count += 1;
     drawPlayer(
@@ -113,7 +108,6 @@ class Player {
     //   45,
     //   70
     // );
-    // console.log(vecUtil.angleOfVelocity(this.unitVec), "ANGLE")
   }
 
   keydownController(event) {

@@ -3,20 +3,59 @@ import { wallUtil } from "./wallUtil"
 
 export const playerUtil = {
   adjustNegativeX(player, arrWalls, movingRight, impulsing, jumping) {
-    let closestL = wallUtil.closestWallToTheLeft(player, arrWalls);
-    let distanceL = wallUtil.distanceToTheLeft(player, closestL);
+    // let closestL = wallUtil.closestWallToTheLeft(player, arrWalls);
+    // let distanceL = wallUtil.distanceToTheLeft(player, closestL);
 
-    if (distanceL <= (10 ** -100)) {
+    // if (distanceL <= 10 ** -100) {
+    //   if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
+    //     player.velocityX = -(10 ** -100);
+    //   }
+    // } else {
+    //   if (
+    //     Math.abs(distanceL) < Math.abs(player.velocityX)
+    //     // Math.abs(distanceL) < 0.45 &&
+    //     // !impulsing
+    //   ) {
+    //     player.x -= distanceL + 10 ** -100;
+    //     player.velocityX = -(10 ** -100);
+    //   }
+    // }
+
+    let newDistance = 900;
+    let newWall;
+
+    for (let i = 0; i < arrWalls.length; i++) {
+      let wall = arrWalls[i];
+
+      if (
+        (wall.y + wall.height > player.y ||
+        wall.y > player.y + player.height) &&
+        wall.x + wall.width <= player.x
+      ) {
+        
+        let test = wallUtil.distanceToTheLeft(player, wall);
+        if (test < newDistance && test >=0) {
+          newDistance = test;
+          newWall = wall;
+        };
+      }
+    }
+
+    console.log(newDistance, "NEWD", newWall, "new wall")
+
+    // debugger
+
+    if (newDistance <= 10 ** -100) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
         player.velocityX = -(10 ** -100);
       }
     } else {
       if (
-        Math.abs(distanceL) < Math.abs(player.velocityX)
-        // Math.abs(distanceL) < 0.45 &&
+        Math.abs(newDistance) < Math.abs(player.velocityX)
+        // Math.abs(newDistance) < 0.45 &&
         // !impulsing
       ) {
-        player.x -= distanceL + (10 ** -100);
+        player.x -= newDistance + 10 ** -100;
         player.velocityX = -(10 ** -100);
       }
     }
@@ -116,15 +155,9 @@ export const playerUtil = {
       player.x += dx;
       player.y += dy;
 
-      if (dx > 0) player.velocityX = 10 ** -100;
+      if (dx > 0) player.velocityX = (10 ** -100);
       if (dx < 0) player.velocityX = -(10 ** -100);
       player.velocityY = 0;
-
-      // if (player.velocityX >= 0) player.velocityX = -0.5;
-      // if (player.velocityX < 0) player.velocityX = 0.5;
-
-      // if (player.velocityY >= 0) player.velocityY = -0.5;
-      // if (player.velocityY < 0) player.velocityY = 0.5;
     }
   },
 };
