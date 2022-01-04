@@ -3,44 +3,10 @@ import { wallUtil } from "./wallUtil"
 
 export const playerUtil = {
   adjustNegativeX(player, arrWalls) {
-    let testDistance;
-    let shortestDistance;
-    let testWall;
+    let closestWall = wallUtil.closestWallToTheLeft(player, arrWalls);
+    let shortestDistance = wallUtil.distanceToTheLeft(player, closestWall);
 
-    for (let i = 0; i < arrWalls.length; i++) {
-      let wall = arrWalls[i];
-
-      if (wall.x + wall.width <= player.x) {
-        testDistance = wallUtil.distanceToTheLeft(player, wall);
-        if (!shortestDistance && shortestDistance !== 0) {
-          shortestDistance = wallUtil.distanceToTheLeft(player, wall);
-        }
-
-        if (
-          ((wall.y + wall.height > player.y &&
-            wall.y < player.y + player.height) ||
-            (wall.y > player.y && 
-            wall.y < player.y + player.height) ||
-            (wall.y < player.y && 
-            wall.y + wall.height > player.y + player.height)) &&
-          testDistance < shortestDistance &&
-          testDistance >= 0
-        ) {
-          shortestDistance = testDistance;
-        }
-        if (shortestDistance === 0) {
-          testWall = wall;
-          break;
-        };
-      }
-    }
-
-    console.log(wallUtil.closestWallToTheLeft(player, arrWalls), "NEW FUNC");
-    console.log(testWall, "correct FUNC");
-
-    // debugger
-
-    if (shortestDistance <= 10 ** -100) {
+    if (shortestDistance <= (10 ** -100)) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
         player.velocityX = -(10 ** -100);
       }
@@ -53,21 +19,19 @@ export const playerUtil = {
   },
 
   adjustPositiveX(player, arrWalls, movingLeft, impulsing) {
-    let closestR = wallUtil.closestWallToTheRight(player, arrWalls);
-    let distanceR = wallUtil.distanceToTheRight(player, closestR);
+    let closestWall = wallUtil.closestWallToTheRight(player, arrWalls);
+    let shortestDistance = wallUtil.distanceToTheRight(player, closestWall);
 
-    if (distanceR <= (10 ** -100)) {
+    if (shortestDistance <= (10 ** -100)) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "left")) {
-        player.velocityX = 10 ** -100;
+        player.velocityX = (10 ** -100);
       }
     } else {
       if (
-        Math.abs(distanceR) < Math.abs(player.velocityX)
-        // Math.abs(distanceR) < 0.45 &&
-        // !impulsing
+        Math.abs(shortestDistance) < Math.abs(player.velocityX)
       ) {
-        player.x += distanceR - (10 ** -100);
-        player.velocityX = 10 ** -100;
+        player.x += shortestDistance - (10 ** -100);
+        player.velocityX = (10 ** -100);
       }
     }
   },

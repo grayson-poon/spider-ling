@@ -124,34 +124,30 @@ export const wallUtil = {
   },
 
   closestWallToTheRight(player, walls) {
-    let closest;
-    let possibleWalls = [];
+    let testWall;
+    let closestWall;
 
-    walls.forEach((wall) => {
-      if (wall.x >= player.x + player.width) possibleWalls.push(wall);
-    });
-    
-    if (possibleWalls.length === 1) closest = possibleWalls[0];
-    let dx = 0;
+    for (let i = 0; i < walls.length; i++) {
+      let wall = walls[i];
 
-    while (closest === undefined) {
-      for (let i = 0; i < possibleWalls.length; i++) {
-        let wall = possibleWalls[i];
+      if (wall.x >= player.x + player.width) {
+        if (!closestWall) closestWall = wall;
+        testWall = wall;
+
         if (
-          wall.containsPoint(player.x + player.width + dx, player.y) ||
-          wall.containsPoint(
-            player.x + player.width + dx,
-            player.y + player.height
-          )
+          ((wall.y + wall.height > player.y && 
+            wall.y < player.y + player.height) ||
+            (wall.y > player.y && 
+            wall.y < player.y + player.height) ||
+            (wall.y < player.y &&
+            wall.y + wall.height > player.y + player.height)) &&
+          testWall.x < closestWall.x
         ) {
-          closest = wall;
+          closestWall = testWall;
         }
-        if (closest) break;
-      };
-      dx += 1;
+      }
     }
-
-    return closest;
+    return closestWall;
   },
 
   closestWallToTheLeft(player, walls) {
@@ -177,10 +173,8 @@ export const wallUtil = {
         ) {
           closestWall = testWall;
         }
-        if (closestWall.x + closestWall.width === player.x) break;
       }
     }
-    
     return closestWall;
   },
 
