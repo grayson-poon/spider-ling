@@ -5,6 +5,7 @@ export const playerUtil = {
   adjustNegativeX(player, arrWalls) {
     let testDistance;
     let shortestDistance;
+    let testWall;
 
     for (let i = 0; i < arrWalls.length; i++) {
       let wall = arrWalls[i];
@@ -27,9 +28,17 @@ export const playerUtil = {
         ) {
           shortestDistance = testDistance;
         }
-        if (shortestDistance === 0) break;
+        if (shortestDistance === 0) {
+          testWall = wall;
+          break;
+        };
       }
     }
+
+    console.log(wallUtil.closestWallToTheLeft(player, arrWalls), "NEW FUNC");
+    console.log(testWall, "correct FUNC");
+
+    // debugger
 
     if (shortestDistance <= 10 ** -100) {
       if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {

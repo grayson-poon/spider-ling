@@ -155,31 +155,33 @@ export const wallUtil = {
   },
 
   closestWallToTheLeft(player, walls) {
-    let closest;
-    let possibleWalls = [];
+    let testWall;
+    let closestWall;
 
-    walls.forEach((wall) => {
-      if (wall.x + wall.width <= player.x) possibleWalls.push(wall);
-    });
+    for (let i = 0; i < walls.length; i++) {
+      let wall = walls[i];
 
-    if (possibleWalls.length === 1) closest = possibleWalls[0];
-    let dx = 0;
-    
-    while (closest === undefined) {
-      for (let i = 0; i < possibleWalls.length; i++) {
-        let wall = possibleWalls[i];
+      if (wall.x + wall.width <= player.x) {
+        if (!closestWall) closestWall = wall;
+        testWall = wall;
+
         if (
-          wall.containsPoint(player.x + dx, player.y) ||
-          wall.containsPoint(player.x + dx, player.y + player.height)
+          ((wall.y + wall.height > player.y &&
+            wall.y < player.y + player.height) ||
+            (wall.y > player.y && 
+            wall.y < player.y + player.height) ||
+            (wall.y < player.y &&
+            wall.y + wall.height > player.y + player.height)) &&
+          testWall.x + testWall.width > closestWall.x + closestWall.width &&
+          testWall.x + testWall.width >= 0
         ) {
-          closest = wall;
+          closestWall = testWall;
         }
-        if (closest) break;
-      };
-      dx -= 1;
+        if (closestWall.x + closestWall.width === player.x) break;
+      }
     }
-
-    return closest;
+    
+    return closestWall;
   },
 
   currentCollisionDetected(player, walls) {
