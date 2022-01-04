@@ -1,4 +1,3 @@
-import { vecUtil } from "./vecUtil";
 import { wallUtil } from "./wallUtil"
 
 export const playerUtil = {
@@ -7,9 +6,7 @@ export const playerUtil = {
     let shortestDistance = wallUtil.distanceToTheLeft(player, closestWall);
 
     if (shortestDistance <= (10 ** -100)) {
-      if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
-        player.velocityX = -(10 ** -100);
-      }
+      player.velocityX = -(10 ** -100);
     } else {
       if (Math.abs(shortestDistance) < Math.abs(player.velocityX)) {
         player.x -= shortestDistance + (10 ** -100);
@@ -18,14 +15,12 @@ export const playerUtil = {
     }
   },
 
-  adjustPositiveX(player, arrWalls, movingLeft, impulsing) {
+  adjustPositiveX(player, arrWalls) {
     let closestWall = wallUtil.closestWallToTheRight(player, arrWalls);
     let shortestDistance = wallUtil.distanceToTheRight(player, closestWall);
 
     if (shortestDistance <= (10 ** -100)) {
-      if (!wallUtil.edgeHangingOff(player, arrWalls, "left")) {
-        player.velocityX = (10 ** -100);
-      }
+      player.velocityX = (10 ** -100);
     } else {
       if (
         Math.abs(shortestDistance) < Math.abs(player.velocityX)
@@ -36,7 +31,7 @@ export const playerUtil = {
     }
   },
 
-  adjustPositiveY(player, arrWalls, jumping, impulsing) {
+  adjustPositiveY(player, arrWalls) {
     let closestWall = wallUtil.closestWallBelow(player, arrWalls);
     let shortestDistance = wallUtil.distanceBelow(player, closestWall);
 
