@@ -67,11 +67,8 @@ class Player {
     if (this.velocityY < 0) playerUtil.adjustNegativeY(this, arrWalls, jumping, impulsing);
     if (this.velocityY > 0) playerUtil.adjustPositiveY(this, arrWalls, jumping, impulsing);
 
-    // adjust velocity for landing on corners
+    // adjust velocity for landing diagonally on a wall
     if (this.velocityX !== 0 && this.velocityY !== 0) playerUtil.adjustDiagonally(this, arrWalls);
-    
-    // adjust step for walls thinner than length/width of player object
-    // playerUtil.adjustStep(this, arrWalls);
     
     this.x += this.velocityX;
     this.y += this.velocityY;

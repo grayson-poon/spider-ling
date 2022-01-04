@@ -163,8 +163,7 @@ export const wallUtil = {
             wall.y < player.y + player.height) ||
             (wall.y < player.y &&
             wall.y + wall.height > player.y + player.height)) &&
-          testWall.x + testWall.width > closestWall.x + closestWall.width &&
-          testWall.x + testWall.width >= 0
+          testWall.x + testWall.width > closestWall.x + closestWall.width
         ) {
           closestWall = testWall;
         }
@@ -190,17 +189,17 @@ export const wallUtil = {
     return false;
   },
 
-  futureCollisionDetected(player, walls, dx, dy) {
+  futureCollisionDetected(player, walls) {
     let status = false;
 
     for (let i = 0; i < walls.length; i++) {
       let wall = walls[i];
 
       if (
-        wall.x <= player.x + player.width + dx &&
-        wall.x + wall.width >= player.x + dx &&
-        wall.y <= player.y + player.height + dy &&
-        wall.y + wall.height >= player.y + dy
+        wall.x <= player.x + player.width + player.velocityX &&
+        wall.x + wall.width >= player.x + player.velocityX &&
+        wall.y <= player.y + player.height + player.velocityY &&
+        wall.y + wall.height >= player.y + player.velocityY
       ) {
         status = true;
       }
@@ -208,96 +207,4 @@ export const wallUtil = {
 
     return status;
   },
-
-  edgeHangingOff(player, walls, edge) {
-    let leftEdge;
-    let rightEdge;
-    let possibleWalls = [];
-
-    if (edge === "left") rightEdge = this.closestWallBelow(player, walls);
-    if (edge === "right") leftEdge = this.closestWallBelow(player, walls);
-
-    walls.forEach((wall) => {
-      if (wall.y >= player.y + player.height) possibleWalls.push(wall);
-    });
-
-    let found = false;
-    let dy = 0;
-
-    while (!rightEdge || !leftEdge || dy > 600) {
-      for (let i = 0; i < possibleWalls.length; i++) {
-        let wall = possibleWalls[i];
-
-        if (edge === "left") {
-          if (wall.containsPoint(player.x, player.y + player.height + dy)) {
-            leftEdge = wall;
-            found = true;
-          }
-        } else if (edge === "right") {
-          if (
-            wall.containsPoint(
-              player.x + player.width,
-              player.y + player.height + dy
-            )
-          ) {
-            rightEdge = wall;
-            found = true;
-          }
-        }
-
-        if (rightEdge && leftEdge) break;
-      };
-      dy += 1;
-    }
-
-    switch (edge) {
-      case "left":
-        return (
-          rightEdge !== leftEdge && this.distanceBelow(player, rightEdge) === 0
-        );
-      case "right":
-        return (
-          leftEdge !== rightEdge && this.distanceBelow(player, leftEdge) === 0
-        );
-    }
-  },
-
-  newController(player, walls) {
-    switch (wallUtil.futureCollisionDetected(
-      player, walls, player.velocityX, player.velocityY
-    )) {
-      case player.velocityX > 0 && player.velocityY < 0:
-        
-      case player.velocityX < 0 && player.velocityY < 0:
-
-      case player.velocityX < 0 && player.velocityY > 0:
-
-      case player.velocityX > 0 && player.velocityY > 0:
-
-      case player.velocityX > 0 && player.velocityY === 0:
-
-      case player.velocityX < 0 && player.velocityY === 0:
-
-      case player.velocityX === 0 && player.velocityY > 0:
-
-      case player.velocityX === 0 && player.velocityY < 0:
-    }
-  },
-
-  maximumStep(player, walls) {
-    let unitVec  = vecUtil.normalize([0, 0], [player.velocityX, player.velocityY]);
-    let [dx, dy] = [0, 0];
-    let collision = false;
-
-    while (collision === false) {
-      if (this.futureCollisionDetected(player, walls, dx, dy)) {
-        collision = true;
-      };
-
-      dx += unitVec[0];
-      dy += unitVec[1];
-    }
-
-    return { dx: dx - unitVec[0], dy: dy - unitVec[1] };
-  }
 };

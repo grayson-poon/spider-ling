@@ -79,6 +79,8 @@ export const playerUtil = {
     if (!payload) return;
     let { dx, dy } = payload;
 
+    console.log("hitting here");
+
     if (Math.abs(dx) >= Math.abs(dy)) {
       player.y += dy;
 
@@ -89,23 +91,6 @@ export const playerUtil = {
 
       if (dy > 0) this.adjustPositiveY(player, arrWalls);
       if (dy < 0) this.adjustNegativeY(player, arrWalls);
-    }
-  },
-
-  adjustStep(player, arrWalls) {
-    if (
-      wallUtil.futureCollisionDetected(player, arrWalls, player.velocityX, player.velocityY) &&
-      !wallUtil.currentCollisionDetected(player, arrWalls)
-    ) {
-      let { dx, dy } = wallUtil.maximumStep(player, arrWalls);
-      console.log({dx, dy}, "one step too far");
-
-      player.x += dx;
-      player.y += dy;
-
-      if (dx > 0) player.velocityX = (10 ** -100);
-      if (dx < 0) player.velocityX = -(10 ** -100);
-      player.velocityY = 0;
     }
   },
 };
