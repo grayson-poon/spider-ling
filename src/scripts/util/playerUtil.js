@@ -37,10 +37,10 @@ export const playerUtil = {
   },
 
   adjustPositiveY(player, arrWalls, jumping, impulsing) {
-    let closestB = wallUtil.closestWallBelow(player, arrWalls);
-    let distanceB = wallUtil.distanceBelow(player, closestB);
+    let closestWall = wallUtil.closestWallBelow(player, arrWalls);
+    let shortestDistance = wallUtil.distanceBelow(player, closestWall);
 
-    if (distanceB === 0) {
+    if (shortestDistance === 0) {
       player.jumping = false;
       player.ableToImpulse = true;
       player.impulsingCount = 0;
@@ -48,17 +48,13 @@ export const playerUtil = {
 
       player.velocityY = 0;
     } else {
-      if (
-        Math.abs(distanceB) < Math.abs(player.velocityY)
-        // Math.abs(distanceB) < 0.9 &&
-        // (!impulsing || !jumping)
-      ) {
+      if (Math.abs(shortestDistance) < Math.abs(player.velocityY)) {
         player.jumping = false;
         player.ableToImpulse = true;
         player.impulsingCount = 0;
         player.unitVec = [0, 0];
 
-        player.y += distanceB;
+        player.y += shortestDistance;
         player.velocityY = 0;
       }
     }
@@ -66,7 +62,7 @@ export const playerUtil = {
 
   adjustNegativeY(player, arrWalls) {
     let closestWall = wallUtil.closestWallAbove(player, arrWalls);
-    let shortestDistance = wallUtil.shortestDistancebove(player, closestWall);
+    let shortestDistance = wallUtil.distanceAbove(player, closestWall);
 
     if (shortestDistance === 0) {
       player.velocityY = 0;
