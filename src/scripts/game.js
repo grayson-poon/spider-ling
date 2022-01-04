@@ -4,7 +4,7 @@ class Game {
   constructor(arrLevels) {
     this.arrLevels = arrLevels;
     this.currentLevel = arrLevels.shift();
-    this.player = new Player(this.currentLevel.startingPos, this.currentLevel);
+    this.player = new Player(this.currentLevel.startingPos, this);
     
     this.gameStarted = false;
     this.pauseStatus = false;
@@ -32,7 +32,7 @@ class Game {
   restartLevel() {
     this.pauseStatus = false;
     this.addKeydownListeners();
-    
+
     this.player.x = this.currentLevel.startingPos[0];
     this.player.y = this.currentLevel.startingPos[1];
     this.player.velocityX = 10 ** -100;;
@@ -40,11 +40,16 @@ class Game {
   }
 
   nextLevel() {
-    if (this.arrLevels >= 1) {
+    if (this.arrLevels.length >= 1) {
       this.currentLevel = this.arrLevels.shift();
-      this.currentPlayer.x = this.currentLevel.startingPos[0];
-      this.currentPlayer.y = this.currentLevel.startingPos[1];
+
+      this.player.x = this.currentLevel.startingPos[0];
+      this.player.y = this.currentLevel.startingPos[1];
+
+      this.player.velocityX = (10 ** -100);
+      this.player.velocityY = 0;
     } else {
+      debugger
       this.won = true;
     }
   }

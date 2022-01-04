@@ -5,6 +5,10 @@ import Layout from "../layout";
 import { levelOne } from "./level_one";
 import { levelTwo } from "./level_two";
 
+// canvas width and height
+const canvasWidth = 900;
+const canvasHeight = 600;
+
 // Level 1
 let level1 = new Level({
   startingPos: [350, 250],
@@ -18,7 +22,7 @@ let level1 = new Level({
 
 // Level 2
 let level2 = new Level({
-  startingPos: [0, 0],
+  startingPos: [15, 200],
   layout: new Layout(levelTwo),
   winZone: {x: 800, y: 350, width: 100, height: 100},
   failZones: [
@@ -27,9 +31,18 @@ let level2 = new Level({
   ]
 });
 
+let level3 = new Level({
+  startingPos: [15, 200],
+  layout: new Layout(),
+  winZone: { x: 800, y: 350, width: 100, height: 100 },
+  failZones: [
+    { x: 160, y: 520, width: 150, height: 80 },
+    { x: 570, y: 520, width: 150, height: 80 },
+  ],
+});
+
 // Export all levels //////////////////////////////////////////////////////
 export const arrLevels = [
   level1,
   level2
 ];
-

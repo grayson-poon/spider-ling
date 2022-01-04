@@ -1,12 +1,13 @@
 import { drawPlayer } from "./draw_player";
 import { playerUtil } from "./util/playerUtil";
 import { vecUtil } from "./util/vecUtil";
+import { zoneUtil } from "./util/zoneUtil";
 
 class Player {
-  constructor(initPos, currentLevel) {
+  constructor(initPos, game) {
     this.x = initPos[0];
     this.y = initPos[1];
-    this.currentLevel = currentLevel;
+    this.game = game;
     
     this.velocityX = 10 ** -100;;
     this.velocityY = 0;
@@ -37,7 +38,8 @@ class Player {
   }
 
   draw(ctx) {
-    let arrWalls = this.currentLevel.arrWalls;
+    let arrWalls = this.game.currentLevel.arrWalls;
+    console.log(this.game, this.game.currentLevel);
     let { left, right, jumping, impulsing } = this.keydownState;
 
     if (left) this.velocityX -= 0.5;
@@ -58,7 +60,7 @@ class Player {
 
     // gravity and friction
     this.velocityY += 1;
-    this.velocityX *= 0.87;
+    this.velocityX *= 0.9;
     this.velocityY *= 0.9;
   
     // adjust velocityX and Y
@@ -105,9 +107,14 @@ class Player {
     //   45,
     //   70
     // );
+
+    if (this.inWinZone(this.game.currentLevel.winZone)) {
+      this.game.nextLevel();
+    }
   }
 
   keydownController(event) {
+    debugger
     event.stopPropagation();
     event.preventDefault();
     let keyState = event.type === "keydown" ? true : false;

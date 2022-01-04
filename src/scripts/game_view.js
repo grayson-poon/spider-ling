@@ -15,6 +15,8 @@ class GameView {
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.game.player.draw(this.ctx);
       this.game.currentLevel.draw(this.ctx);
+    } else if (this.game.won) {
+      return;
     }
     window.requestAnimationFrame(this.loop.bind(this));
   }
