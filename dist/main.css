@@ -177,11 +177,11 @@ div#win h2 {
 div#sidebar {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-div#game-menu ul {
+div#game-menu {
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -191,34 +191,34 @@ div#game-menu ul {
   border-bottom-right-radius: 10px 10px;
   border-top-right-radius: 10px 10px;
   font-size: 14px;
+  max-width: 150px;
 }
 
-div#game-menu ul li:not(:first-child) {
-  background-color: white;
-  margin: 10px;
-  text-align: center;
-  border-right: 2px;
-}
-
-div#game-menu ul li:not(:first-child) {
-  padding: 5px;
-}
-
-div#game-menu ul li:not(:first-child):hover {
-  outline: 2px solid black;
-  background-color: red;
-  margin: 10px;
-  cursor: pointer;
-}
-
-div#game-menu ul li:first-child {
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+div#game-menu > div:first-child {
+  margin: 10px 10px 0 10px;
   padding-bottom: 10px;
   border-top-right-radius: 10px 10px;
   border-bottom: 1px solid black;
   text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+div#game-menu ul li {
+  font-size: 16px;
+  font-weight: 400;
+  background-color: white;
+  margin: 10px;
+  text-align: center;
+  border-right: 2px;
+  padding: 5px;
+}
+
+div#game-menu ul li:hover {
+  outline: 2px solid black;
+  background-color: red;
+  margin: 10px;
+  cursor: pointer;
 }
 
 div#nav-links {
@@ -236,10 +236,17 @@ div#nav-links a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: fit-content;
   color: black;
   text-align: center;
   text-decoration: none;
+}
+
+div#nav-links a div {
+  border-bottom: 2px solid black;
+}
+
+div#nav-links a:hover div {
+  border-bottom: 2px solid #CC300F;
 }
 
 div#nav-links a:hover {
@@ -275,6 +282,8 @@ div#nav-links a:hover {
   padding: 10px;
   height: 63px;
   width: 63px;
+  max-width: 63px;
+  max-height: 63px;
   object-fit: cover;
 }
 
