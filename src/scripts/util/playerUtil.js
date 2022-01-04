@@ -28,13 +28,13 @@ export const playerUtil = {
       let wall = arrWalls[i];
 
       if (
-        (wall.y + wall.height > player.y ||
-        wall.y > player.y + player.height) &&
+        (wall.y + wall.height > player.y && wall.y < player.y + player.height ||
+        wall.y > player.y && wall.y < player.y + player.height) &&
         wall.x + wall.width <= player.x
       ) {
         
         let test = wallUtil.distanceToTheLeft(player, wall);
-        if (test < newDistance && test >=0) {
+        if (test < newDistance) {
           newDistance = test;
           newWall = wall;
         };
