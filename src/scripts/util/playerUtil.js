@@ -2,27 +2,7 @@ import { vecUtil } from "./vecUtil";
 import { wallUtil } from "./wallUtil"
 
 export const playerUtil = {
-  adjustNegativeX(player, arrWalls, movingRight, impulsing, jumping) {
-    // let closestL = wallUtil.closestWallToTheLeft(player, arrWalls);
-    // let distanceL = wallUtil.distanceToTheLeft(player, closestL);
-
-    // if (distanceL <= 10 ** -100) {
-    //   if (!wallUtil.edgeHangingOff(player, arrWalls, "right")) {
-    //     player.velocityX = -(10 ** -100);
-    //   }
-    // } else {
-    //   if (
-    //     Math.abs(distanceL) < Math.abs(player.velocityX)
-    //     // Math.abs(distanceL) < 0.45 &&
-    //     // !impulsing
-    //   ) {
-    //     player.x -= distanceL + 10 ** -100;
-    //     player.velocityX = -(10 ** -100);
-    //   }
-    // }
-
-    // debugger
-
+  adjustNegativeX(player, arrWalls) {
     let testDistance;
     let shortestDistance;
 
