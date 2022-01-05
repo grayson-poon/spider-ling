@@ -91,32 +91,6 @@ canvas {
   align-items: center;
 }
 
-div#pause-container {
-  width: 900px;
-  height: 600px;
-  visibility: hidden;
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.85);
-}
-
-div#pause-content {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  width: 900px;
-  height: 400px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-size: 25px;
-  color: white;
-}
-
 div#about-container {
   width: 900px;
   height: 600px;
@@ -158,6 +132,20 @@ div#about-content {
   margin-bottom: 32px;
 }
 
+.credits {
+  font-size: 18px;
+}
+
+.credits a {
+  text-decoration: underline;
+  color: #a25be4;
+}
+
+.credits a:hover {
+  cursor: pointer;
+  color: aqua;
+}
+
 div#controls-container {
   width: 900px;
   height: 600px;
@@ -179,7 +167,7 @@ div#controls-container {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -52%);
+  transform: translate(-50%, -51%);
   text-align: center;
   font-size: 24px;
   line-height: 32px;
@@ -191,6 +179,13 @@ div#controls-container {
   list-style-type: disc;
   list-style-position: outside;
   font-size: 21px;
+}
+
+#controls-content > div {
+  padding-bottom: 16px;
+}
+
+.controls li, .instructions li {
   margin-left: 1em;
 }
 
@@ -215,6 +210,32 @@ div#controls-container {
   color: orange;
 }
 
+div#pause-container {
+  width: 900px;
+  height: 600px;
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+div#pause-content {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  width: 900px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 25px;
+  color: white;
+}
+
 div#win-container {
   width: 900px;
   height: 600px;
@@ -229,28 +250,14 @@ div#win-container {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-div#win {
+div#win-content {
   text-align: center;
   font-size: 25px;
   color: white;
 }
 
-div#win h2 {
+div#win-content {
   padding-bottom: 15px;
-}
-
-.credits {
-  font-size: 18px;
-}
-
-.credits a {
-  text-decoration: underline;
-  color: #a25be4;
-}
-
-.credits a:hover {
-  cursor: pointer;
-  color: aqua;
 }
 
 div#sidebar {

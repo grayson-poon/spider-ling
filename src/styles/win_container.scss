@@ -1,0 +1,23 @@
+div#win-container {
+  width: 900px;
+  height: 600px;
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+div#win-content {
+  text-align: center;
+  font-size: 25px;
+  color: white;
+}
+
+div#win-content {
+  padding-bottom: 15px;
+}
