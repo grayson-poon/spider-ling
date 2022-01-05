@@ -76,8 +76,6 @@ export default class Player {
     this.keydownState.impulsing = false;
     if (this.impulsingCount >= this.numImpulses) this.ableToImpulse = false;
 
-    console.log(this.velocityX, "VELX");
-
     // render sprite section based on count of draw loop
     this.count >= 25 ? this.count = 0 : this.count += 1;
     drawPlayer(
@@ -141,6 +139,8 @@ export default class Player {
     const rect = event.currentTarget.getBoundingClientRect();
     const clickPos = [event.clientX - rect.left, event.clientY - rect.top];
     
+    console.log(clickPos, "CLICK POS");
+
     this.unitVec = vecUtil.normalize([this.x, this.y], clickPos);
     this.keydownState.impulsing = true;
   }

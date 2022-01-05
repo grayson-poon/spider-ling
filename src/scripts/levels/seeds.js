@@ -31,11 +31,14 @@ let level2 = new Level({
 
 // Level 3
 let level3 = new Level({
-  startingPos: [cW / 2, cH / 2],
+  startingPos: [cW / 2 - 15, 10],
   layout: new Layout(levelThree),
-  winZone: { x: cW - 2 - 45, y: cH - 70 - 2, width: 45, height: 70 },
+  winZone: { x: cW / 2 - 30, y: 0.65 * cH, width: 60, height: 30 },
   failZones: [
-    { x: 2, y: cH - 70 - 2, width: 45, height: 70 },
+    { x: 30, y: cH - 15 - 2, width: 120, height: 15 },
+    { x: cW - 30 - 120, y: cH - 15 - 2, width: 120 - 2, height: 15 },
+    { x: 180, y: cH - 15 - 2, width: 240, height: 15 },
+    { x: cW - 240 - 180, y: cH - 15 - 2, width: 240 - 2, height: 15 },
   ],
 });
 
