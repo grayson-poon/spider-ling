@@ -3,8 +3,9 @@ import Layout from "../layout";
 
 // wall_layouts
 import { levelOne } from "./level_one";
-import { levelThree } from "./level_three";
 import { levelTwo } from "./level_two";
+import { levelThree } from "./level_three";
+import { levelFour } from "./level_four";
 
 // canvas dimensions
 const cW = 900;
