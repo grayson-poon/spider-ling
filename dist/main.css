@@ -78,19 +78,6 @@ div#bottom-container {
   justify-content: center;
 }
 
-div#canvas-container {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  border: 2px solid black;
-}
-
-canvas {
-  background-color: white;
-  align-items: center;
-}
-
 div#about-container {
   width: 900px;
   height: 600px;
@@ -210,6 +197,52 @@ div#controls-container {
   color: orange;
 }
 
+#fail-container {
+  width: 900px;
+  height: 600px;
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+#fail-content {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: white;
+}
+
+#fail-content img {
+  width: 650px;
+  height: 450px;
+  object-fit: cover;
+  margin: 18px 32px 18px 32px;
+}
+
+#fail-content .utils {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-decoration: underline;
+  color: orange;
+}
+
+.utils div:hover {
+  text-decoration: underline;
+  color: aqua;
+  cursor: pointer;
+}
+
 div#pause-container {
   width: 900px;
   height: 600px;
@@ -254,10 +287,20 @@ div#win-content {
   text-align: center;
   font-size: 25px;
   color: white;
+  padding-bottom: 15px;
 }
 
-div#win-content {
-  padding-bottom: 15px;
+div#canvas-container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border: 2px solid black;
+}
+
+canvas {
+  background-color: white;
+  align-items: center;
 }
 
 div#sidebar {

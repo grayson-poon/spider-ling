@@ -1,4 +1,18 @@
-@import "./about_container.scss";
-@import "./controls_container.scss";
-@import "./pause_container.scss";
-@import "./win_container.scss";
+@import "./canvas_containers/about_container.scss";
+@import "./canvas_containers/controls_container.scss";
+@import "./canvas_containers/fail_container.scss";
+@import "./canvas_containers/pause_container.scss";
+@import "./canvas_containers/win_container.scss";
+
+div#canvas-container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border: 2px solid black;
+}
+
+canvas {
+  background-color: white;
+  align-items: center;
+}

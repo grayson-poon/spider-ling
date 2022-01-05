@@ -3,16 +3,3 @@ div#bottom-container {
   flex-direction: row;
   justify-content: center;
 }
-
-div#canvas-container {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  border: 2px solid black;
-}
-
-canvas {
-  background-color: white;
-  align-items: center;
-}

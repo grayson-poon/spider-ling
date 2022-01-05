@@ -110,6 +110,10 @@ export default class Player {
     if (this.inWinZone(this.game.currentLevel.winZone)) {
       this.game.nextLevel();
     }
+
+    if (this.inFailZones(this.game.currentLevel.failZones)) {
+      this.game.failedGame();
+    }
   }
 
   keydownController(event) {

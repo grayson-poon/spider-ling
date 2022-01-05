@@ -53,6 +53,10 @@ export default class Game {
     }
   }
 
+  quitGame() {
+    window.location.reload();
+  }
+
   failedGame() {
     if (this.player.inFailZones(this.currentLevel.failZones)) {
       this.failed = true;
