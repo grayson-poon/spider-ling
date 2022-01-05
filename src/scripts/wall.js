@@ -1,4 +1,4 @@
-class Wall {
+export default class Wall {
   constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
@@ -19,5 +19,3 @@ class Wall {
     }
   }
 }
-
-export default Wall;

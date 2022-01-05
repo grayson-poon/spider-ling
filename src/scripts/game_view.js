@@ -2,7 +2,7 @@ import Game from "./game";
 import { arrLevels } from "./levels/seeds";
 import { addMenubarListeners } from "./event_handlers/menubar_listeners";
 
-class GameView {
+export default class GameView {
   constructor(ctx) {
     this.ctx = ctx;
     this.game = new Game(arrLevels);
@@ -22,5 +22,3 @@ class GameView {
     window.requestAnimationFrame(this.loop.bind(this));
   }
 }
-
-export default GameView;

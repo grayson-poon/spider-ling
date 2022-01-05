@@ -3,7 +3,7 @@ import { playerUtil } from "./util/playerUtil";
 import { vecUtil } from "./util/vecUtil";
 import { zoneUtil } from "./util/zoneUtil";
 
-class Player {
+export default class Player {
   constructor(initPos, game) {
     this.x = initPos[0];
     this.y = initPos[1];
@@ -154,5 +154,3 @@ class Player {
     return false;
   }
 }
-
-export default Player;

@@ -1,6 +1,6 @@
 import Player from "./player";
 
-class Game {
+export default class Game {
   constructor(arrLevels) {
     this.arrLevels = arrLevels;
     this.currentLevel = arrLevels.shift();
@@ -71,5 +71,3 @@ class Game {
     document.getElementById("canvas").removeEventListener("click", this.player.keydownState.clickController);
   }
 }
-
-export default Game;
