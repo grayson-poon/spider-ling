@@ -59,8 +59,6 @@ const handleAbout = (game) => {
     event.stopPropagation();
     event.preventDefault();
 
-    debugger
-
     if (!game.gameStarted) {
       content.style.visibility = "visible";
       document.getElementById("pause-container").style.visibility = "hidden";
@@ -97,7 +95,6 @@ const handleControls = (game) => {
     event.stopPropagation();
     event.preventDefault();
 
-    debugger
     if (!game.gameStarted) {
       content.style.visibility = "visible";
       document.getElementById("pause-container").style.visibility = "hidden";
