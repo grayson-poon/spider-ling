@@ -9,7 +9,9 @@ const handleStartPause = (gameView, game) => {
       case "Start":
         ele.innerHTML = "Pause";
         document.getElementById("canvas-container").style.border = "none";
+        document.getElementById("pause-container").style.visibility = "hidden";
         document.getElementById("about-container").style.visibility = "hidden";
+        document.getElementById("controls-container").style.visibility = "hidden";
         
         game.start(gameView);
         break;
@@ -21,9 +23,10 @@ const handleStartPause = (gameView, game) => {
         break;
       case "Resume":
         ele.innerHTML = "Pause";
+        document.getElementById("canvas-container").style.border = "none";
         document.getElementById("pause-container").style.visibility = "hidden";
         document.getElementById("about-container").style.visibility = "hidden";
-        document.getElementById("canvas-container").style.border = "none";
+        document.getElementById("controls-container").style.visibility = "hidden";
 
         game.resume();
         break;
@@ -60,6 +63,7 @@ const handleAbout = (game) => {
 
     if (!game.gameStarted) {
       content.style.visibility = "visible";
+      document.getElementById("pause-container").style.visibility = "hidden";
       document.getElementById("controls-container").style.visibility = "hidden";
     }
 
@@ -96,6 +100,7 @@ const handleControls = (game) => {
     debugger
     if (!game.gameStarted) {
       content.style.visibility = "visible";
+      document.getElementById("pause-container").style.visibility = "hidden";
       document.getElementById("about-container").style.visibility = "hidden";
     }
 
