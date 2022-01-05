@@ -1,5 +1,6 @@
 export default class Level {
   constructor(options) {
+    this.level = options.level;
     this.startingPos = options.startingPos;
     this.layout = options.layout;
     this.arrWalls = this.layout.arrWalls;
@@ -29,5 +30,13 @@ export default class Level {
     );
 
     ctx.globalAlpha = 1.0;
+
+    if (this.level === 1) {
+      ctx.fillStyle = "black";
+      ctx.font = "24px Arial";
+      ctx.fillText("Try out your Spidey movements here!", 275, 100);
+      ctx.font = "18px Arial";
+      ctx.fillText("If you ever forget how to move, use the menubar on the right to view game controls!", 125, 135);
+    }
   }
 }
