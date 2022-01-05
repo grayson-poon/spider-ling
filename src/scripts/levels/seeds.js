@@ -39,7 +39,7 @@ let level3 = new Level({
     { x: 30, y: cH - 15 - 2, width: 120, height: 15 },
     { x: cW - 30 - 120, y: cH - 15 - 2, width: 120 - 2, height: 15 },
     { x: 180, y: cH - 15 - 2, width: 240, height: 15 },
-    { x: cW - 240 - 180, y: cH - 15 - 2, width: 240 - 2, height: 15 },
+    { x: cW - 240 - 180, y: cH - 15 - 2, width: 240, height: 15 },
   ],
 });
 
