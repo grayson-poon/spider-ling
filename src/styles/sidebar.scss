@@ -45,7 +45,8 @@ div#game-menu ul li:hover {
   cursor: pointer;
 }
 
-div#game-menu ul li:last-child {
+div#game-menu li#about, 
+div#game-menu li#controls {
   font-size: 14px;
 }
 

@@ -9,7 +9,7 @@ const handleStartPause = (gameView, game) => {
       case "Start":
         ele.innerHTML = "Pause";
         document.getElementById("canvas-container").style.border = "none";
-        document.getElementById("instructions-credits-container").style.visibility = "hidden";
+        document.getElementById("about-container").style.visibility = "hidden";
         
         game.start(gameView);
         break;
@@ -22,7 +22,7 @@ const handleStartPause = (gameView, game) => {
       case "Resume":
         ele.innerHTML = "Pause";
         document.getElementById("pause-container").style.visibility = "hidden";
-        document.getElementById("instructions-credits-container").style.visibility = "hidden";
+        document.getElementById("about-container").style.visibility = "hidden";
         document.getElementById("canvas-container").style.border = "none";
 
         game.resume();
@@ -41,39 +41,89 @@ const handleRestart = (gameView, game) => {
 
     document.getElementById("start-pause").innerText = "Pause";
     document.getElementById("pause-container").style.visibility = "hidden";
-    document.getElementById("instructions-credits-container").style.visibility = "hidden";
+    document.getElementById("about-container").style.visibility = "hidden";
+    document.getElementById("controls-container").style.visibility = "hidden";
 
     game.restartLevel(gameView);
   });
 };
 
-const handleInstructionsCredits = (game) => {
-  const ele = document.getElementById("instructions-credits");
-  const content = document.getElementById("instructions-credits-container");
+const handleAbout = (game) => {
+  const ele = document.getElementById("about");
+  const content = document.getElementById("about-container");
   
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
-    if (!game.gameStarted) return;
 
-    if (content.style.visibility === "visible") {
-      content.style.visibility = "hidden";
-      document.getElementById("start-pause").innerHTML = "Pause";
-      document.getElementById("canvas-container").style.border = "none";
-      
-      game.resume();
-    } else {
+    debugger
+
+    if (!game.gameStarted) {
       content.style.visibility = "visible";
-      document.getElementById("start-pause").innerHTML = "Resume";
-      document.getElementById("pause-container").style.visibility = "hidden";
-      
-      game.pause();
+      document.getElementById("controls-container").style.visibility = "hidden";
+    }
+
+    if (game.gameStarted) {
+      switch(content.style.visibility) {
+        case "visible":
+          content.style.visibility = "hidden";
+          document.getElementById("start-pause").innerHTML = "Pause";
+          document.getElementById("canvas-container").style.border = "none";
+          
+          game.resume();
+          break;
+        case "hidden":
+          content.style.visibility = "visible";
+          document.getElementById("start-pause").innerHTML = "Resume";
+          document.getElementById("pause-container").style.visibility = "hidden";
+          document.getElementById("controls-container").style.visibility = "hidden";
+          
+          game.pause();
+          break;
+      }
     }
   });
 };
 
+const handleControls = (game) => {
+  const ele = document.getElementById("controls");
+  const content = document.getElementById("controls-container");
+
+  ele.addEventListener("click", (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    debugger
+    if (!game.gameStarted) {
+      content.style.visibility = "visible";
+      document.getElementById("about-container").style.visibility = "hidden";
+    }
+
+    if (game.gameStarted) {
+      switch(content.style.visibility) {
+        case "visible":
+          content.style.visibility = "hidden";
+          document.getElementById("start-pause").innerHTML = "Pause";
+          document.getElementById("canvas-container").style.border = "none";
+          
+          game.resume();
+          break;
+        case "hidden":
+          content.style.visibility = "visible";
+          document.getElementById("start-pause").innerHTML = "Resume";
+          document.getElementById("pause-container").style.visibility = "hidden";
+          document.getElementById("about-container").style.visibility = "hidden";
+          
+          game.pause();
+          break;
+      }
+    }
+  });
+}
+
 export const addMenubarListeners = (gameView, game) => {
   handleStartPause(gameView, game);
   handleRestart(gameView, game);
-  handleInstructionsCredits(game);
+  handleAbout(game);
+  handleControls(game);
 };
