@@ -380,4 +380,7 @@ div#nav-links a:hover {
 
 body {
   background-image: linear-gradient(to right, red, blue);
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
 }

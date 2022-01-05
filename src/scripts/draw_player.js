@@ -49,12 +49,16 @@ export const drawPlayer = (
       ctx.drawImage(reverseImage, 580, 0, 50, 80, x - 15, y, 45, 70);
       break;
     // jumping facing right
-    case (jumping && velocityX > 0) || (!jumping && velocityY > 0 && velocityX > 0): 
+    case (jumping && velocityX > 0) || (!jumping && velocityY > 0 && velocityX > 0) || (velocityX === 0 && jumping): 
       ctx.drawImage(image, 865, 0, 63, 68, x - 15, y, 45, 70); 
       break;
     // jumping facing left
     case (jumping && velocityX < 0) || (!jumping && velocityY > 0 && velocityX < 0): 
       ctx.drawImage(reverseImage, 512, 0, 63, 68, x, y, 45, 70); 
+      break;
+    // default => standing facing right
+    default:
+      ctx.drawImage(image, 667, 0, 35, 76, x, y, 30, 70); 
       break;
   }
 }
