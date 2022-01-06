@@ -217,7 +217,7 @@ div#controls-container {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
+  font-size: 24px;
   color: white;
 }
 
@@ -284,10 +284,35 @@ div#win-container {
 }
 
 div#win-content {
-  text-align: center;
-  font-size: 25px;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
   color: white;
-  padding-bottom: 15px;
+}
+
+#win-content img {
+  width: 650px;
+  height: 450px;
+  object-fit: cover;
+  margin: 18px 32px 18px 32px;
+}
+
+#win-content .utils {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-decoration: underline;
+  color: orange;
+}
+
+.utils div:hover {
+  text-decoration: underline;
+  color: aqua;
+  cursor: pointer;
 }
 
 div#canvas-container {

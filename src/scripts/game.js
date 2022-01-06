@@ -1,5 +1,3 @@
-import { addCanvasHtmlListeners } from "./event_handlers/canvas_html_listeners";
-import { addMenubarListeners } from "./event_handlers/menubar_listeners";
 import Player from "./player";
 
 export default class Game {
