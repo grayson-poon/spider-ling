@@ -2,7 +2,7 @@
 
 ## Background:
 
-Spider-ling is an implementation of a level-based game, in which a user-controlled character must move from a starting position to an ending position to complete/pass the level. The user then advances to a subsequent level of harder difficulty to pass. There are various moves the character can employ in order to avoid the obstacles, such as move around, jump and shoot webs to change its current trajectory.
+Spider-ling is an implementation of a level-based game, in which a user-controlled character must move from a starting position to an ending position to complete/pass the level. The user then advances to a subsequent level of harder difficulty to pass. The user can run around, jump, and boost around the game view.
 
 As of now, this game will not include the use of any external libraries or engine to model the game physics properties, as these will be implemented as properties of the various objects in the game. Due to this, different game physics properties can be added to objects in the game in future updates, which will add a sense of robustness and customizability to the game itself. Spider-ling is hosted on [GitHub Pages](https://grayson-poon.github.io/spider-ling/).
 
@@ -12,8 +12,8 @@ In Spider-ling, users will be able to:
 
 * Start, pause, and restart the game
 * Move around the game view by pressing certain keyboard characters
-* Choose where they want to place/shoot webs with the mouse
 * Jump and launch from one location to another
+* Choose where they want to launch to by clicking on the game view relative to the player
 
 In addition, this project will include:
 
