@@ -19,6 +19,5 @@ export default class GameView {
     delete this.game.player;
     delete this.game;
     this.game = new Game(this.arrLevels, this);
-    return this.game;
   }
 }
