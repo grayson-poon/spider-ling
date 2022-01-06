@@ -95,18 +95,6 @@ export default class Player {
       this.count
     );
 
-    // ctx.drawImage(
-    //   this.spidermanSprite,
-    //   810,
-    //   0,
-    //   50,
-    //   80,
-    //   this.x,
-    //   this.y,
-    //   45,
-    //   70
-    // );
-
     if (this.inWinZone(this.game.currentLevel.winZone)) {
       this.game.nextLevel();
     }
@@ -143,8 +131,6 @@ export default class Player {
     const rect = event.currentTarget.getBoundingClientRect();
     const clickPos = [event.clientX - rect.left, event.clientY - rect.top];
     
-    console.log(clickPos, "CLICK POS");
-
     this.unitVec = vecUtil.normalize([this.x, this.y], clickPos);
     this.keydownState.impulsing = true;
   }

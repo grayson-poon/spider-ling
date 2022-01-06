@@ -19,13 +19,18 @@ export default class Game {
 
   loop() {
     if (this.won) {
+      this.gameView.activeMenubar = false;
       this.removeKeydownListeners();
+      document.getElementById("win-container").style.visibility = "visible";
       return;
     } else if (this.failed) {
       this.gameView.activeMenubar = false;
       this.removeKeydownListeners();
       document.getElementById("fail-container").style.visibility = "visible";
       return;
+    // } else if (this.won || this.failed) {
+    //   this.handleWinOrFail();
+    //   return;
     } else if (!this.pauseStatus) {
       this.gameView.ctx.clearRect(0, 0, this.gameView.ctx.canvas.width, this.gameView.ctx.canvas.height);
       this.player.draw(this.gameView.ctx);
@@ -60,16 +65,16 @@ export default class Game {
   }
 
   nextLevel() {
-    if (this.arrLevels.length >= 1) {
+    if (this.currentLevel === this.arrLevels[this.arrLevels.length - 1]) {
+      this.won = true;
+    } else {
       this.currentLevel = this.arrLevels[this.currentLevel.level + 1];
 
       this.player.x = this.currentLevel.startingPos[0];
       this.player.y = this.currentLevel.startingPos[1];
 
-      this.player.velocityX = (10 ** -100);
+      this.player.velocityX = 10 ** -100;
       this.player.velocityY = 0;
-    } else {
-      this.won = true;
     }
   }
 
@@ -82,6 +87,15 @@ export default class Game {
       this.failed = true;
       this.removeKeydownListeners();
     }
+  }
+
+  handleWinOrFail() {
+    this.gameView.activeMenubar = false;
+    this.removeKeydownListeners();
+
+    this.won
+      ? (document.getElementById("win-container").style.visibility = "visible")
+      : (document.getElementById("fail-container").style.visibility = "visible");
   }
 
   addKeydownListeners() {
