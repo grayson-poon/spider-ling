@@ -1,74 +1,141 @@
-export default function addMenubarEventListeners(gameView, game) {
-  addStartListener(gameView, game);
-  addRestartListener(game);
-  addInstructionsListener(gameView, game);
-}
+const handleStartPause = (gameView) => {
+  const ele = document.getElementById("start-pause");
 
-function addStartListener(gameView, game) {
-  const ele = document.getElementById("start_pause");
-  ele.addEventListener("click", handleStart(gameView, game, ele));
-}
-
-function handleStart(gameView, game, ele) {
-  return function(event) {
+  ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
+    if (!gameView.activeMenubar) return;
 
-    if (ele.innerText === "Start") {
-      gameView.start();
-      ele.innerHTML = "Pause";
-      document.getElementById("canvas-container").style.border = "none";
-      document.getElementById("instructions_credits-container").style.visibility = "hidden";
-    } else if (ele.innerText === "Pause") {
-        game.pause();
+    switch(ele.innerText) {
+      case "Start":
+        ele.innerHTML = "Pause";
+        document.getElementById("canvas-container").style.border = "none";
+        document.getElementById("pause-container").style.visibility = "hidden";
+        document.getElementById("about-container").style.visibility = "hidden";
+        document.getElementById("controls-container").style.visibility = "hidden";
+        document.getElementById("fail-container").style.visibility = "hidden";
+        
+        gameView.game.start();
+        break;
+      case "Pause":
         ele.innerHTML = "Resume";
         document.getElementById("pause-container").style.visibility = "visible";
-      } else if (ele.innerText === "Resume") {
-        game.resume(gameView);
+
+        gameView.game.pause();
+        break;
+      case "Resume":
         ele.innerHTML = "Pause";
-        document.getElementById("pause-container").style.visibility = "hidden";
-        document.getElementById("instructions_credits-container").style.visibility = "hidden";
         document.getElementById("canvas-container").style.border = "none";
-    }
-  }
-}
+        document.getElementById("pause-container").style.visibility = "hidden";
+        document.getElementById("about-container").style.visibility = "hidden";
+        document.getElementById("controls-container").style.visibility = "hidden";
+        document.getElementById("fail-container").style.visibility = "hidden";
 
-function addRestartListener(game) {
+        gameView.game.resume();
+        break;
+    }
+  });
+};
+
+const handleRestart = (gameView) => {
   const ele = document.getElementById("restart");
-  ele.addEventListener("click", handleRestart(game));
-}
 
-function handleRestart(game) {
-  return function(event) {
+  ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
-    game.restartLevel();
-  }
-}
+    if (!gameView.game.gameStarted || !gameView.activeMenubar) return;
 
-function addInstructionsListener(gameView, game) {
-  const ele = document.getElementById("instructions_credits");
-  ele.addEventListener("click", handleInstructions(gameView, game));
-}
+    document.getElementById("start-pause").innerText = "Pause";
+    document.getElementById("pause-container").style.visibility = "hidden";
+    document.getElementById("about-container").style.visibility = "hidden";
+    document.getElementById("controls-container").style.visibility = "hidden";
+    document.getElementById("fail-container").style.visibility = "hidden";
 
-function handleInstructions(gameView, game) {
-  return function(event) {
+    gameView.game.restartLevel();
+  });
+};
+
+const handleAbout = (gameView) => {
+  const ele = document.getElementById("about");
+  const content = document.getElementById("about-container");
+  
+  ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
+    if (!gameView.activeMenubar) return;
 
-    document.getElementById("start_pause").innerHTML = "Resume";
-    const ele = document.getElementById("instructions_credits-container");
-    const startPause = document.getElementById("start_pause");
-
-    if (ele.style.visibility === "visible") {
-      ele.style.visibility = "hidden";
-      game.resume(gameView);
-      document.getElementById("start_pause").innerHTML = "Pause";
-      document.getElementById("canvas-container").style.border = "none";
-    } else {
-      ele.style.visibility = "visible";
-      game.pause();
+    if (!gameView.game.gameStarted) {
+      content.style.visibility = "visible";
       document.getElementById("pause-container").style.visibility = "hidden";
+      document.getElementById("controls-container").style.visibility = "hidden";
+      document.getElementById("fail-container").style.visibility = "hidden";
     }
-  }
+
+    if (gameView.game.gameStarted) {
+      switch(content.style.visibility) {
+        case "visible":
+          content.style.visibility = "hidden";
+          document.getElementById("start-pause").innerHTML = "Pause";
+          document.getElementById("canvas-container").style.border = "none";
+          
+          gameView.game.resume();
+          break;
+        case "hidden":
+          content.style.visibility = "visible";
+          document.getElementById("start-pause").innerHTML = "Resume";
+          document.getElementById("pause-container").style.visibility = "hidden";
+          document.getElementById("controls-container").style.visibility = "hidden";
+          document.getElementById("fail-container").style.visibility = "hidden";
+          
+          gameView.game.pause();
+          break;
+      }
+    }
+  });
+};
+
+const handleControls = (gameView) => {
+  const ele = document.getElementById("controls");
+  const content = document.getElementById("controls-container");
+
+  ele.addEventListener("click", (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    if (!gameView.activeMenubar) return;
+
+    if (!gameView.game.gameStarted) {
+      content.style.visibility = "visible";
+      document.getElementById("pause-container").style.visibility = "hidden";
+      document.getElementById("about-container").style.visibility = "hidden";
+      document.getElementById("fail-container").style.visibility = "hidden";
+    }
+
+    if (gameView.game.gameStarted) {
+      switch (content.style.visibility) {
+        case "visible":
+          content.style.visibility = "hidden";
+          document.getElementById("start-pause").innerHTML = "Pause";
+          document.getElementById("canvas-container").style.border = "none";
+
+          gameView.game.resume();
+          break;
+        case "hidden":
+          content.style.visibility = "visible";
+          document.getElementById("start-pause").innerHTML = "Resume";
+          document.getElementById("pause-container").style.visibility = "hidden";
+          document.getElementById("about-container").style.visibility = "hidden";
+          document.getElementById("fail-container").style.visibility = "hidden";
+
+          gameView.game.pause();
+          break;
+      }
+    }
+  });
 }
+
+export const addMenubarListeners = (gameView) => {
+  handleStartPause(gameView);
+  handleRestart(gameView);
+  handleAbout(gameView);
+  handleControls(gameView);
+};

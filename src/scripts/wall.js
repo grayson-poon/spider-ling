@@ -1,4 +1,4 @@
-class Wall {
+export default class Wall {
   constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
@@ -7,18 +7,15 @@ class Wall {
   }
 
   containsPoint(testX, testY) {
-    if (this.x <= testX &&
-        testX <= this.x + this.width &&
-        this.y <= testY &&
-        testY <= this.y + this.height) {
-          return true;
-        } else {
-          return false;
-        }
+    if (
+      this.x <= testX &&
+      testX <= this.x + this.width &&
+      this.y <= testY &&
+      testY <= this.y + this.height
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
-
-export default Wall;
-
-// run the object collision functions inside the game, if player's coords overlap with wall instance coords, stop movement
-// refactor level/layout/game/gameview classes to account for array of wall objects

@@ -1,33 +1,23 @@
-import addMenubarEventListeners from "./event_handlers/menubar_listeners";
-import addKeydownEventListeners from "./event_handlers/keydown_listeners";
-import addClickEventListeners from "./event_handlers/click_listeners";
+import Game from "./game";
+import { arrLevels } from "./levels/seeds";
+import { addMenubarListeners } from "./event_handlers/menubar_listeners";
+import { addCanvasHtmlListeners } from "./event_handlers/canvas_html_listeners";
 
-class GameView {
-  constructor(ctx, game) {
+export default class GameView {
+  constructor(ctx) {
     this.ctx = ctx;
-    this.game = game;
+    this.arrLevels = arrLevels
+    this.game = new Game(this.arrLevels, this);
+    this.activeMenubar = true;
 
-    this.canvas = this.ctx.canvas;
-    this.player = this.game.currentPlayer;
-    this.level = this.game.currentLevel;
-
-    this.animate = this.animate.bind(this);
-
-    addMenubarEventListeners(this, this.game);
-    addKeydownEventListeners(this.player, this.level, this.game.pauseStatus);
-    addClickEventListeners(this.ctx.canvas, this.player);
+    addMenubarListeners(this);
+    addCanvasHtmlListeners(this);
   }
 
-  animate() {
-    if (this.game.pauseStatus === false) {
-      this.game.renderFrame(this.ctx);
-      window.requestAnimationFrame(this.animate);
-    }
-  }
-
-  start() {
-    window.requestAnimationFrame(this.animate);
+  newGame() {
+    this.activeMenubar = true;
+    delete this.game.player;
+    delete this.game;
+    this.game = new Game(this.arrLevels, this);
   }
 }
-
-export default GameView;

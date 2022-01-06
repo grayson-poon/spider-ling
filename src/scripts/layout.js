@@ -1,9 +1,5 @@
-class Layout {
+export default class Layout {
   constructor(arrWalls) {
     this.arrWalls = arrWalls;
   }
 }
-
-export default Layout;
-
-

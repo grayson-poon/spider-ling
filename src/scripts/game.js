@@ -1,91 +1,110 @@
 import Player from "./player";
-import { wallUtil } from "./Utils/wallUtil";
-import addKeydownEventListeners from "./event_handlers/keydown_listeners";
 
-class Game {
-  constructor(arrLevels) {
-    this.allLevels = arrLevels;
-    this.currentLevel = arrLevels.shift();
-    this.currentPlayer = new Player(this.currentLevel.startingPos);
-    this.done = false;
+export default class Game {
+  constructor(arrLevels, gameView) {
+    this.arrLevels = arrLevels;
+    this.gameView = gameView;
+    this.currentLevel = arrLevels[0];
+    this.player = new Player(this.currentLevel.startingPos, this);
+    
+    this.gameStarted = false;
     this.pauseStatus = false;
+    this.won = false;
+    this.failed = false;
+
+    this.addKeydownListeners();
   }
 
-  renderFrame(ctx) {
-    if (this.currentPlayer.jumping) {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      this.currentPlayer.renderPlayer(ctx);
-      this.currentLevel.renderLevel(ctx);
-      this.completedLevel();
-      this.failedLevel();
-    } else {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      this.currentPlayer.renderPlayer(ctx);
-      this.currentLevel.renderLevel(ctx);
-      this.completedLevel();
-      this.failedLevel();
-      this.gravity();
+  loop() {
+    if (this.won) {
+      this.gameView.activeMenubar = false;
+      this.removeKeydownListeners();
+      document.getElementById("win-container").style.visibility = "visible";
+      return;
+    } else if (this.failed) {
+      this.gameView.activeMenubar = false;
+      this.removeKeydownListeners();
+      document.getElementById("fail-container").style.visibility = "visible";
+      return;
+    // } else if (this.won || this.failed) {
+    //   this.handleWinOrFail();
+    //   return;
+    } else if (!this.pauseStatus) {
+      this.gameView.ctx.clearRect(0, 0, this.gameView.ctx.canvas.width, this.gameView.ctx.canvas.height);
+      this.player.draw(this.gameView.ctx);
+      this.currentLevel.draw(this.gameView.ctx);
     }
+    window.requestAnimationFrame(this.loop.bind(this));
+  }
+
+  start() {
+    this.gameStarted = true;
+    this.loop();
   }
 
   pause() {
     this.pauseStatus = true;
-    addKeydownEventListeners(this.player, this.level, this.pauseStatus);
+    this.removeKeydownListeners();
   }
 
-  resume(gameView) {
+  resume() {
     this.pauseStatus = false;
-    addKeydownEventListeners(this.player, this.level, this.pauseStatus);
-    gameView.start();
-  }
-
-  winGame() {
-    if (this.done) {
-      document.getElementById("win-container").style.visibility = "visible";
-      this.pause();
-    }
-  }
-  
-  completedLevel() {
-    if (this.currentPlayer.inWinZone(this.currentLevel.winZone)) {
-      this.nextLevel();
-    }
-  }
-
-  failedLevel() {
-    if (this.currentPlayer.inFailZone(this.currentLevel.failZones)) {
-      this.restartLevel();
-    }
-  }
-  
-  nextLevel() {
-    if (this.allLevels.length >= 1) {
-      this.currentLevel = this.allLevels.shift();
-      this.currentPlayer.x = this.currentLevel.startingPos[0];
-      this.currentPlayer.y = this.currentLevel.startingPos[1];
-    } else {
-      this.done = true;
-      this.winGame();
-    }
+    this.addKeydownListeners();
   }
 
   restartLevel() {
-    this.currentPlayer.x = this.currentLevel.startingPos[0];
-    this.currentPlayer.y = this.currentLevel.startingPos[1];
+    this.pauseStatus = false;
+    this.addKeydownListeners();
+
+    this.player.x = this.currentLevel.startingPos[0];
+    this.player.y = this.currentLevel.startingPos[1];
+    this.player.velocityX = 10 ** -100;;
+    this.player.velocityY = 0;
   }
 
-  gravity() {
-    let closest = wallUtil.closestWallBelow(this.currentPlayer, this.currentLevel.arrWalls);
-    let distance = wallUtil.distanceBelow(this.currentPlayer, closest);
-    
-    if (distance === 2) {
-      return
-    } else if (distance > this.currentPlayer.velocity) {
-      this.currentPlayer.y += this.currentPlayer.velocity;
+  nextLevel() {
+    if (this.currentLevel === this.arrLevels[this.arrLevels.length - 1]) {
+      this.won = true;
     } else {
-      this.currentPlayer.y += (distance - 2);
+      this.currentLevel = this.arrLevels[this.currentLevel.level + 1];
+
+      this.player.x = this.currentLevel.startingPos[0];
+      this.player.y = this.currentLevel.startingPos[1];
+
+      this.player.velocityX = 10 ** -100;
+      this.player.velocityY = 0;
     }
   }
-}
 
-export default Game;
+  quitGame() {
+    window.location.reload();
+  }
+
+  failedGame() {
+    if (this.player.inFailZones(this.currentLevel.failZones)) {
+      this.failed = true;
+      this.removeKeydownListeners();
+    }
+  }
+
+  handleWinOrFail() {
+    this.gameView.activeMenubar = false;
+    this.removeKeydownListeners();
+
+    this.won
+      ? (document.getElementById("win-container").style.visibility = "visible")
+      : (document.getElementById("fail-container").style.visibility = "visible");
+  }
+
+  addKeydownListeners() {
+    document.addEventListener("keydown", this.player.keydownState.keydownController);
+    document.addEventListener("keyup", this.player.keydownState.keydownController);
+    document.getElementById("canvas").addEventListener("click", this.player.keydownState.clickController);
+  }
+
+  removeKeydownListeners() {
+    document.removeEventListener("keydown", this.player.keydownState.keydownController);
+    document.removeEventListener("keyup", this.player.keydownState.keydownController);
+    document.getElementById("canvas").removeEventListener("click", this.player.keydownState.clickController);
+  }
+}

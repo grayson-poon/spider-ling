@@ -1,0 +1,117 @@
+div#sidebar {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+div#game-menu {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom-right-radius: 10px 10px;
+  border-top-right-radius: 10px 10px;
+  font-size: 14px;
+  max-width: 130px;
+}
+
+div#game-menu > div:first-child {
+  margin: 10px 10px 0 10px;
+  padding-bottom: 10px;
+  border-top-right-radius: 10px 10px;
+  border-bottom: 1px solid black;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+div#game-menu ul li {
+  font-size: 16px;
+  font-weight: 400;
+  background-color: white;
+  margin: 10px;
+  text-align: center;
+  border-right: 2px;
+  padding: 5px;
+}
+
+div#game-menu ul li:hover {
+  outline: 2px solid black;
+  background-color: red;
+  margin: 10px;
+  cursor: pointer;
+}
+
+div#game-menu li#about, 
+div#game-menu li#controls {
+  font-size: 14px;
+}
+
+div#nav-links {
+  display: flex;
+  flex-direction: column;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 15px;
+  line-height: 21px;
+  width: fit-content;
+}
+
+div#nav-links a {
+  background-color: white;
+  border-right: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+
+div#nav-links a div {
+  border-bottom: 2px solid black;
+}
+
+div#nav-links a:hover div {
+  border-bottom: 2px solid #CC300F;
+}
+
+div#nav-links a:hover {
+  background-color: black;
+  color: #CC300F;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.github {
+  border-top: 2px solid black;
+  border-bottom: 1px solid black;
+  border-top-right-radius: 10px 10px;
+  padding-top: 8px;
+}
+
+.github img {
+  border-top-right-radius: 10px 10px;
+  width: 83px;
+  height: 83px;
+  max-width: 83px;
+  max-height: 83px;
+  object-fit: cover;
+}
+
+.linkedin {
+  border-bottom: 2px solid black;
+  border-bottom-right-radius: 10px 10px;
+  padding-top: 8px;
+}
+
+.linkedin img {
+  padding: 10px;
+  height: 63px;
+  width: 63px;
+  max-width: 63px;
+  max-height: 63px;
+  object-fit: cover;
+}

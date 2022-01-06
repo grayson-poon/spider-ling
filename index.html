@@ -20,68 +20,110 @@
   <div id="bottom-container">
     <div id="canvas-container">
       <canvas id="canvas" width="900" height="600"></canvas>
+      
       <div id="pause-container">
-        <div id="pause-content">
-          GAME PAUSED
+        <div id="pause-content">GAME PAUSED</div>
+      </div>
+
+      <div id="about-container">
+        <div id="about-content">
+          <div>About & Credits:</div>
+          <br>
+          <div class="first">
+            Spidey has been captured and needs to escape this <u>EVIL</u> lair. 
+            Good thing he has YOU, his person in the chair!
+          </div>
+          <div class="second">
+            Help Spidey navigate through the tunnels, cooridors, and passageways
+            of wherever he is and get him back to New York City so he can
+            continue protecting the neighborhood!
+            <br>
+            <br>
+            Beware of <u>TRAPS</u> that Spidey
+            could run into.
+          </div>
+          <div class="credits">
+            <div>Sprite images belong to Angry Clown Entertainment. <a href="https://angryclownent.com/" target="_blank">Check them out here!</a></div>
+          </div>
         </div>
       </div>
 
-      <div id="instructions_credits-container">
-        <div id="instructions_credits-content">
-          <h1>Game Instructions</h1>
-          <br>
-          <h2>Spidey is stuck and he needs YOUR help to escape!</h2>
-          <br>
-          <li>Use the keys "A" and "D" to move Spidey left and right, respectively.</li>
-          <li>Use the Spacebar to jump.</li>
-          <li>Click anywhere on the game view to launch Spidey in that direction.</li>
-          <br>
-          <br>
-          <h2>Credits</h2>
-          <br>
-          <li>Sprite images belong to Angry Clown Entertainment. <a href="https://angryclownent.com/">Click me!</a></li>
-        </div>
+      <div id="controls-container">
+        <div id="controls-content">
+          <div>Controls:</div>
+          <ul class="controls">
+            <li>Use keyboard keys "A" and "D" to guide Spidey left/right</li>
+            <li>Press the spacebar to jump</li>
+            <li>
+              Use the mouse/trackpad and click
+              anywhere on the game view to launch Spidey in that direction!
+            </li>
+            <li>
+              Spidey can only boost two times in a row before needing to catch his
+              breath and rest on the ground, so use the boosts wisely!
+            </li>
+          </ul>
+
+          <div>How to play:</div>
+          <ul class="instructions">
+            <li>
+              Guide Spidey to the light-blue zones on the screen (these will
+              take you to the next level)
+            </li>
+            <li>Avoid making Spidey touch any orange zones (traps)</li>
+            <li>With great power comes great responsibility. Play responsibly! :)</li>
+          </ul>
+        </div>   
       </div>
 
       <div id="win-container">
-        <div id="win">
-          <h1>Congratulations!</h1>
-          <h2>You have just saved Spidey! Who's the real hero now?</h2>
+        <div id="win-content">
+          <div>Congratulations,</div>
+          <div>you have just saved Spidey! Who's the real hero now?</div>
           <img src="https://i.kym-cdn.com/photos/images/newsfeed/001/273/942/c29.jpg">
+          <div class="utils">
+            <div class="home">Return to home</div>
+            <div class="new-game">Try again</div>
+          </div>
         </div>
       </div>
 
-      <div id="game-paused">
-        <h1> Game is Paused</h1>
-        <p>game is paused</p>
+      <div id="fail-container">
+        <div id="fail-content">
+          <div>Oh no, Spidey fell into a trap! :O</div>
+          <img src="https://beforesandafters.com/wp-content/uploads/2019/07/SMFFH9.jpg">
+          <div class="utils">
+            <div class="home">Return to homepage</div>
+            <div class="new-game">Try again</div>
+          </div>
+        </div>
       </div>
     </div>
 
 
     <div id="sidebar">
-
       <div id="game-menu">
+        <div>Game Menu</div>
         <ul>
-          <li>Game Menu</li>
-          <li id="start_pause">Start</li>
-          <li id="restart">Restart</li>
-          <li id="instructions_credits">Instructions & Credits</li>
+          <li id="start-pause">Start</li>
+          <li id="restart">Restart Level</li>
+          <li id="about">About & Credits</li>
+          <li id="controls">Controls & How to play</li>
         </ul>
       </div>
 
-        <div id="nav-links">
-          <ul>
-            <a href="https://github.com/grayson-poon/spider-ling">GitHub
-              <img src="https://octodex.github.com/images/spidertocat.png">
-            </a>
-            <a href="https://www.linkedin.com/in/grayson-poon/">
-              <img src="https://cdn.iconscout.com/icon/free/png-256/linkedin-3089482-2567434.png">
-            </a>
-          </ul>
-        </div>
+      <div id="nav-links">
+          <a class="github" href="https://github.com/grayson-poon/spider-ling" target="_blank">
+            <div>GitHub</div>
+            <img src="https://octodex.github.com/images/spidertocat.png">
+          </a>
 
+          <a class="linkedin" href="https://www.linkedin.com/in/grayson-poon/" target="_blank">
+            <div>LinkedIn</div>
+            <img src="https://cdn.iconscout.com/icon/free/png-256/linkedin-3089482-2567434.png">
+          </a>
+      </div>
     </div>
-
   </div>
 
 </body>
