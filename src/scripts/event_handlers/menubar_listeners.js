@@ -62,8 +62,6 @@ const handleAbout = (gameView) => {
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
-    debugger;
-
     if (!gameView.activeMenubar) return;
 
     if (!gameView.game.gameStarted) {
@@ -103,8 +101,6 @@ const handleControls = (gameView) => {
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
-    debugger;
-
     if (!gameView.activeMenubar) return;
 
     if (!gameView.game.gameStarted) {
