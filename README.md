@@ -10,7 +10,7 @@ As of now, this game will not include the use of any external libraries or engin
 
 In Spider-ling, users will be able to:
 
-* Start, pause, and restart the game
+* Start, pause, and restart the current level
 * Move around the game view by pressing certain keyboard characters
 * Jump and launch from one location to another
 * Choose where they want to launch to by clicking on the game view relative to the player
