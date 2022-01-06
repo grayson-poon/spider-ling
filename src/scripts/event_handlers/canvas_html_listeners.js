@@ -22,14 +22,17 @@ const handleNewGame = (gameView) => {
       event.stopPropagation();
       event.preventDefault();
 
+      debugger;
+
       document.getElementById("start-pause").innerText = "Pause";
       document.getElementById("fail-container").style.visibility = "hidden";
       document.getElementById("pause-container").style.visibility = "hidden";
       document.getElementById("about-container").style.visibility = "hidden";
       document.getElementById("controls-container").style.visibility = "hidden";
+      document.getElementById("win-container").style.visibility = "hidden";
 
       gameView.newGame();
-      gameView.game.start(gameView);
+      gameView.game.start();
     });
   });
 };

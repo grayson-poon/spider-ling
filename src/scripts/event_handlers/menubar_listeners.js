@@ -14,6 +14,7 @@ const handleStartPause = (gameView) => {
         document.getElementById("about-container").style.visibility = "hidden";
         document.getElementById("controls-container").style.visibility = "hidden";
         document.getElementById("fail-container").style.visibility = "hidden";
+        document.getElementById("win-container").style.visibility = "hidden";
         
         gameView.game.start();
         break;
@@ -30,6 +31,7 @@ const handleStartPause = (gameView) => {
         document.getElementById("about-container").style.visibility = "hidden";
         document.getElementById("controls-container").style.visibility = "hidden";
         document.getElementById("fail-container").style.visibility = "hidden";
+        document.getElementById("win-container").style.visibility = "hidden";
 
         gameView.game.resume();
         break;
@@ -50,6 +52,7 @@ const handleRestart = (gameView) => {
     document.getElementById("about-container").style.visibility = "hidden";
     document.getElementById("controls-container").style.visibility = "hidden";
     document.getElementById("fail-container").style.visibility = "hidden";
+    document.getElementById("win-container").style.visibility = "hidden";
 
     gameView.game.restartLevel();
   });
@@ -69,6 +72,7 @@ const handleAbout = (gameView) => {
       document.getElementById("pause-container").style.visibility = "hidden";
       document.getElementById("controls-container").style.visibility = "hidden";
       document.getElementById("fail-container").style.visibility = "hidden";
+      document.getElementById("win-container").style.visibility = "hidden";
     }
 
     if (gameView.game.gameStarted) {
@@ -86,6 +90,7 @@ const handleAbout = (gameView) => {
           document.getElementById("pause-container").style.visibility = "hidden";
           document.getElementById("controls-container").style.visibility = "hidden";
           document.getElementById("fail-container").style.visibility = "hidden";
+          document.getElementById("win-container").style.visibility = "hidden";
           
           gameView.game.pause();
           break;
@@ -108,6 +113,7 @@ const handleControls = (gameView) => {
       document.getElementById("pause-container").style.visibility = "hidden";
       document.getElementById("about-container").style.visibility = "hidden";
       document.getElementById("fail-container").style.visibility = "hidden";
+      document.getElementById("win-container").style.visibility = "hidden";
     }
 
     if (gameView.game.gameStarted) {
@@ -125,6 +131,7 @@ const handleControls = (gameView) => {
           document.getElementById("pause-container").style.visibility = "hidden";
           document.getElementById("about-container").style.visibility = "hidden";
           document.getElementById("fail-container").style.visibility = "hidden";
+          document.getElementById("win-container").style.visibility = "hidden";
 
           gameView.game.pause();
           break;
