@@ -28,7 +28,6 @@ const handleNewGame = (gameView) => {
       document.getElementById("about-container").style.visibility = "hidden";
       document.getElementById("controls-container").style.visibility = "hidden";
 
-      // debugger
       gameView.newGame();
       gameView.game.start(gameView);
     });

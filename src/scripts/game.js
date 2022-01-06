@@ -1,3 +1,5 @@
+import { addCanvasHtmlListeners } from "./event_handlers/canvas_html_listeners";
+import { addMenubarListeners } from "./event_handlers/menubar_listeners";
 import Player from "./player";
 
 export default class Game {
@@ -20,6 +22,7 @@ export default class Game {
       this.removeKeydownListeners();
       return;
     } else if (this.failed) {
+      this.gameView.activeMenubar = false;
       this.removeKeydownListeners();
       document.getElementById("fail-container").style.visibility = "visible";
       return;
@@ -37,7 +40,6 @@ export default class Game {
   }
 
   pause() {
-    debugger
     this.pauseStatus = true;
     this.removeKeydownListeners();
   }
@@ -78,6 +80,7 @@ export default class Game {
   failedGame() {
     if (this.player.inFailZones(this.currentLevel.failZones)) {
       this.failed = true;
+      this.removeKeydownListeners();
     }
   }
 

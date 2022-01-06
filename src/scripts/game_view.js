@@ -10,12 +10,14 @@ export default class GameView {
     this.game = new Game(this.arrLevels, this);
     this.activeMenubar = true;
 
-    addMenubarListeners(this, this.game);
-    addCanvasHtmlListeners(this, this.game);
+    addMenubarListeners(this);
+    addCanvasHtmlListeners(this);
   }
 
   newGame() {
     this.activeMenubar = true;
+    delete this.game.player;
+    delete this.game;
     this.game = new Game(this.arrLevels, this);
     return this.game;
   }
