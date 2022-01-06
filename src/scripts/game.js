@@ -16,19 +16,9 @@ export default class Game {
   }
 
   loop() {
-    if (this.won) {
-      this.gameView.activeMenubar = false;
-      this.removeKeydownListeners();
-      document.getElementById("win-container").style.visibility = "visible";
+    if (this.won || this.failed) {
+      this.handleWinOrFail();
       return;
-    } else if (this.failed) {
-      this.gameView.activeMenubar = false;
-      this.removeKeydownListeners();
-      document.getElementById("fail-container").style.visibility = "visible";
-      return;
-    // } else if (this.won || this.failed) {
-    //   this.handleWinOrFail();
-    //   return;
     } else if (!this.pauseStatus) {
       this.gameView.ctx.clearRect(0, 0, this.gameView.ctx.canvas.width, this.gameView.ctx.canvas.height);
       this.player.draw(this.gameView.ctx);

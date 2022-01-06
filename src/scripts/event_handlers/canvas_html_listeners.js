@@ -1,6 +1,3 @@
-import Game from "../game";
-import { arrLevels } from "../levels/seeds";
-
 const handleBackToHome = () => {
   const elements = document.getElementsByClassName("home");
 
@@ -21,8 +18,6 @@ const handleNewGame = (gameView) => {
     ele.addEventListener("click", (event) => {
       event.stopPropagation();
       event.preventDefault();
-
-      debugger;
 
       document.getElementById("start-pause").innerText = "Pause";
       document.getElementById("fail-container").style.visibility = "hidden";
