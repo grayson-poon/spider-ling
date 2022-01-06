@@ -13,7 +13,7 @@ const cH = 600;
 
 // Level 1
 let level1 = new Level({
-  level: 1,
+  level: 0,
   startingPos: [350, 250],
   layout: new Layout(levelOne),
   winZone: { x: cW - 2 - 45, y: cH - 70 - 2, width: 45, height: 70 },
@@ -22,7 +22,7 @@ let level1 = new Level({
 
 // Level 2
 let level2 = new Level({
-  level: 2,
+  level: 1,
   startingPos: [15, 200],
   layout: new Layout(levelTwo),
   winZone: { x: 850, y: 0.75 * cH - 70, width: 48, height: 70 },
@@ -34,7 +34,7 @@ let level2 = new Level({
 
 // Level 3
 let level3 = new Level({
-  level: 3,
+  level: 2,
   startingPos: [cW / 2 - 15, 10],
   layout: new Layout(levelThree),
   winZone: { x: cW / 2 - 30, y: 0.65 * cH, width: 60, height: 30 },

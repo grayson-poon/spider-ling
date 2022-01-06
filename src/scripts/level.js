@@ -31,7 +31,7 @@ export default class Level {
 
     ctx.globalAlpha = 1.0;
 
-    if (this.level === 1) {
+    if (this.level === 0) {
       ctx.fillStyle = "black";
       ctx.font = "24px Arial";
       ctx.fillText("Try out your Spidey movements here!", 275, 100);

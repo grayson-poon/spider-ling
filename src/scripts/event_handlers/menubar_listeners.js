@@ -4,6 +4,7 @@ const handleStartPause = (gameView, game) => {
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
+    if (!gameView.activeMenubar) return;
 
     switch(ele.innerText) {
       case "Start":
@@ -13,7 +14,7 @@ const handleStartPause = (gameView, game) => {
         document.getElementById("about-container").style.visibility = "hidden";
         document.getElementById("controls-container").style.visibility = "hidden";
         
-        game.start(gameView);
+        game.start();
         break;
       case "Pause":
         ele.innerHTML = "Resume";
@@ -40,24 +41,25 @@ const handleRestart = (gameView, game) => {
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
-    if (!game.gameStarted) return;
+    if (!game.gameStarted || !gameView.activeMenubar) return;
 
     document.getElementById("start-pause").innerText = "Pause";
     document.getElementById("pause-container").style.visibility = "hidden";
     document.getElementById("about-container").style.visibility = "hidden";
     document.getElementById("controls-container").style.visibility = "hidden";
 
-    game.restartLevel(gameView);
+    game.restartLevel();
   });
 };
 
-const handleAbout = (game) => {
+const handleAbout = (gameView, game) => {
   const ele = document.getElementById("about");
   const content = document.getElementById("about-container");
   
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
+    if (!gameView.activeMenubar) return;
 
     if (!game.gameStarted) {
       content.style.visibility = "visible";
@@ -87,13 +89,14 @@ const handleAbout = (game) => {
   });
 };
 
-const handleControls = (game) => {
+const handleControls = (gameView, game) => {
   const ele = document.getElementById("controls");
   const content = document.getElementById("controls-container");
 
   ele.addEventListener("click", (event) => {
     event.stopPropagation();
     event.preventDefault();
+    if (!gameView.activeMenubar) return;
 
     if (!game.gameStarted) {
       content.style.visibility = "visible";
@@ -126,6 +129,6 @@ const handleControls = (game) => {
 export const addMenubarListeners = (gameView, game) => {
   handleStartPause(gameView, game);
   handleRestart(gameView, game);
-  handleAbout(game);
-  handleControls(game);
+  handleAbout(gameView, game);
+  handleControls(gameView, game);
 };

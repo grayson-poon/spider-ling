@@ -1,9 +1,10 @@
 import Player from "./player";
 
 export default class Game {
-  constructor(arrLevels) {
+  constructor(arrLevels, gameView) {
     this.arrLevels = arrLevels;
-    this.currentLevel = arrLevels.shift();
+    this.gameView = gameView;
+    this.currentLevel = arrLevels[0];
     this.player = new Player(this.currentLevel.startingPos, this);
     
     this.gameStarted = false;
@@ -14,12 +15,29 @@ export default class Game {
     this.addKeydownListeners();
   }
 
-  start(gameView) {
+  loop() {
+    if (this.won) {
+      this.removeKeydownListeners();
+      return;
+    } else if (this.failed) {
+      this.removeKeydownListeners();
+      document.getElementById("fail-container").style.visibility = "visible";
+      return;
+    } else if (!this.pauseStatus) {
+      this.gameView.ctx.clearRect(0, 0, this.gameView.ctx.canvas.width, this.gameView.ctx.canvas.height);
+      this.player.draw(this.gameView.ctx);
+      this.currentLevel.draw(this.gameView.ctx);
+    }
+    window.requestAnimationFrame(this.loop.bind(this));
+  }
+
+  start() {
     this.gameStarted = true;
-    gameView.loop();
+    this.loop();
   }
 
   pause() {
+    debugger
     this.pauseStatus = true;
     this.removeKeydownListeners();
   }
@@ -41,7 +59,7 @@ export default class Game {
 
   nextLevel() {
     if (this.arrLevels.length >= 1) {
-      this.currentLevel = this.arrLevels.shift();
+      this.currentLevel = this.arrLevels[this.currentLevel.level + 1];
 
       this.player.x = this.currentLevel.startingPos[0];
       this.player.y = this.currentLevel.startingPos[1];
