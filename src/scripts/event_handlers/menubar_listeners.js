@@ -13,6 +13,7 @@ const handleStartPause = (gameView) => {
         document.getElementById("pause-container").style.visibility = "hidden";
         document.getElementById("about-container").style.visibility = "hidden";
         document.getElementById("controls-container").style.visibility = "hidden";
+        document.getElementById("fail-container").style.visibility = "hidden";
         
         gameView.game.start();
         break;
@@ -28,6 +29,7 @@ const handleStartPause = (gameView) => {
         document.getElementById("pause-container").style.visibility = "hidden";
         document.getElementById("about-container").style.visibility = "hidden";
         document.getElementById("controls-container").style.visibility = "hidden";
+        document.getElementById("fail-container").style.visibility = "hidden";
 
         gameView.game.resume();
         break;
@@ -47,6 +49,7 @@ const handleRestart = (gameView) => {
     document.getElementById("pause-container").style.visibility = "hidden";
     document.getElementById("about-container").style.visibility = "hidden";
     document.getElementById("controls-container").style.visibility = "hidden";
+    document.getElementById("fail-container").style.visibility = "hidden";
 
     gameView.game.restartLevel();
   });
@@ -67,6 +70,7 @@ const handleAbout = (gameView) => {
       content.style.visibility = "visible";
       document.getElementById("pause-container").style.visibility = "hidden";
       document.getElementById("controls-container").style.visibility = "hidden";
+      document.getElementById("fail-container").style.visibility = "hidden";
     }
 
     if (gameView.game.gameStarted) {
@@ -83,6 +87,7 @@ const handleAbout = (gameView) => {
           document.getElementById("start-pause").innerHTML = "Resume";
           document.getElementById("pause-container").style.visibility = "hidden";
           document.getElementById("controls-container").style.visibility = "hidden";
+          document.getElementById("fail-container").style.visibility = "hidden";
           
           gameView.game.pause();
           break;
@@ -106,6 +111,7 @@ const handleControls = (gameView) => {
       content.style.visibility = "visible";
       document.getElementById("pause-container").style.visibility = "hidden";
       document.getElementById("about-container").style.visibility = "hidden";
+      document.getElementById("fail-container").style.visibility = "hidden";
     }
 
     if (gameView.game.gameStarted) {
@@ -120,10 +126,9 @@ const handleControls = (gameView) => {
         case "hidden":
           content.style.visibility = "visible";
           document.getElementById("start-pause").innerHTML = "Resume";
-          document.getElementById("pause-container").style.visibility =
-            "hidden";
-          document.getElementById("about-container").style.visibility =
-            "hidden";
+          document.getElementById("pause-container").style.visibility = "hidden";
+          document.getElementById("about-container").style.visibility = "hidden";
+          document.getElementById("fail-container").style.visibility = "hidden";
 
           gameView.game.pause();
           break;
